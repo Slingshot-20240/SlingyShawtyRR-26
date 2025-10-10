@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.subsystems;
+package org.firstinspires.ftc.teamcode.subsystems.intake;
 
 import androidx.annotation.NonNull;
 
@@ -9,13 +9,12 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class ActiveIntake {
-    private final DcMotorEx activeIntake;
+public class Intake {
+    private final DcMotorEx intake;
 
-    public ActiveIntake(HardwareMap hardwareMap) {
-        activeIntake = hardwareMap.get(DcMotorEx.class, "activeIntake");
-        activeIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        activeIntake.setDirection(DcMotorSimple.Direction.FORWARD);
+    public Intake(HardwareMap hardwareMap) {
+        intake = hardwareMap.get(DcMotorEx.class, "intake");
+        intake.setDirection(DcMotorSimple.Direction.FORWARD);
     }
 
     //----------------------------In----------------------------------\\
@@ -23,7 +22,7 @@ public class ActiveIntake {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            activeIntake.setPower(0.7);
+            intake.setPower(1.0);
             return false;
         }
     }
@@ -36,7 +35,7 @@ public class ActiveIntake {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            activeIntake.setPower(0);
+            intake.setPower(0);
             return false;
         }
     }
@@ -49,7 +48,7 @@ public class ActiveIntake {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            activeIntake.setPower(-0.7);
+            intake.setPower(-1.0);
             return false;
         }
     }
