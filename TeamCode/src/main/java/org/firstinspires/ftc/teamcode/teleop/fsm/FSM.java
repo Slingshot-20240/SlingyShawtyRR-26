@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.teleop.fsm;
 
 
+import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
 import org.firstinspires.ftc.teamcode.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
@@ -17,6 +19,8 @@ public class FSM {
     public FSMStates state = FSMStates.BASE_STATE;
     public ControlType type = ControlType.HARDCODED_CONTROL;
     private GamepadMapping gamepad;
+    private Localizer drive;
+    private Pose2d pose;
 
     // SUBSYSTEMS
     private Intake intake;
@@ -44,6 +48,8 @@ public class FSM {
         // Updates all other controls
         gamepad.update();
 
+        drive.update();
+        pose = drive.getPose();
         //TODO - Get robot pos from localization
 
         switch (state) {
