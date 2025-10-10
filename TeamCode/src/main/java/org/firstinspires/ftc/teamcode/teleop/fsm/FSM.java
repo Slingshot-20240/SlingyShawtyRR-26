@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop.fsm;
 
-import com.pedropathing.follower.Follower;
-import com.pedropathing.geometry.Pose;
+
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Robot;

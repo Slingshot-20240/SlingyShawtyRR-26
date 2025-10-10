@@ -1,12 +1,11 @@
 package org.firstinspires.ftc.teamcode.teleop.misc;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-import dev.nextftc.ftc.NextFTCOpMode;
-
 @TeleOp(name = "ShooterPID", group = "Testing")
-public class ShooterPID extends NextFTCOpMode {
+public class ShooterPID extends LinearOpMode {
 
     DcMotorEx flywheel;
 

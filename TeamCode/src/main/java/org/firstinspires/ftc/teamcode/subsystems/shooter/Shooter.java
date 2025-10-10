@@ -22,6 +22,9 @@ public class Shooter {
         outtakeL.setDirection(DcMotorSimple.Direction.FORWARD);
         outtakeR.setDirection(DcMotorSimple.Direction.FORWARD);
 
+        outtakeL.setVelocityPIDFCoefficients(0,0,0,0);
+        outtakeR.setVelocityPIDFCoefficients(0,0,0,0);
+
         variableHoodR = hardwareMap.get(Servo.class, "variableHoodR");
         variableHoodL = hardwareMap.get(Servo.class, "variableHoodL");
 
@@ -47,7 +50,6 @@ public class Shooter {
         }
     }
 
-    //TODO add PID!!!!!
     //-----------------Math-----------------\\
     private static final double launchHeight = 0; // TODO update this with CAD
     private static final double g = 9.81;
