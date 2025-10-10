@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.teleop.fsm;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 
 public class PracticeFSM {

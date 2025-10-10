@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.teleop.mechTests;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 
 @TeleOp(group = "mech tests")
@@ -23,9 +23,9 @@ public class TransferTest extends OpMode {
         controls.update();
 
         if(controls.failSafeReset.value()) {
-            robot.transfer.transferOff();
+            robot.transfer.off();
         } else {
-            robot.transfer.transferOn();
+            robot.transfer.on();
         }
     }
 }

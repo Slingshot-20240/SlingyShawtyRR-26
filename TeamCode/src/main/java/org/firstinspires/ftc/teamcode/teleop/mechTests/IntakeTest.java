@@ -3,10 +3,10 @@ package org.firstinspires.ftc.teamcode.teleop.mechTests;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 
-@TeleOp(group = "mech tests")
+@TeleOp(group = "intake mech tests")
 public class IntakeTest extends OpMode {
     Robot robot;
     GamepadMapping controls;
@@ -20,6 +20,6 @@ public class IntakeTest extends OpMode {
 
     @Override
     public void loop() {
-        robot.intake.teleIntakeRoller.setPower(power);
+        robot.intake.intake.setPower(power);
     }
 }

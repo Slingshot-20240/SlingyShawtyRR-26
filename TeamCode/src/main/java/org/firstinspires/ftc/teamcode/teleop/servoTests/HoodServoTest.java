@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.teleop.servoTests;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 
 @TeleOp (group = "servo tests")
@@ -20,7 +20,7 @@ public class HoodServoTest extends OpMode {
 
     @Override
     public void loop() {
-        robot.shooter.teleVariableHoodR.setPosition(servoPos);
-        robot.shooter.teleVariableHoodL.setPosition(servoPos);
+        robot.shooter.variableHoodL.setPosition(servoPos);
+        robot.shooter.variableHoodR.setPosition(servoPos);
     }
 }

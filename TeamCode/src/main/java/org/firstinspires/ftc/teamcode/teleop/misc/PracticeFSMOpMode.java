@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.teleop.misc;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 
 public class PracticeFSMOpMode extends OpMode {

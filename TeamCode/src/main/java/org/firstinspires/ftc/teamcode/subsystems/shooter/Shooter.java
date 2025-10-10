@@ -13,14 +13,14 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Shooter {
     private final DcMotorEx outtakeL;
     private final DcMotorEx outtakeR;
-    private final Servo variableHoodL;
-    private final Servo variableHoodR;
+    public final Servo variableHoodL;
+    public final Servo variableHoodR;
 
     public Shooter(HardwareMap hardwareMap) {
         outtakeL = hardwareMap.get(DcMotorEx.class, "outtakeL");
         outtakeR = hardwareMap.get(DcMotorEx.class, "outtakeL");
         outtakeL.setDirection(DcMotorSimple.Direction.FORWARD);
-        outtakeR.setDirection(DcMotorSimple.Direction.FORWARD);
+        outtakeR.setDirection(DcMotorSimple.Direction.REVERSE);
 
         outtakeL.setVelocityPIDFCoefficients(0,0,0,0);
         outtakeR.setVelocityPIDFCoefficients(0,0,0,0);
@@ -28,8 +28,8 @@ public class Shooter {
         variableHoodR = hardwareMap.get(Servo.class, "variableHoodR");
         variableHoodL = hardwareMap.get(Servo.class, "variableHoodL");
 
-        outtakeL.setDirection(DcMotorSimple.Direction.REVERSE);
         variableHoodL.setDirection(Servo.Direction.REVERSE);
+        variableHoodR.setDirection(Servo.Direction.REVERSE);
     }
 
     public enum outtakeVels {
@@ -120,7 +120,17 @@ public class Shooter {
     public Action out() {
         return new ShooterOut();
     }
+//-------------------------------------------------------------------------------
 
+    public void setShooterPower(double power) {
+        outtakeL.setPower(power);
+        outtakeR.setPower(power);
+    }
+
+    public void setHoodAngle(double angle) {
+        variableHoodL.setPosition(angle);
+        variableHoodR.setPosition(angle);
+    }
 
     public void hoodToBackTriPos() {
         variableHoodR.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * back_dist)) / 2 * Math.PI);

@@ -3,13 +3,13 @@ package org.firstinspires.ftc.teamcode.teleop.fsm;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
-import org.firstinspires.ftc.teamcode.nextFTC.subsystems.drivetrain.Drivetrain;
-import org.firstinspires.ftc.teamcode.nextFTC.subsystems.intake.Intake;
-import org.firstinspires.ftc.teamcode.nextFTC.subsystems.shooter.Shooter;
-import org.firstinspires.ftc.teamcode.nextFTC.subsystems.transfer.Transfer;
-import org.firstinspires.ftc.teamcode.nextFTC.subsystems.turret.Turret;
+import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
+import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
+import org.firstinspires.ftc.teamcode.subsystems.turret.Turret;
 
 public class FSM {
     // GENERAL ROBOT STATES + CLASSES
@@ -25,15 +25,13 @@ public class FSM {
     private Shooter shooter;
     private Drivetrain drivetrain;
 
-    // OTHER
-    private Follower follower;
 
     public FSM(HardwareMap hardwareMap, GamepadMapping gamepad) {
         robot = new Robot(hardwareMap, gamepad);
         this.gamepad = robot.controls;
 
         intake = robot.intake;
-        turret = robot.turret;
+        //turret = robot.turret;
         transfer = robot.transfer;
         shooter = robot.shooter;
 
@@ -46,9 +44,7 @@ public class FSM {
         // Updates all other controls
         gamepad.update();
 
-        double heading = follower.getHeading();
-        Pose pose = follower.getPose();
-        follower.update();
+        //TODO - Get robot pos from localization
 
         switch (state) {
             case BASE_STATE:
@@ -60,13 +56,13 @@ public class FSM {
                 shooter.setShooterPower(0);
 
                 // Going to try transfer always on, may need to add some delays
-                transfer.transferOff();
+                transfer.on();
 
                 // Intake button toggle, intake on/off
                 if (gamepad.intake.value()) {
-                    intake.intakeOn();
+                    intake.in();
                 } else if (!gamepad.intake.value())
-                    intake.intakeOff();
+                    intake.idle();
 
                 if (gamepad.pidShoot.value() || gamepad.shootTriangle.value() || gamepad.shootBack.value()) {
                     state = FSMStates.SHOOTING;
@@ -80,18 +76,20 @@ public class FSM {
 
             case SHOOTING:
                 // TODO: FIX THIS ASK BOOP - BEE
-                turret.setTurretPos(turret.calcTurretVal(pose.getX(), pose.getY(), pose.getX(), pose.getY(), pose.getHeading()), 1);
+                //I (Ishaan) Commented line below cuz i got NO clue how to supress errors.
+                //Actually i do, we just have to add localization
+                //turret.setTurretPos(turret.calcTurretVal(pose.getX(), pose.getY(), pose.getX(), pose.getY(), pose.getHeading()), 1);
                 // turn transfer off while shooting until back to base state
-                transfer.transferOff();
+                transfer.off();
                 // Hardcoded control AND we're at the back shooting zone
                 if (type == ControlType.HARDCODED_CONTROL && gamepad.shootBack.value()) {
                     shooter.hoodToBackTriPos();
-                    shooter.teleShootFromBack();
+                    shooter.shootFromBack();
                 }
                 // Hardcoded control AND we're at the tip of the triangle of the front shooting zone
                 else if (type == ControlType.HARDCODED_CONTROL && gamepad.shootTriangle.value()) {
                     shooter.hoodToFrontTriPos();
-                    shooter.teleShootFromFront();
+                    shooter.shootFromFront();
                 }
                 // PID control that adjusts depending on our distance - TO BE IMPLEMENTED
                 else if (type == ControlType.PID_CONTROL && gamepad.pidShoot.value()) {
