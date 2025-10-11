@@ -39,6 +39,14 @@ public class HardwareSequences {
         );
     }
 
+    public static Action shootFor(double power, long time) {
+        return new SequentialAction(
+                shooter.out(),
+                new SleepAction(time),
+                shooter.idle()
+        );
+    }
+
 
 
 }
