@@ -1,20 +1,20 @@
-package org.firstinspires.ftc.teamcode.teleop.misc;
+package org.firstinspires.ftc.teamcode.subsystems.shooter;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 @TeleOp(name = "ShooterPID", group = "Testing")
-public class ShooterPID extends LinearOpMode {
+public class OuttakePID extends LinearOpMode {
 
-    DcMotorEx flywheel;
+    DcMotorEx outtake;
 
     @Override
     public void runOpMode() {
-        flywheel = hardwareMap.get(DcMotorEx.class, "flywheel");
+        outtake = hardwareMap.get(DcMotorEx.class, "outtake");
         
         // Set PIDF (start with defaults, tune later)
-        flywheel.setVelocityPIDFCoefficients(0.2, 2.0, 0.002, 0.0);
+        outtake.setVelocityPIDFCoefficients(0.2, 2.0, 0.002, 0.0);
 
         waitForStart();
 
@@ -26,10 +26,10 @@ public class ShooterPID extends LinearOpMode {
             double targetVel = 3500 + 1500 * Math.sin(2 * Math.PI * 0.5 * time);
 
             // Send target to REV Hub PID
-            flywheel.setVelocity(targetVel);
+            outtake.setVelocity(targetVel);
 
             // Read actual velocity
-            double actualVel = flywheel.getVelocity();
+            double actualVel = outtake.getVelocity();
 
             // Telemetry
             telemetry.addData("Target (ticks/s): ", targetVel);

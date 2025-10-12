@@ -24,7 +24,7 @@ public class Transfer {
     public class TransferUp implements Action {
 
         @Override
-        public boolean run(@NonNull TelemetryPacket packet) {;
+        public boolean run(@NonNull TelemetryPacket packet) {
             transferL.setPower(1.0);
             transferR.setPower(1.0);
             return false;

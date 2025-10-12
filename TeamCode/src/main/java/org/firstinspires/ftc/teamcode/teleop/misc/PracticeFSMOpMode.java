@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.teleop.misc;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.robot.Robot;
+import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 
 public class PracticeFSMOpMode extends OpMode {
@@ -32,7 +32,7 @@ public class PracticeFSMOpMode extends OpMode {
         }
 
         if (gamepad1.x) {
-            // turn on trnasfer
+            // turn on transfer
         } else {
             // turn off transfer
         }

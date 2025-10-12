@@ -5,7 +5,7 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
-import org.firstinspires.ftc.teamcode.robot.Robot;
+import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
@@ -18,16 +18,16 @@ public class FSM {
     public Robot robot;
     public FSMStates state = FSMStates.BASE_STATE;
     public ControlType type = ControlType.HARDCODED_CONTROL;
-    private GamepadMapping gamepad;
+    private final GamepadMapping gamepad;
     private Localizer drive;
     private Pose2d pose;
 
     // SUBSYSTEMS
-    private Intake intake;
+    private final Intake intake;
     private Turret turret;
-    private Transfer transfer;
-    private Shooter shooter;
-    private Drivetrain drivetrain;
+    private final Transfer transfer;
+    private final Shooter shooter;
+    private final Drivetrain drivetrain;
 
 
     public FSM(HardwareMap hardwareMap, GamepadMapping gamepad) {
@@ -82,7 +82,7 @@ public class FSM {
 
             case SHOOTING:
                 // TODO: FIX THIS ASK BOOP - BEE
-                //I (Ishaan) Commented line below cuz i got NO clue how to supress errors.
+                //I (Ishaan) Commented line below cuz i got NO clue how to suppress errors.
                 //Actually i do, we just have to add localization
                 //turret.setTurretPos(turret.calcTurretVal(pose.getX(), pose.getY(), pose.getX(), pose.getY(), pose.getHeading()), 1);
                 // turn transfer off while shooting until back to base state
