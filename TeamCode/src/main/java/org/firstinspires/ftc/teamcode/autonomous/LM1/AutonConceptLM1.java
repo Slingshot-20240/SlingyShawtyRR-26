@@ -26,6 +26,8 @@ public class AutonConceptLM1 extends LinearOpMode {
     public void runOpMode() {
         Pose2d initialPose = new Pose2d(-61, -36.3, Math.toRadians(270));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
+        AutonSequencesLM1 acl = new AutonSequencesLM1(hardwareMap);
+        HardwareSequences hws = new HardwareSequences(hardwareMap);
 
         Intake intake = new Intake(hardwareMap);
         Transfer transfer = new Transfer(hardwareMap);
@@ -92,8 +94,8 @@ public class AutonConceptLM1 extends LinearOpMode {
 //-----------------Initialization-----------------\\
         Actions.runBlocking(
                 new ParallelAction(
-                        HardwareSequences.intakeInFor(2),
-                        HardwareSequences.transferUpFor(3)
+                        hws.intakeInFor(2),
+                        hws.transferUpFor(3)
                 )
         );
 
@@ -108,9 +110,9 @@ public class AutonConceptLM1 extends LinearOpMode {
 
                 //--------Preloads--------\\
                         //Shoot Preloads
-                        new ParallelAction(
+                        new SequentialAction(
                                 scorePreload,
-                                AutonSequencesLM1.scoreSet()
+                                acl.scoreSet()
                         ),
 
 
@@ -120,18 +122,18 @@ public class AutonConceptLM1 extends LinearOpMode {
                         new SequentialAction(
                                 new ParallelAction(
                                         prepareSet1,
-                                        AutonSequencesLM1.prepareForSet(3,5)
+                                        acl.prepareForSet(3,5)
                                 ),
                                 new ParallelAction(
                                         grabSet1,
-                                        AutonSequencesLM1.intakeSet()
+                                        acl.intakeSet()
                                 )
                         ),
 
                         //Shoot Set 1
                         new SequentialAction(
                                 scoreSet1,
-                                AutonSequencesLM1.scoreSet()
+                                acl.scoreSet()
                         ),
 
 
@@ -141,18 +143,18 @@ public class AutonConceptLM1 extends LinearOpMode {
                         new SequentialAction(
                                 new ParallelAction(
                                         prepareSet2,
-                                        AutonSequencesLM1.prepareForSet(3,5)
+                                        acl.prepareForSet(3,5)
                                 ),
                                 new ParallelAction(
                                         grabSet2,
-                                        AutonSequencesLM1.intakeSet()
+                                        acl.intakeSet()
                                 )
                         ),
 
                         //Shoot Set 1
                         new SequentialAction(
                                 scoreSet2,
-                                AutonSequencesLM1.scoreSet()
+                                acl.scoreSet()
                         ),
 
 
@@ -162,18 +164,18 @@ public class AutonConceptLM1 extends LinearOpMode {
                         new SequentialAction(
                                 new ParallelAction(
                                         prepareSet3,
-                                        AutonSequencesLM1.prepareForSet(3,5)
+                                        acl.prepareForSet(3,5)
                                 ),
                                 new ParallelAction(
                                         grabSet3,
-                                        AutonSequencesLM1.intakeSet()
+                                        acl.intakeSet()
                                 )
                         ),
 
                         //Shoot Set 1
                         new SequentialAction(
                                 scoreSet3,
-                                AutonSequencesLM1.scoreSet()
+                                acl.scoreSet()
                         ),
 
                 //--------Park--------\\
