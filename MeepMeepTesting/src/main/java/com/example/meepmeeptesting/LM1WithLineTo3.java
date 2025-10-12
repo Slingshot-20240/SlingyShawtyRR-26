@@ -7,7 +7,7 @@ import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
-public class MeepMeepTesting {
+public class LM1WithLineTo3 {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(700);
 
@@ -22,32 +22,28 @@ public class MeepMeepTesting {
                 .waitSeconds(2)
 
                 // Set1 Poses
-                .strafeToLinearHeading(new Vector2d(-12, -29), Math.toRadians(270),
-                        new TranslationalVelConstraint(75)) // prepareSet1Pose
-                .strafeToLinearHeading(new Vector2d(-12, -53), Math.toRadians(270),
-                        new TranslationalVelConstraint(20)) // grabSet1Pose
+                .strafeToLinearHeading(new Vector2d(-12, -29), Math.toRadians(270)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(-12, -54), Math.toRadians(270), new TranslationalVelConstraint(25)) // grabSet1Pose
                 .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
                 .waitSeconds(2)
 
                 // Set2 Poses
-                .strafeToLinearHeading(new Vector2d(12, -29), Math.toRadians(270),
-                        new TranslationalVelConstraint(75)) // prepareSet2Pose
-                .strafeToLinearHeading(new Vector2d(12, -53), Math.toRadians(270),
-                        new TranslationalVelConstraint(20)) // grabSet2Pose
+                .strafeToLinearHeading(new Vector2d(12, -29), Math.toRadians(270)) // prepareSet2Pose
+                .strafeToLinearHeading(new Vector2d(12, -54), Math.toRadians(270), new TranslationalVelConstraint(25)) // grabSet2Pose
                 .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
                 .waitSeconds(2)
 
                 // Set3 Poses
-                .strafeToLinearHeading(new Vector2d(36.5, -29), Math.toRadians(270),
-                        new TranslationalVelConstraint(75)) // prepareSet3Pose
-                .strafeToLinearHeading(new Vector2d(36.5, -53), Math.toRadians(270),
-                        new TranslationalVelConstraint(20)) // grabSet3Pose
+                .turnTo(Math.toRadians(0)) // prepareSet3Pose
+                .lineToX(36.5)
+                .turnTo(Math.toRadians(270))
+                .strafeTo(new Vector2d(36.5, -54),
+                        new TranslationalVelConstraint(25)) // grabSet3Pose
                 .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
                 .waitSeconds(2)
 
                 // Park Pose
-                .strafeToLinearHeading(new Vector2d(-48, -24), Math.toRadians(180),
-                        new TranslationalVelConstraint(75)) // parkPose
+                .strafeToLinearHeading(new Vector2d(-48, -24), Math.toRadians(180)) // parkPose
 
 
                 .build());
