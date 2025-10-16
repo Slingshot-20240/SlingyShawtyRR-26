@@ -10,15 +10,18 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Shooter {
-    public final DcMotorEx outtake;
+    public final DcMotorEx outtakeL;
+    public final DcMotorEx outtakeR;
     public final Servo variableHoodL;
     public final Servo variableHoodR;
 
     public Shooter(HardwareMap hardwareMap) {
-        outtake = hardwareMap.get(DcMotorEx.class, "outtake");
-        outtake.setDirection(DcMotorSimple.Direction.REVERSE);
+        outtakeL = hardwareMap.get(DcMotorEx.class, "outtakeL");
+        outtakeR = hardwareMap.get(DcMotorEx.class, "outtakeR");
+        outtakeL.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        outtake.setVelocityPIDFCoefficients(0,0,0,0);
+        outtakeL.setVelocityPIDFCoefficients(0,0,0,0);
+        outtakeR.setVelocityPIDFCoefficients(0,0,0,0);
 
         variableHoodR = hardwareMap.get(Servo.class, "variableHoodR");
         variableHoodL = hardwareMap.get(Servo.class, "variableHoodL");
@@ -93,7 +96,8 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setPower(0);
+            outtakeL.setPower(0);
+            outtakeR.setPower(0);
             return false;
         }
     }
@@ -106,7 +110,8 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setPower(-1.0);
+            outtakeL.setPower(-1.0);
+            outtakeR.setPower(-1.0);
             return false;
         }
     }
@@ -116,7 +121,8 @@ public class Shooter {
 //-------------------------------------------------------------------------------
 
     public void setShooterPower(double power) {
-        outtake.setPower(power);
+        outtakeR.setPower(power);
+        outtakeL.setPower(power);
     }
 
     public void setHoodAngle(double angle) {
@@ -135,11 +141,13 @@ public class Shooter {
     }
 
     public void shootFromBack() {
-        outtake.setPower(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
+        outtakeL.setPower(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
+        outtakeR.setPower(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
     }
 
     public void shootFromFront() {
-        outtake.setPower(outtakeVels.HARDCODED_SHOOT_TRIANGLE.getOuttakeVel());
+        outtakeL.setPower(outtakeVels.HARDCODED_SHOOT_TRIANGLE.getOuttakeVel());
+        outtakeR.setPower(outtakeVels.HARDCODED_SHOOT_TRIANGLE.getOuttakeVel());
     }
 
 }
