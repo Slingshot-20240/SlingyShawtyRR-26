@@ -1,17 +1,11 @@
 package org.firstinspires.ftc.teamcode.subsystems.vision;
 
-import com.qualcomm.hardware.limelightvision.LLFieldMap;
-import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.SerialNumber;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 
-import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.*;
 
@@ -30,7 +24,7 @@ public class AprilTagLimelight {
         return Stream.of(limelight.getLatestResult().getFiducialResults()).map((a)->(FiducialResult)a).filter(Objects::nonNull).map(a->a.getFiducialId()).map(ObeliskLocation::fromInt).filter(Objects::nonNull).findFirst().orElse(null);
     }
     public Pose3D getDist() {
-        return Stream.of(limelight.getLatestResult().getFiducialResults()).map((a) -> (FiducialResult) a).filter(Objects::nonNull).filter((a) -> {if (!isBlue) return a.getFiducialId() == 24; else return a.getFiducialId() == 20;}).map(FiducialResult::getRobotPoseTargetSpace).findFirst().orElse(null); // If loop time is bad, I can fix
+        return Stream.of(limelight.getLatestResult().getFiducialResults()).map((a) -> (FiducialResult) a).filter(Objects::nonNull).filter((a) -> (!isBlue && a.getFiducialId() == 24) || (isBlue && a.getFiducialId() == 20).map(FiducialResult::getRobotPoseTargetSpace).findFirst().orElse(null); // If loop time is bad, I can fix
     }
     public enum ObeliskLocation //measured by the location of the green
     {
