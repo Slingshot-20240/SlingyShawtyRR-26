@@ -41,7 +41,7 @@ public class AutonSequencesLM1 {
 
                 intake.in(),
                 new SequentialAction(
-                        new ShooterAction(shooter.outtakeL, shooter.outtakeR, 0.8),
+                        new ShooterAction(shooter.outtake, 0.8),
                         new ParallelAction(
                                 new HoodAction(shooter.variableHoodL, shooter.variableHoodR, 0.5),
                                 transfer.on()

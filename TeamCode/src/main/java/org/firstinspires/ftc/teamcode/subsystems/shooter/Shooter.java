@@ -10,18 +10,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Shooter {
-    public final DcMotorEx outtakeL;
-    public final DcMotorEx outtakeR;
+    public final DcMotorEx outtake;
     public final Servo variableHoodL;
     public final Servo variableHoodR;
 
     public Shooter(HardwareMap hardwareMap) {
-        outtakeL = hardwareMap.get(DcMotorEx.class, "outtakeL");
-        outtakeR = hardwareMap.get(DcMotorEx.class, "outtakeR");
-        outtakeL.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        outtakeL.setVelocityPIDFCoefficients(0,0,0,0);
-        outtakeR.setVelocityPIDFCoefficients(0,0,0,0);
+        outtake = hardwareMap.get(DcMotorEx.class, "outtake");
+        outtake.setVelocityPIDFCoefficients(0,0,0,0);
 
         variableHoodR = hardwareMap.get(Servo.class, "variableHoodR");
         variableHoodL = hardwareMap.get(Servo.class, "variableHoodL");
@@ -49,15 +44,14 @@ public class Shooter {
     }
 
     //-----------------Math-----------------\\
-    private static final double launchHeight = 0; // TODO update this with CAD
+    private static final double launchHeight = .280; // meters
     private static final double g = 9.81;
     private static final double H = .39 - launchHeight; // y distance, m distance from launch height to a little above hole on goal
     private static double shootVel;
     private static double R; // TODO: update R with April Tag value
 
     // Hardcoded distances from tip of triangle points to the middle of the goal (meters)
-    // TODO: ADJUST FOR ROBOT DIMENSIONS
-    static double front_dist = 2.1844;
+    static double front_dist = 2.1844 ;
     static double back_dist = 3.2004;
 
     public double calculateShooterVel() {
@@ -96,8 +90,7 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtakeL.setPower(0);
-            outtakeR.setPower(0);
+            outtake.setPower(0);
             return false;
         }
     }
@@ -110,8 +103,7 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtakeL.setPower(-1.0);
-            outtakeR.setPower(-1.0);
+            outtake.setPower(-1.0);
             return false;
         }
     }
@@ -121,8 +113,7 @@ public class Shooter {
 //-------------------------------------------------------------------------------
 
     public void setShooterPower(double power) {
-        outtakeR.setPower(power);
-        outtakeL.setPower(power);
+        outtake.setPower(power);
     }
 
     public void setHoodAngle(double angle) {
@@ -141,13 +132,11 @@ public class Shooter {
     }
 
     public void shootFromBack() {
-        outtakeL.setPower(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
-        outtakeR.setPower(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
+        outtake.setPower(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
     }
 
     public void shootFromFront() {
-        outtakeL.setPower(outtakeVels.HARDCODED_SHOOT_TRIANGLE.getOuttakeVel());
-        outtakeR.setPower(outtakeVels.HARDCODED_SHOOT_TRIANGLE.getOuttakeVel());
+        outtake.setPower(outtakeVels.HARDCODED_SHOOT_TRIANGLE.getOuttakeVel());
     }
 
 }

@@ -7,21 +7,17 @@ import com.acmerobotics.roadrunner.Action;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 public class ShooterAction implements Action {
-    DcMotorEx outtakeL;
-    DcMotorEx outtakeR;
+    DcMotorEx outtake;
     double outtakePower;
 
-    public ShooterAction(DcMotorEx outtakeL, DcMotorEx outtakeR, double outtakePower) {
-        this.outtakeL = outtakeL;
-        this.outtakeR = outtakeR;
+    public ShooterAction(DcMotorEx outtake, double outtakePower) {
+        this.outtake = outtake;
         this.outtakePower = outtakePower;
     }
 
     @Override
     public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-        outtakeL.setPower(outtakePower);
-        outtakeR.setPower(outtakePower);
-
+        outtake.setPower(outtakePower);
         return false;
     }
 }
