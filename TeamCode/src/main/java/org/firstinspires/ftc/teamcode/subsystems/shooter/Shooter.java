@@ -11,6 +11,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Shooter {
     public final DcMotorEx outtake;
+    // HOOD SERVO RANGE
+    // .65 is all the way down
+    // .05 is all the way up
     public final Servo variableHoodL;
     public final Servo variableHoodR;
 
@@ -22,7 +25,7 @@ public class Shooter {
         variableHoodL = hardwareMap.get(Servo.class, "variableHoodL");
 
         variableHoodL.setDirection(Servo.Direction.FORWARD);
-        variableHoodR.setDirection(Servo.Direction.REVERSE);
+        variableHoodR.setDirection(Servo.Direction.FORWARD);
     }
 
     public enum outtakeVels {
