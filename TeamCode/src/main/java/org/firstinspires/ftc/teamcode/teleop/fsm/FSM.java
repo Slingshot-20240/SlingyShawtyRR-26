@@ -24,7 +24,7 @@ public class FSM {
 
     // SUBSYSTEMS
     private final Intake intake;
-    private Turret turret;
+    //private Turret turret;
     private final Transfer transfer;
     private final Shooter shooter;
     private final Drivetrain drivetrain;
