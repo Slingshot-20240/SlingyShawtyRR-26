@@ -7,30 +7,27 @@ import com.acmerobotics.roadrunner.Action;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+//PROGRAM CHANGED BY ISHAAN 10/22 ON GIT IDE on chromebook lol
+//I cannot see errors, so TODO: SUPRESS ERRORS
 public class HoodAction implements Action {
-    Servo variableHoodL;
-    Servo variableHoodR;
+    Servo variableHood;
 
     ElapsedTime timer;
     double position;
 
 
-    public HoodAction(Servo variableHoodL, Servo variableHoodR, double position) {
-        this.variableHoodL = variableHoodL;
-        this.variableHoodR = variableHoodR;
+    public HoodAction(Servo variableHood, double position) {
+        this.variableHood = variableHood;
         this.position = position;
 
-        variableHoodL.setDirection(Servo.Direction.FORWARD);
-        variableHoodR.setDirection(Servo.Direction.REVERSE);
+        variableHood.setDirection(Servo.Direction.REVERSE);
     }
 
     @Override
     public boolean run(@NonNull TelemetryPacket telemetryPacket) {
         if(timer == null) {
             timer = new ElapsedTime();
-            variableHoodL.setPosition(position);
-            variableHoodR.setPosition(position);
-
+            variableHood.setPosition(position);
         }
 
         //How long you are giving it to do the action (moving the servos) before returning out of it
