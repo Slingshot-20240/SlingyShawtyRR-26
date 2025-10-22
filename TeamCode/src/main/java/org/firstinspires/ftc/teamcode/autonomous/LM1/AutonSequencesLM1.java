@@ -42,6 +42,7 @@ public class AutonSequencesLM1 {
                 intake.in(),
                 new SequentialAction(
                         new ShooterAction(shooter.outtake, 0.8),
+                        new SleepAction(1), //waits for flywheel to spin up, tune this val
                         new ParallelAction(
                                 new HoodAction(shooter.variableHoodL, shooter.variableHoodR, 0.5),
                                 transfer.on()
