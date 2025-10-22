@@ -11,21 +11,19 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Shooter {
     public final DcMotorEx outtake;
+
     // HOOD SERVO RANGE
     // .65 is all the way down
     // .05 is all the way up
-    public final Servo variableHoodL;
-    public final Servo variableHoodR;
+    public final Servo variableHood;
 
     public Shooter(HardwareMap hardwareMap) {
         outtake = hardwareMap.get(DcMotorEx.class, "outtake");
         outtake.setVelocityPIDFCoefficients(0,0,0,0);
 
-        variableHoodR = hardwareMap.get(Servo.class, "variableHoodR");
-        variableHoodL = hardwareMap.get(Servo.class, "variableHoodL");
+        variableHood = hardwareMap.get(Servo.class, "variableHood");
 
-        variableHoodL.setDirection(Servo.Direction.FORWARD);
-        variableHoodR.setDirection(Servo.Direction.FORWARD);
+        variableHood.setDirection(Servo.Direction.FORWARD);
     }
 
     public enum outtakeVels {
@@ -80,7 +78,7 @@ public class Shooter {
         hoodAngle = Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * R)) / 2 * Math.PI;
         return hoodAngle;
     }
-    //Added by Ishaan idk if its right
+
     public static double getShootVel() {
         return shootVel;
     }
@@ -120,18 +118,15 @@ public class Shooter {
     }
 
     public void setHoodAngle(double angle) {
-        variableHoodL.setPosition(angle);
-        variableHoodR.setPosition(angle);
+        variableHood.setPosition(angle);
     }
 
     public void hoodToBackTriPos() {
-        variableHoodR.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * back_dist)) / 2 * Math.PI);
-        variableHoodL.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * back_dist)) / 2 * Math.PI);
+        variableHood.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * back_dist)) / 2 * Math.PI);
     }
 
     public void hoodToFrontTriPos() {
-        variableHoodR.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * front_dist)) / 2 * Math.PI);
-        variableHoodL.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * front_dist)) / 2 * Math.PI);
+        variableHood.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * front_dist)) / 2 * Math.PI);
     }
 
     public void shootFromBack() {

@@ -22,6 +22,8 @@ public class TransferTest extends OpMode {
     public void loop() {
         controls.update();
 
+//i may be wrong but idk if calling rr action like on and off willl work here
+//im prolly wrong (dis ishaan)
         if(controls.failSafeReset.value()) {
             robot.transfer.off();
         } else {
