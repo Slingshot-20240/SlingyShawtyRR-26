@@ -49,7 +49,6 @@ public class SequenceTests extends LinearOpMode {
                 )
         );
 
-
         waitForStart();
 
 //-----------------Autonomous-----------------\\
@@ -63,8 +62,6 @@ public class SequenceTests extends LinearOpMode {
                                 path1,
                                 acl.scoreSet()
                         ),
-
-
         );
 
     }
