@@ -11,6 +11,12 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 public class Robot {
+    // CONFIG
+    // right - expansion
+    // left - control
+    // front - 0
+    // back - 1
+
     // MECHANISMS
     private final IMU imu;
     public Intake intake;
