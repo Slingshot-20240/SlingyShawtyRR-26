@@ -51,10 +51,12 @@ public class Transfer {
     //-----------------------------Down--------------------------------------\\
     public class TransferDown implements Action {
 
+        //Changed in git online lol, to not set power full when transfer down. 
+        //Most likely down will only be used for flow of balls etc. 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            transferL.setPower(-1.0);
-            transferR.setPower(-1.0);
+            transferL.setPower(-0.4);
+            transferR.setPower(-0.4);
             return false;
         }
     }
