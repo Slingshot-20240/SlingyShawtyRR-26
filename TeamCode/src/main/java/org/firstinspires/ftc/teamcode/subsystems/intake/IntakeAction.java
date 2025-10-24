@@ -7,8 +7,8 @@ import com.acmerobotics.roadrunner.Action;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 public class IntakeAction implements Action {
-    DcMotorEx intake;
-    double intakePower;
+    private final DcMotorEx intake;
+    private final double intakePower;
 
     public IntakeAction(DcMotorEx intake, double intakePower) {
         this.intake = intake;
@@ -18,6 +18,7 @@ public class IntakeAction implements Action {
     @Override
     public boolean run(@NonNull TelemetryPacket telemetryPacket) {
         intake.setPower(intakePower);
+
         return true;
     }
 }

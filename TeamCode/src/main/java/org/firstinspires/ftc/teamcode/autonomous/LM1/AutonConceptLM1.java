@@ -121,8 +121,8 @@ public class AutonConceptLM1 extends LinearOpMode {
                         //Grab Set 1
                         new SequentialAction(
                                 new ParallelAction(
-                                        prepareSet1,
-                                        acl.prepareForSet(3,5)
+                                        prepareSet1
+                                        //acl.prepareForSet()
                                 ),
                                 new ParallelAction(
                                         grabSet1,
@@ -142,8 +142,8 @@ public class AutonConceptLM1 extends LinearOpMode {
                         //Grab Set 2
                         new SequentialAction(
                                 new ParallelAction(
-                                        prepareSet2,
-                                        acl.prepareForSet(3,5)
+                                        prepareSet2
+                                        //acl.prepareForSet(3,5)
                                 ),
                                 new ParallelAction(
                                         grabSet2,
@@ -163,8 +163,8 @@ public class AutonConceptLM1 extends LinearOpMode {
                         //Grab Set 3
                         new SequentialAction(
                                 new ParallelAction(
-                                        prepareSet3,
-                                        acl.prepareForSet(3,5)
+                                        prepareSet3
+                                        //acl.prepareForSet(3,5)
                                 ),
                                 new ParallelAction(
                                         grabSet3,

@@ -38,10 +38,17 @@ public class SequenceTests extends LinearOpMode {
 
 //-----------------Pathing Actions-----------------\\
 
-//double check heading stuff to make sure robot goes striaght
+//double check heading stuff to make sure robot goes straight
         Action path1 = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(0, 15), Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(0, 60), Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(0,0),Math.toRadians(90))
                 .build();
+
+        Action path2 = drive.actionBuilder(new Pose2d(0,0,Math.toRadians(90)))
+
+                .strafeToLinearHeading(new Vector2d(0,40),Math.toRadians(0))
+                .build();
+
 
         
 
@@ -58,19 +65,25 @@ public class SequenceTests extends LinearOpMode {
         if (isStopRequested()) return;
 
         Actions.runBlocking(
-                new ParallelAction(
-                        intake.in(),
+                new SequentialAction(
+                        new ParallelAction(
+                                path1,
+                                acl.intakeSet()
+                        ),
+                        new SleepAction(2),
 
-                        //Score Set
+                        new ParallelAction(
+                                path2,
+                                acl.prepareForSet()
+                        ),
+                        new SleepAction(2),
                         new SequentialAction(
-                                //path1,
-                                //new IntakeAction(intake.intake, 1.0)
-                                //new HoodAction(shooter.variableHood, 0.4),
-                                transfer.on(),
-                                new SleepAction(5),
-                                shooter.out(),
-                                new SleepAction(5)
-                        )
+                                acl.scoreSet()
+                        ),
+                        new SleepAction(10)
+
+
+
                 )
         );
 

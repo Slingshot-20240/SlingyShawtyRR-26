@@ -7,6 +7,7 @@ import com.acmerobotics.roadrunner.SleepAction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.intake.IntakeAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.HoodAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterAction;
@@ -36,18 +37,16 @@ public class AutonSequencesLM1 {
      * Intake power runs constantly
      * Hood is angled to shoot position
      */
-    public Action scoreSet() {
+    public Action   scoreSet() {
         return new ParallelAction(
-                //TODO - not done 🥀 rip lock tf in ishaan quit slacking
 
                 intake.in(),
                 new SequentialAction(
-                        new ShooterAction(shooter.outtake, 0.8),
-                        new SleepAction(1), //waits for flywheel to spin up, tune this val
-                        new ParallelAction(
-                                new HoodAction(shooter.variableHood,0.5),
-                                transfer.on()
-                        )
+                        new SleepAction(2), //Wait time for flywheel to get to good speed
+                        hws.transferUpFor(5),
+                        shooter.idle(),
+                        intake.idle()
+
                 )
 
         );
@@ -61,18 +60,18 @@ public class AutonSequencesLM1 {
      */
     public Action intakeSet() {
         return new ParallelAction(
-                intake.in(),
-                hws.transferUpFor(3)
+                hws.intakeInFor(3),
+                hws.transferUpFor(2)
         );
     }
 
     /**
      * Intake in while transfer
      */
-    public Action prepareForSet(long intakeTime, long transferTime) {
+    public Action prepareForSet() {
         return new ParallelAction(
-                hws.intakeInFor(intakeTime),
-                hws.transferUpFor(transferTime)
+                intake.in(),
+                shooter.out()
         );
     }
 

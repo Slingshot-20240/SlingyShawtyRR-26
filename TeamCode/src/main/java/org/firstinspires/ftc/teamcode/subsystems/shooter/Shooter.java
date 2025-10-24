@@ -9,6 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.subsystems.base_templates.Servo_Template;
+
 public class Shooter {
     public final DcMotorEx outtake;
 
@@ -112,6 +114,19 @@ public class Shooter {
         return new ShooterOut();
     }
 //-------------------------------------------------------------------------------
+
+    public class VHPos1 implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            variableHood.setPosition(0.5);
+            return false;
+        }
+    }
+    public Action toPos1() {
+        return new VHPos1();
+    }
+
+
 
     public void setShooterPower(double power) {
         outtake.setPower(power);
