@@ -20,7 +20,7 @@ public class TransferServoTest extends OpMode {
 
     @Override
     public void loop() {
-        robot.transfer.frontTransfer.setPower(-servoPos);
-        robot.transfer.backTransfer.setPower(servoPos);
+        robot.transfer.backTransfer.setPower(-servoPos);
+        robot.transfer.frontTransfer.setPower(servoPos);
     }
 }

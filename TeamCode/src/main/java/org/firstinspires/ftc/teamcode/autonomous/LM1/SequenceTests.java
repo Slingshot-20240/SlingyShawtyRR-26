@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.SleepAction;
 import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
@@ -14,6 +15,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //Subsystems Imports
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.intake.IntakeAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.HoodAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
@@ -44,11 +46,11 @@ public class SequenceTests extends LinearOpMode {
         
 
 //-----------------Initialization-----------------\\
-        Actions.runBlocking(
-                new SequentialAction(
-                    new HoodAction(shooter.variableHood, 0.5)
-                )
-        );
+//        Actions.runBlocking(
+//                new SequentialAction(
+//                    new HoodAction(shooter.variableHood, 0.5)
+//                )
+//        );
 
         waitForStart();
 
@@ -56,12 +58,18 @@ public class SequenceTests extends LinearOpMode {
         if (isStopRequested()) return;
 
         Actions.runBlocking(
-                new SequentialAction(
+                new ParallelAction(
+                        intake.in(),
 
                         //Score Set
                         new SequentialAction(
-                                path1,
-                                acl.scoreSet()
+                                //path1,
+                                //new IntakeAction(intake.intake, 1.0)
+                                //new HoodAction(shooter.variableHood, 0.4),
+                                transfer.on(),
+                                new SleepAction(5),
+                                shooter.out(),
+                                new SleepAction(5)
                         )
                 )
         );
