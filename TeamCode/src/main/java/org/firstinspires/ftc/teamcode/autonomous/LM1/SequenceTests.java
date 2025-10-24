@@ -58,12 +58,18 @@ public class SequenceTests extends LinearOpMode {
         if (isStopRequested()) return;
 
         Actions.runBlocking(
-                new SequentialAction(
+                new ParallelAction(
+                        intake.in(),
 
                         //Score Set
                         new SequentialAction(
                                 //path1,
-                                new IntakeAction(intake.intake, 1.0)
+                                //new IntakeAction(intake.intake, 1.0)
+                                //new HoodAction(shooter.variableHood, 0.4),
+                                transfer.on(),
+                                new SleepAction(5),
+                                shooter.out(),
+                                new SleepAction(5)
                         )
                 )
         );

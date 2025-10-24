@@ -17,7 +17,9 @@ public class Transfer {
         backTransfer = hardwareMap.get(CRServo.class, "transferB");
         frontTransfer = hardwareMap.get(CRServo.class, "transferF");
 
-        backTransfer.setDirection(DcMotorSimple.Direction.REVERSE);
+        backTransfer.setDirection(DcMotorSimple.Direction.FORWARD);
+        frontTransfer.setDirection(DcMotorSimple.Direction.REVERSE);
+
     }
 
     //----------------------------Up----------------------------------\\
