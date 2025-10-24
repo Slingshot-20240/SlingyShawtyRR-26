@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.autonomous.LM1;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.SleepAction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
@@ -44,7 +45,7 @@ public class AutonSequencesLM1 {
                         new ShooterAction(shooter.outtake, 0.8),
                         new SleepAction(1), //waits for flywheel to spin up, tune this val
                         new ParallelAction(
-                                new HoodAction(shooter.variableHoodL, shooter.variableHoodR, 0.5),
+                                new HoodAction(shooter.variableHood, 0.5),
                                 transfer.on()
                         )
                 )

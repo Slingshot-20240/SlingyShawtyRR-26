@@ -14,6 +14,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //Subsystems Imports
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.shooter.HoodAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
@@ -24,7 +25,7 @@ public class SequenceTests extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        Pose2d initialPose = new Pose2d(0, 0, Math.toRadians(90)));
+        Pose2d initialPose = new Pose2d(0, 0, Math.toRadians(90));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
         AutonSequencesLM1 acl = new AutonSequencesLM1(hardwareMap);
         HardwareSequences hws = new HardwareSequences(hardwareMap);
@@ -37,7 +38,7 @@ public class SequenceTests extends LinearOpMode {
 
 //double check heading stuff to make sure robot goes striaght
         Action path1 = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(0, 15), Math.toRadians(90)))
+                .strafeToLinearHeading(new Vector2d(0, 15), Math.toRadians(90))
                 .build();
 
         
@@ -45,7 +46,7 @@ public class SequenceTests extends LinearOpMode {
 //-----------------Initialization-----------------\\
         Actions.runBlocking(
                 new SequentialAction(
-                    new HoodAction(variableHood, 0.5)
+                    new HoodAction(shooter.variableHood, 0.5)
                 )
         );
 
@@ -61,7 +62,8 @@ public class SequenceTests extends LinearOpMode {
                         new SequentialAction(
                                 path1,
                                 acl.scoreSet()
-                        ),
+                        )
+                )
         );
 
     }
