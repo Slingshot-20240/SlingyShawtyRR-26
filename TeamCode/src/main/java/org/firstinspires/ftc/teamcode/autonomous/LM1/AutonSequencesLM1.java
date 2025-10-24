@@ -37,7 +37,7 @@ public class AutonSequencesLM1 {
      * Intake power runs constantly
      * Hood is angled to shoot position
      */
-    public Action   scoreSet() {
+    public Action scoreSet() {
         return new ParallelAction(
 
                 intake.in(),

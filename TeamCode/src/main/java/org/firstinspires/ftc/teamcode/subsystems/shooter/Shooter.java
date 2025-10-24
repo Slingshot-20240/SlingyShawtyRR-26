@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.ServoImplEx;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.subsystems.base_templates.Servo_Template;
 
@@ -115,16 +117,6 @@ public class Shooter {
     }
 //-------------------------------------------------------------------------------
 
-    public class VHPos1 implements Action {
-        @Override
-        public boolean run(@NonNull TelemetryPacket packet) {
-            variableHood.setPosition(0.5);
-            return false;
-        }
-    }
-    public Action toPos1() {
-        return new VHPos1();
-    }
 
 
 
