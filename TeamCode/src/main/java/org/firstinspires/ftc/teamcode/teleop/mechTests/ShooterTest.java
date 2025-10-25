@@ -50,12 +50,15 @@ public class ShooterTest extends OpMode {
 //        }
 
 
-        robot.shooter.setShooterPower(-1);
+//        robot.shooter.setShooterPower(-1);
+//
+//        if (robot.shooter.outtake.getVelocity() <= 1500) {
+//            robot.transfer.transferOn();
+//        }
 
-        if (robot.shooter.outtake.getVelocity() <= 1500) {
-            robot.transfer.transferOn();
+        if (controls.shootBack.value()) {
+            robot.shooter.shootFromFront();
         }
-
 
 
         dashboardTelemetry.addData("backShootValue", Shooter.outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());

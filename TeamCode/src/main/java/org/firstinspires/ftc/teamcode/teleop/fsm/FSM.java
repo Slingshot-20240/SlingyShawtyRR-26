@@ -120,7 +120,7 @@ public class FSM {
                     //shooter.hoodToBackTriPos();
                     //shooter.shootFromBack();
                     shooter.variableHood.setPosition(.55);
-                    shooter.setShooterPower(-.75);
+                    shooter.shootFromBack();
 
                     if (robot.shooter.outtake.getVelocity() >= 840) {
                         robot.transfer.transferOn();
@@ -131,7 +131,7 @@ public class FSM {
 //                    shooter.hoodToFrontTriPos();
 //                    shooter.shootFromFront();
                     shooter.variableHood.setPosition(.05);
-                    shooter.setShooterPower(-.5);
+                    shooter.shootFromFront();
 
                     if (robot.shooter.outtake.getVelocity() >= 840) {
                         robot.transfer.transferOn();

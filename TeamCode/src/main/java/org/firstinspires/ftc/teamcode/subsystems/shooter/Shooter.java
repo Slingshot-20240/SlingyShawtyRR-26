@@ -71,8 +71,8 @@ public class Shooter {
     }
 
     public static double convertVelToRPM(double vel) {
-        double newVel = (vel * 60) / 2 * .096 * Math.PI; // vel in RPM
-        return newVel/6000;
+        double newVel = (vel * 60) / .086 * Math.PI; // vel in RPM
+        return -newVel/6000;
     }
 
     // HOOD ANGLE CALCULATIONS - TODO: ASK RUPAL
