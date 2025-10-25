@@ -15,7 +15,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //Subsystems Imports
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
-import org.firstinspires.ftc.teamcode.subsystems.intake.IntakeAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.HoodAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
@@ -27,7 +26,7 @@ public class SequenceTests extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        Pose2d initialPose = new Pose2d(0, 0, Math.toRadians(90));
+        Pose2d initialPose = new Pose2d(-49.3, -49, Math.toRadians(55));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
         AutonSequencesLM1 acl = new AutonSequencesLM1(hardwareMap);
         HardwareSequences hws = new HardwareSequences(hardwareMap);
