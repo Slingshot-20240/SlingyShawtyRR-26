@@ -74,5 +74,10 @@ public class Transfer {
         frontTransfer.setPower(0);
     }
 
+    public void backReverseFrontForward() {
+        backTransfer.setPower(1);
+        frontTransfer.setPower(1);
+    }
+
 }
 

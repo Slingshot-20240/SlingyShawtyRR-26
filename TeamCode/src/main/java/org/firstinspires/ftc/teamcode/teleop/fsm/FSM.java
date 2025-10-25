@@ -70,6 +70,10 @@ public class FSM {
                 // shooter off :)
                 shooter.setShooterPower(0);
 
+                // TRANSFER ALT
+                // always have transfer on but back running backwards, should keep ball in place
+                // transfer.backReverseFrontForward();
+
                 if (gamepad.transferCounter.value()) {
                     countBalls = 0;
                 }
