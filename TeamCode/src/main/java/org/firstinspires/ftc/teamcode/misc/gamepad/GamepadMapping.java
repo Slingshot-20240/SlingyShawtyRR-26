@@ -27,6 +27,8 @@ public class GamepadMapping {
     // MISC
     public Toggle failSafeReset;
     public Toggle transferCounter;
+    public Toggle tempTransfer;
+    public Toggle outtake;
 
     public GamepadMapping(Gamepad gamepad1, Gamepad gamepad2) {
         // GAMEPADS
@@ -48,6 +50,8 @@ public class GamepadMapping {
         // MISC
         failSafeReset = new Toggle(false);
         transferCounter = new Toggle(false);
+        tempTransfer = new Toggle(false);
+        outtake = new Toggle(false);
     }
 
     public void joystickUpdate() {
@@ -68,6 +72,11 @@ public class GamepadMapping {
 
         failSafeReset.update(gamepad2.dpad_down);
         transferCounter.update(gamepad2.right_bumper);
+
+        // TEMP TRANSFER
+        tempTransfer.update(gamepad1.right_bumper);
+
+        outtake.update(gamepad1.y);
     }
 
     public void resetMultipleControls(Toggle... toggles) {

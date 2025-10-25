@@ -8,10 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.ServoImplEx;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.teamcode.subsystems.base_templates.Servo_Template;
 
 public class Shooter {
     public final DcMotorEx outtake;
@@ -34,9 +30,9 @@ public class Shooter {
     public enum outtakeVels {
         PID_SHOOT(shootVel),
         // 5.059
-        HARDCODED_SHOOT_TRIANGLE(convertVelToRPM(Math.sqrt(H * g + g * Math.sqrt(Math.pow(front_dist, 2) + Math.pow(H, 2))))),
+        HARDCODED_SHOOT_FRONT(.6),
         // 5.954
-        HARDCODED_SHOOT_BACK(convertVelToRPM(Math.sqrt(H * g + g * Math.sqrt(Math.pow(back_dist, 2) + Math.pow(H, 2))))),
+        HARDCODED_SHOOT_BACK(.7),
         IDLE(0);
 
         private final double outtake_vels;
@@ -130,11 +126,11 @@ public class Shooter {
     }
 
     public void hoodToBackTriPos() {
-        variableHood.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * back_dist)) / 2 * Math.PI);
+        variableHood.setPosition(.05);
     }
 
     public void hoodToFrontTriPos() {
-        variableHood.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * front_dist)) / 2 * Math.PI);
+        variableHood.setPosition(.3);
     }
 
     public void shootFromBack() {
@@ -142,7 +138,7 @@ public class Shooter {
     }
 
     public void shootFromFront() {
-        outtake.setPower(outtakeVels.HARDCODED_SHOOT_TRIANGLE.getOuttakeVel());
+        outtake.setPower(outtakeVels.HARDCODED_SHOOT_FRONT.getOuttakeVel());
     }
 
 }

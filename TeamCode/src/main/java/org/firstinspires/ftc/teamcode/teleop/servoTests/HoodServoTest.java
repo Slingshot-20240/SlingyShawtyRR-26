@@ -18,18 +18,31 @@ public class HoodServoTest extends OpMode {
     // .05 is all the way up
 
     public static double servoPos = 0;
+    public static double power = 0;
     GamepadMapping controls;
     private Servo variableHood;
+    private Robot robot;
 
     @Override
     public void init() {
         controls = new GamepadMapping(gamepad1, gamepad2);
-        //robot = new Robot(hardwareMap, controls);
+        robot = new Robot(hardwareMap, controls);
         variableHood = hardwareMap.get(Servo.class, "variableHood");
     }
 
     @Override
     public void loop() {
+        controls.update();
+        robot.shooter.setShooterPower(-power);
         variableHood.setPosition(servoPos);
+
+        // right bumper
+        if (controls.tempTransfer.value()) {
+            robot.transfer.transferOn();
+        }
+        // left bumper
+        if (controls.intake.value()) {
+            robot.intake.intakeOn();
+        }
     }
 }

@@ -67,16 +67,21 @@ public class FSM {
                     //shooter.hoodToBackTriPos();
                     shooter.variableHood.setPosition(.55);
                 }
+
+                if (gamepad.outtake.value()) {
+                    intake.intakeReverse();
+                }
+
                 // shooter off :)
                 shooter.setShooterPower(0);
 
                 // TRANSFER ALT
                 // always have transfer on but back running backwards, should keep ball in place
-                // transfer.backReverseFrontForward();
+                transfer.backReverseFrontForward();
 
-                if (gamepad.transferCounter.value()) {
-                    countBalls = 0;
-                }
+//                if (gamepad.transferCounter.value()) {
+//                    countBalls = 0;
+//                }
 
                 // Going to try transfer always on, may need to add some delays
                 // transfer.transferOn();
@@ -84,11 +89,11 @@ public class FSM {
                 // Intake button toggle, intake on/off
                 if (gamepad.intake.value()) {
                     intake.intakeOn();
-                    if (countBalls == 0) {
-                        state = FSMStates.TRANSFER_FIRST;
-                        startTime = loopTime.milliseconds();
-                        countBalls++;
-                    }
+//                    if (countBalls == 0) {
+//                        state = FSMStates.TRANSFER_FIRST;
+//                        startTime = loopTime.milliseconds();
+//                        countBalls++;
+//                    }
                 } else if (!gamepad.intake.value())
                     intake.intakeOff();
 
@@ -126,7 +131,7 @@ public class FSM {
                 if (type == ControlType.HARDCODED_CONTROL && gamepad.shootBack.value()) {
                     //shooter.hoodToBackTriPos();
                     //shooter.shootFromBack();
-                    shooter.variableHood.setPosition(.55);
+                    shooter.hoodToBackTriPos();
                     shooter.shootFromBack();
 
                     if (robot.shooter.outtake.getVelocity() >= 840) {
@@ -135,9 +140,7 @@ public class FSM {
                 }
                 // Hardcoded control AND we're at the tip of the triangle of the front shooting zone
                 else if (type == ControlType.HARDCODED_CONTROL && gamepad.shootTriangle.value()) {
-//                    shooter.hoodToFrontTriPos();
-//                    shooter.shootFromFront();
-                    shooter.variableHood.setPosition(.05);
+                    shooter.hoodToFrontTriPos();
                     shooter.shootFromFront();
 
                     if (robot.shooter.outtake.getVelocity() >= 840) {
