@@ -47,4 +47,11 @@ public class Robot {
         drivetrain = new Drivetrain(hardwareMap, imu, controls);
 
     }
+
+    public void hardwareSoftReset() {
+        transfer.transferOff();
+        shooter.hoodToBackTriPos();
+        intake.intakeOff();
+        shooter.setShooterPower(0);
+    }
 }
