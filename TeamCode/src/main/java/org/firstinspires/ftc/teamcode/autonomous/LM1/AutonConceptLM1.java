@@ -110,23 +110,24 @@ public class AutonConceptLM1 extends LinearOpMode {
 
                 //--------Preloads--------\\
                         //Shoot Preloads
-                        new SequentialAction(
+                        new ParallelAction(
                                 scorePreload,
-                                acl.scoreSet()
+                                acl.preparePreloads()
                         ),
+                        acl.scorePreloads(),
 
 
 
                 //--------Set 1--------\\
                         //Grab Set 1
                         new SequentialAction(
-                                new ParallelAction(
-                                        prepareSet1
-                                        //acl.prepareForSet()
-                                ),
+                                prepareSet1,
+
                                 new ParallelAction(
                                         grabSet1,
-                                        acl.intakeSet()
+                                        acl.intakeSet(),
+                                        //start spinning up shooter
+                                        shooter.out()
                                 )
                         ),
 
@@ -141,38 +142,36 @@ public class AutonConceptLM1 extends LinearOpMode {
                 //--------Set 2--------\\
                         //Grab Set 2
                         new SequentialAction(
-                                new ParallelAction(
-                                        prepareSet2
-                                        //acl.prepareForSet(3,5)
-                                ),
+                                prepareSet2,
+
                                 new ParallelAction(
                                         grabSet2,
-                                        acl.intakeSet()
+                                        acl.intakeSet(),
+                                        //start spinning up shooter
+                                        shooter.out()
                                 )
                         ),
 
-                        //Shoot Set 1
+                        //Shoot Set 2
                         new SequentialAction(
                                 scoreSet2,
                                 acl.scoreSet()
                         ),
 
-
-
                 //--------Set 3--------\\
                         //Grab Set 3
                         new SequentialAction(
-                                new ParallelAction(
-                                        prepareSet3
-                                        //acl.prepareForSet(3,5)
-                                ),
+                                prepareSet3,
+
                                 new ParallelAction(
                                         grabSet3,
-                                        acl.intakeSet()
+                                        acl.intakeSet(),
+                                        //start spinning up shooter
+                                        shooter.out()
                                 )
                         ),
 
-                        //Shoot Set 1
+                        //Shoot Set 3
                         new SequentialAction(
                                 scoreSet3,
                                 acl.scoreSet()
