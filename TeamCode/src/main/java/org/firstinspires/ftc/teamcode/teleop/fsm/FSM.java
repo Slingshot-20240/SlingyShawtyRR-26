@@ -12,7 +12,6 @@ import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
-import org.firstinspires.ftc.teamcode.subsystems.turret.Turret;
 
 public class FSM {
     // GENERAL ROBOT STATES + CLASSES
@@ -33,7 +32,7 @@ public class FSM {
     // OTHER
     public final ElapsedTime loopTime;
     public double startTime;
-    private int count_balls = 0;
+    private int countBalls = 0;
 
 
     public FSM(HardwareMap hardwareMap, GamepadMapping gamepad) {
@@ -71,16 +70,20 @@ public class FSM {
                 // shooter off :)
                 shooter.setShooterPower(0);
 
+                if (gamepad.transferCounter.value()) {
+                    countBalls = 0;
+                }
+
                 // Going to try transfer always on, may need to add some delays
                 // transfer.transferOn();
 
                 // Intake button toggle, intake on/off
                 if (gamepad.intake.value()) {
                     intake.intakeOn();
-                    if (count_balls == 0) {
+                    if (countBalls == 0) {
                         state = FSMStates.TRANSFER_FIRST;
                         startTime = loopTime.milliseconds();
-                        count_balls++;
+                        countBalls++;
                     }
                 } else if (!gamepad.intake.value())
                     intake.intakeOff();
@@ -145,7 +148,7 @@ public class FSM {
                 // Return to base state if shooting is false
                 // TODO: this may not work
                 if (gamepad.pidShoot.changed() || gamepad.shootTriangle.changed() || gamepad.shootBack.changed()) {
-                    count_balls = 0;
+                    countBalls = 0;
                     state = FSMStates.BASE_STATE;
                     transfer.transferOff();
                     gamepad.resetMultipleControls(gamepad.pidShoot, gamepad.shootBack, gamepad.shootTriangle, gamepad.intake);
