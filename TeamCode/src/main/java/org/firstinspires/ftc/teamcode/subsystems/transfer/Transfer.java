@@ -7,6 +7,7 @@ import com.acmerobotics.roadrunner.Action;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class Transfer {
     public final CRServo backTransfer;
@@ -16,9 +17,6 @@ public class Transfer {
     public Transfer(HardwareMap hardwareMap) {
         backTransfer = hardwareMap.get(CRServo.class, "transferB");
         frontTransfer = hardwareMap.get(CRServo.class, "transferF");
-
-        backTransfer.setDirection(DcMotorSimple.Direction.FORWARD);
-        frontTransfer.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
 
@@ -64,6 +62,16 @@ public class Transfer {
     }
     public Action down() {
         return new TransferDown();
+    }
+
+    public void transferOn() {
+        backTransfer.setPower(-1.0);
+        frontTransfer.setPower(1.0);
+    }
+
+    public void transferOff() {
+        backTransfer.setPower(0);
+        frontTransfer.setPower(0);
     }
 
 }

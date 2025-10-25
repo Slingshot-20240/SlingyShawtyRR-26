@@ -19,10 +19,13 @@ public class FSMTest extends OpMode {
         gamepad = new GamepadMapping(gamepad1,gamepad2);
         fsm = new FSM(hardwareMap, gamepad);
         robot = fsm.robot;
+        robot.shooter.variableHood.setPosition(0);
     }
 
     @Override
     public void loop() {
+        telemetry.addData("loopTime", fsm.loopTime.milliseconds() - fsm.startTime);
+        telemetry.addData("velo", fsm.robot.shooter.outtake.getVelocity());
         fsm.update();
     }
 }

@@ -26,7 +26,7 @@ public class ShooterPID extends LinearOpMode {
     @Override
     public void runOpMode() {
         flywheel.setDirection(DcMotorSimple.Direction.REVERSE);
-        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+        dashboardTelemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         flywheel = hardwareMap.get(DcMotorEx.class, "outtake");
 
         // Set PIDF (start with defaults, tune later)
@@ -54,12 +54,12 @@ public class ShooterPID extends LinearOpMode {
 
 
             // Telemetry
-            telemetry.addData("Target (ticks/s): ", targetVel);
-            telemetry.addData("Actual (ticks/s): ", actualVel);
-            telemetry.addData("P:",p);
-            telemetry.addData("I:",i);
-            telemetry.addData("D:",d);
-            telemetry.update();
+            dashboardTelemetry.addData("Target (ticks/s): ", targetVel);
+            dashboardTelemetry.addData("Actual (ticks/s): ", actualVel);
+            dashboardTelemetry.addData("P:",p);
+            dashboardTelemetry.addData("I:",i);
+            dashboardTelemetry.addData("D:",d);
+            dashboardTelemetry.update();
 
             TelemetryPacket packet = new TelemetryPacket();
             packet.fieldOverlay().setStroke("#3F51B5");

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.teleop.fsm;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
 import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
@@ -29,6 +30,11 @@ public class FSM {
     private final Shooter shooter;
     private final Drivetrain drivetrain;
 
+    // OTHER
+    public final ElapsedTime loopTime;
+    public double startTime;
+    private int count_balls = 0;
+
 
     public FSM(HardwareMap hardwareMap, GamepadMapping gamepad) {
         robot = new Robot(hardwareMap, gamepad);
@@ -40,6 +46,9 @@ public class FSM {
         shooter = robot.shooter;
 
         drivetrain = robot.drivetrain;
+
+        loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
+        startTime = loopTime.milliseconds();
     }
 
     public void update() {
@@ -48,27 +57,33 @@ public class FSM {
         // Updates all other controls
         gamepad.update();
 
-        drive.update();
-        pose = drive.getPose();
+//        drive.update();
+//        pose = drive.getPose();
         //TODO - Get robot pos from localization
 
         switch (state) {
             case BASE_STATE:
                 // if hardcoded control, set hood to back shooting position
                 if (type.equals(ControlType.HARDCODED_CONTROL)) {
-                    shooter.hoodToBackTriPos();
+                    //shooter.hoodToBackTriPos();
+                    shooter.variableHood.setPosition(.55);
                 }
                 // shooter off :)
                 shooter.setShooterPower(0);
 
                 // Going to try transfer always on, may need to add some delays
-                transfer.on();
+                // transfer.transferOn();
 
                 // Intake button toggle, intake on/off
                 if (gamepad.intake.value()) {
-                    intake.in();
+                    intake.intakeOn();
+                    if (count_balls == 0) {
+                        state = FSMStates.TRANSFER_FIRST;
+                        startTime = loopTime.milliseconds();
+                        count_balls++;
+                    }
                 } else if (!gamepad.intake.value())
-                    intake.idle();
+                    intake.intakeOff();
 
                 if (gamepad.pidShoot.value() || gamepad.shootTriangle.value() || gamepad.shootBack.value()) {
                     state = FSMStates.SHOOTING;
@@ -80,22 +95,47 @@ public class FSM {
 
                 break;
 
+            case TRANSFER_FIRST:
+                // counter, everytime we shoot it resets and that first one is the one we do this
+                // manual override
+                if (loopTime.milliseconds() - startTime <= 1700) {
+                    transfer.transferOn();
+                } else {
+                    transfer.transferOff();
+                    state = FSMStates.BASE_STATE;
+                    gamepad.resetMultipleControls(gamepad.intake);
+                    break;
+                }
+                break;
+
             case SHOOTING:
+                intake.intakeOn();
                 // TODO: FIX THIS ASK BOOP - BEE
                 //I (Ishaan) Commented line below cuz i got NO clue how to suppress errors.
                 //Actually i do, we just have to add localization
                 //turret.setTurretPos(turret.calcTurretVal(pose.getX(), pose.getY(), pose.getX(), pose.getY(), pose.getHeading()), 1);
                 // turn transfer off while shooting until back to base state
-                transfer.off();
                 // Hardcoded control AND we're at the back shooting zone
                 if (type == ControlType.HARDCODED_CONTROL && gamepad.shootBack.value()) {
-                    shooter.hoodToBackTriPos();
-                    shooter.shootFromBack();
+                    //shooter.hoodToBackTriPos();
+                    //shooter.shootFromBack();
+                    shooter.variableHood.setPosition(.55);
+                    shooter.setShooterPower(-.75);
+
+                    if (robot.shooter.outtake.getVelocity() >= 840) {
+                        robot.transfer.transferOn();
+                    }
                 }
                 // Hardcoded control AND we're at the tip of the triangle of the front shooting zone
                 else if (type == ControlType.HARDCODED_CONTROL && gamepad.shootTriangle.value()) {
-                    shooter.hoodToFrontTriPos();
-                    shooter.shootFromFront();
+//                    shooter.hoodToFrontTriPos();
+//                    shooter.shootFromFront();
+                    shooter.variableHood.setPosition(.05);
+                    shooter.setShooterPower(-.5);
+
+                    if (robot.shooter.outtake.getVelocity() >= 840) {
+                        robot.transfer.transferOn();
+                    }
                 }
                 // PID control that adjusts depending on our distance - TO BE IMPLEMENTED
                 else if (type == ControlType.PID_CONTROL && gamepad.pidShoot.value()) {
@@ -105,8 +145,10 @@ public class FSM {
                 // Return to base state if shooting is false
                 // TODO: this may not work
                 if (gamepad.pidShoot.changed() || gamepad.shootTriangle.changed() || gamepad.shootBack.changed()) {
+                    count_balls = 0;
                     state = FSMStates.BASE_STATE;
-                    gamepad.resetMultipleControls(gamepad.pidShoot, gamepad.shootBack, gamepad.shootTriangle);
+                    transfer.transferOff();
+                    gamepad.resetMultipleControls(gamepad.pidShoot, gamepad.shootBack, gamepad.shootTriangle, gamepad.intake);
                 }
                 break;
 
@@ -126,7 +168,7 @@ public class FSM {
         BASE_STATE,
         SHOOTING,
         PARK,
-        TRANSFER
+        TRANSFER_FIRST
     }
 
     public enum ControlType {

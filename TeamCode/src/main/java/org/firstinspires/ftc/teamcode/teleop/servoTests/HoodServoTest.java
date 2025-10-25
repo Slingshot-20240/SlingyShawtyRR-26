@@ -12,22 +12,24 @@ import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 @TeleOp (group = "servo tests")
 public class HoodServoTest extends OpMode {
     //Robot robot;
+
+    // HOOD SERVO RANGE
+    // .65 is all the way down
+    // .05 is all the way up
+
     public static double servoPos = 0;
     GamepadMapping controls;
-    private Servo variableHoodL;
-    private Servo variableHoodR;
+    private Servo variableHood;
 
     @Override
     public void init() {
         controls = new GamepadMapping(gamepad1, gamepad2);
         //robot = new Robot(hardwareMap, controls);
-        variableHoodL = hardwareMap.get(Servo.class, "variableHoodL");
-        variableHoodR = hardwareMap.get(Servo.class, "variableHoodR");
+        variableHood = hardwareMap.get(Servo.class, "variableHood");
     }
 
     @Override
     public void loop() {
-        variableHoodL.setPosition(servoPos);
-        variableHoodR.setPosition(servoPos);
+        variableHood.setPosition(servoPos);
     }
 }

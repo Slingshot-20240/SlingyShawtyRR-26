@@ -17,7 +17,7 @@ public class Shooter {
     public final DcMotorEx outtake;
 
     // HOOD SERVO RANGE
-    // .65 is all the way down
+    // .55 is all the way down
     // .05 is all the way up
     public final Servo variableHood;
 
@@ -28,7 +28,7 @@ public class Shooter {
 
         variableHood = hardwareMap.get(Servo.class, "variableHood");
 
-        variableHood.setDirection(Servo.Direction.REVERSE);
+        //variableHood.setDirection(Servo.Direction.REVERSE);
     }
 
     public enum outtakeVels {

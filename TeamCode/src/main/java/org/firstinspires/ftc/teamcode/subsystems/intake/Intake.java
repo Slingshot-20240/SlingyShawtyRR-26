@@ -58,6 +58,14 @@ public class Intake {
     }
 //-------------------------------------------------------------------------------
 
+    public void intakeOn() {
+        intake.setPower(1);
+    }
+
+    public void intakeOff() {
+        intake.setPower(0);
+    }
+
 }
 
 

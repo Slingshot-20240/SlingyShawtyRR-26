@@ -22,6 +22,6 @@ public class IntakeTest extends OpMode {
 
     @Override
     public void loop() {
-        robot.intake.intake.setPower(power);
+        robot.intake.intakeOn();
     }
 }

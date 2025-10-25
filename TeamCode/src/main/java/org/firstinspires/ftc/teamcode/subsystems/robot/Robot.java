@@ -17,8 +17,8 @@ public class Robot {
     // front - 0
     // back - 1
 
-    // Front transfer 5 control hub
-    // Back transfer 3 control hub
+    // Front transfer 3 control hub
+    // Back transfer 5 control hub
     // servo variable hood 0 on control hub
     // shooter motor expansion hub port 3
     // intake control hub port 3
