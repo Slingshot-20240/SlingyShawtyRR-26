@@ -67,6 +67,11 @@ public class FSM {
                     //shooter.hoodToBackTriPos();
                     shooter.variableHood.setPosition(.55);
                 }
+
+                if (gamepad.outtake.value()) {
+                    intake.intakeReverse();
+                }
+
                 // shooter off :)
                 shooter.setShooterPower(0);
 

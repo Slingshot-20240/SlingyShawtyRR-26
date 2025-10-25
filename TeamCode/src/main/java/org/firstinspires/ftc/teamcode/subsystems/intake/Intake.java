@@ -66,6 +66,10 @@ public class Intake {
         intake.setPower(0);
     }
 
+    public void intakeReverse() {
+        intake.setPower(-1);
+    }
+
 }
 
 
