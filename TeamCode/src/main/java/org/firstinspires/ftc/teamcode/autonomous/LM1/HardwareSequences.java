@@ -34,7 +34,7 @@ public class HardwareSequences {
         );
     }
 
-    public Action transferUpFor(long time) {
+    public Action transferUpFor(double time) {
         return new SequentialAction(
                 transfer.on(),
                 new SleepAction(time),

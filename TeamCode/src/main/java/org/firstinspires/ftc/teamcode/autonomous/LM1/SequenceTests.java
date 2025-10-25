@@ -40,24 +40,39 @@ public class SequenceTests extends LinearOpMode {
 
 //double check heading stuff to make sure robot goes straight
         Action path1 = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(0, 60), Math.toRadians(90))
-                .strafeToLinearHeading(new Vector2d(0,0),Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(0, 60), Math.toRadians(90), new TranslationalVelConstraint(80))
+                .strafeToLinearHeading(new Vector2d(0,0),Math.toRadians(90), new TranslationalVelConstraint(80))
                 .build();
 
         Action path2 = drive.actionBuilder(new Pose2d(0,0,Math.toRadians(90)))
+                .strafeToLinearHeading(new Vector2d(0,40),Math.toRadians(0), new TranslationalVelConstraint(65))
+                .build();
+        Action path3 = drive.actionBuilder(new Pose2d(0,40,Math.toRadians(0)))
+                .strafeToLinearHeading(new Vector2d(0,0),Math.toRadians(90))
+                .build();
 
-                .strafeToLinearHeading(new Vector2d(0,40),Math.toRadians(0))
+        Action path1a = drive.actionBuilder(initialPose)
+                .strafeToLinearHeading(new Vector2d(0, 60), Math.toRadians(90), new TranslationalVelConstraint(80))
+                .strafeToLinearHeading(new Vector2d(0,0),Math.toRadians(90), new TranslationalVelConstraint(80))
+                .build();
+
+        Action path2a = drive.actionBuilder(new Pose2d(0,0,Math.toRadians(90)))
+                .strafeToLinearHeading(new Vector2d(0,40),Math.toRadians(0), new TranslationalVelConstraint(65))
+                .build();
+        Action path3a = drive.actionBuilder(new Pose2d(0,40,Math.toRadians(0)))
+                .strafeToLinearHeading(new Vector2d(0,0),Math.toRadians(90))
                 .build();
 
 
         
 
 //-----------------Initialization-----------------\\
-//        Actions.runBlocking(
-//                new SequentialAction(
-//                    new HoodAction(shooter.variableHood, 0.5)
-//                )
-//        );
+        Actions.runBlocking(
+                new SequentialAction(
+                    new HoodAction(shooter.variableHood, 0.7)
+
+                )
+        );
 
         waitForStart();
 
@@ -70,17 +85,37 @@ public class SequenceTests extends LinearOpMode {
                                 path1,
                                 acl.intakeSet()
                         ),
-                        new SleepAction(2),
+                        //new SleepAction(2),
 
                         new ParallelAction(
                                 path2,
                                 acl.prepareForSet()
                         ),
-                        new SleepAction(2),
+                        //new SleepAction(2),
                         new SequentialAction(
                                 acl.scoreSet()
                         ),
-                        new SleepAction(10)
+                        path3,
+                        new SleepAction(3),
+
+//AGAIN
+                        new ParallelAction(
+                                path1a,
+                                acl.intakeSet()
+                        ),
+                        //new SleepAction(2),
+
+                        new ParallelAction(
+                                path2a,
+                                acl.prepareForSet()
+                        ),
+                        //new SleepAction(2),
+                        new SequentialAction(
+                                acl.scoreSet()
+                        ),
+                        path3a,
+                        new SleepAction(3)
+
 
 
 

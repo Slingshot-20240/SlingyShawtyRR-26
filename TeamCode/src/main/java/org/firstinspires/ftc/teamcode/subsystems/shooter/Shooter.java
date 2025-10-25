@@ -24,10 +24,11 @@ public class Shooter {
     public Shooter(HardwareMap hardwareMap) {
         outtake = hardwareMap.get(DcMotorEx.class, "outtake");
         outtake.setVelocityPIDFCoefficients(0,0,0,0);
+        outtake.setDirection(DcMotorSimple.Direction.REVERSE);
 
         variableHood = hardwareMap.get(Servo.class, "variableHood");
 
-        variableHood.setDirection(Servo.Direction.FORWARD);
+        variableHood.setDirection(Servo.Direction.REVERSE);
     }
 
     public enum outtakeVels {

@@ -45,7 +45,8 @@ public class AutonSequencesLM1 {
                         new SleepAction(2), //Wait time for flywheel to get to good speed
                         hws.transferUpFor(5),
                         shooter.idle(),
-                        intake.idle()
+                        intake.idle(),
+                        new SleepAction(1)
 
                 )
 
@@ -59,9 +60,13 @@ public class AutonSequencesLM1 {
      * Intakes while transfer
      */
     public Action intakeSet() {
-        return new ParallelAction(
-                hws.intakeInFor(3),
-                hws.transferUpFor(2)
+        return new SequentialAction(
+                new ParallelAction(
+                        hws.intakeInFor(4),
+                        hws.transferUpFor(2)
+                ),
+                shooter.out()
+
         );
     }
 
