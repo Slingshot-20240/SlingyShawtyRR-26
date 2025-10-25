@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.autonomous.LM1;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
+import com.acmerobotics.roadrunner.RaceAction;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.SleepAction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -29,6 +30,24 @@ public class AutonSequencesLM1 {
     }
 
 
+    public Action preparePreloads() {
+        return new ParallelAction(
+                intake.in(),
+                shooter.out()
+
+        );
+    }
+
+    public Action scorePreloads() {
+        return new SequentialAction(
+                intake.in(),
+                new ParallelAction(
+                        hws.transferUpFor(5),
+                        hws.shootFor(5)
+                )
+
+        );
+    }
     /**
      * Code todo
      * keep in mind to wait between each shot
@@ -42,11 +61,10 @@ public class AutonSequencesLM1 {
 
                 intake.in(),
                 new SequentialAction(
-                        new SleepAction(2), //Wait time for flywheel to get to good speed
+                        //TODO - Tune the time the flywheel tune to get to good speed
+                        new SleepAction(2),
                         hws.transferUpFor(5),
-                        shooter.idle(),
-                        intake.idle(),
-                        new SleepAction(1)
+                        shooter.idle()
 
                 )
 
@@ -62,7 +80,8 @@ public class AutonSequencesLM1 {
     public Action intakeSet() {
         return new SequentialAction(
                 new ParallelAction(
-                        hws.intakeInFor(4),
+                        intake.in(),
+                //TODO - Tune this transfer value to determine how high up the first ball goes
                         hws.transferUpFor(2)
                 ),
                 shooter.out()
