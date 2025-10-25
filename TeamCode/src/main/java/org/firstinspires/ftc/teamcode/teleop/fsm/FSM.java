@@ -129,13 +129,13 @@ public class FSM {
                 // turn transfer off while shooting until back to base state
                 // Hardcoded control AND we're at the back shooting zone
                 if (type == ControlType.HARDCODED_CONTROL && gamepad.shootBack.value()) {
-                    //shooter.hoodToBackTriPos();
-                    //shooter.shootFromBack();
                     shooter.hoodToBackTriPos();
                     shooter.shootFromBack();
 
-                    if (robot.shooter.outtake.getVelocity() >= 840) {
+                    if (gamepad.tempTransfer.value()) {
                         robot.transfer.transferOn();
+                    } else {
+                        robot.transfer.transferOff();
                     }
                 }
                 // Hardcoded control AND we're at the tip of the triangle of the front shooting zone
@@ -143,8 +143,10 @@ public class FSM {
                     shooter.hoodToFrontTriPos();
                     shooter.shootFromFront();
 
-                    if (robot.shooter.outtake.getVelocity() >= 840) {
+                    if (gamepad.tempTransfer.value()) {
                         robot.transfer.transferOn();
+                    } else {
+                        robot.transfer.transferOff();
                     }
                 }
                 // PID control that adjusts depending on our distance - TO BE IMPLEMENTED
