@@ -105,7 +105,7 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setPower(-1.0);
+            outtake.setPower(-0.6);
             return false;
         }
     }

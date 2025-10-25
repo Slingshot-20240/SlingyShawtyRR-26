@@ -55,9 +55,9 @@ public class GamepadMapping {
     }
 
     public void joystickUpdate() {
-        drive = gamepad1.left_stick_y;
-        strafe = gamepad1.left_stick_x;
-        turn = gamepad1.right_stick_x;
+        drive = gamepad2.left_stick_y;
+        strafe = gamepad2.left_stick_x;
+        turn = gamepad2.right_stick_x;
     }
 
     public void update() {
