@@ -27,7 +27,7 @@ public class GamepadMapping {
     // MISC
     public Toggle failSafeReset;
     public Toggle transferCounter;
-    public Toggle tempTransfer;
+    public Toggle transfer;
     public Toggle outtake;
 
     public GamepadMapping(Gamepad gamepad1, Gamepad gamepad2) {
@@ -50,7 +50,7 @@ public class GamepadMapping {
         // MISC
         failSafeReset = new Toggle(false);
         transferCounter = new Toggle(false);
-        tempTransfer = new Toggle(false);
+        transfer = new Toggle(false);
         outtake = new Toggle(false);
     }
 
@@ -74,7 +74,7 @@ public class GamepadMapping {
         transferCounter.update(gamepad2.right_bumper);
 
         // TEMP TRANSFER
-        tempTransfer.update(gamepad1.right_bumper);
+        transfer.update(gamepad1.dpad_up);
 
         outtake.update(gamepad1.y);
     }

@@ -37,7 +37,7 @@ public class HoodServoTest extends OpMode {
         variableHood.setPosition(servoPos);
 
         // right bumper
-        if (controls.tempTransfer.value()) {
+        if (controls.transfer.value()) {
             robot.transfer.transferOn();
         }
         // left bumper

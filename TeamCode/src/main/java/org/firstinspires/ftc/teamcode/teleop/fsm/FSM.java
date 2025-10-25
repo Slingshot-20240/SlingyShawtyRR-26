@@ -132,7 +132,7 @@ public class FSM {
                     shooter.hoodToBackTriPos();
                     shooter.shootFromBack();
 
-                    if (gamepad.tempTransfer.value()) {
+                    if (gamepad.transfer.value()) {
                         robot.transfer.transferOn();
                     } else {
                         robot.transfer.transferOff();
@@ -143,7 +143,7 @@ public class FSM {
                     shooter.hoodToFrontTriPos();
                     shooter.shootFromFront();
 
-                    if (gamepad.tempTransfer.value()) {
+                    if (gamepad.transfer.value()) {
                         robot.transfer.transferOn();
                     } else {
                         robot.transfer.transferOff();
