@@ -42,7 +42,7 @@ public class ShooterPID extends LinearOpMode {
 
 
             //sine wave/variable setpoint between 2000 and 5000 ticks/sec
-//            double targetVel = 3500 + 1500 * Math.sin(2 * Math.PI * 0.5 * time);
+            //double targetVel = 3500 + 1500 * Math.sin(2 * Math.PI * 0.5 * time);
 
 
             // Send target to REV Hub PID
