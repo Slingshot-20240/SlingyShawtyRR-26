@@ -162,7 +162,7 @@ public class FSM {
                     countBalls = 0;
                     state = FSMStates.BASE_STATE;
                     transfer.transferOff();
-                    gamepad.resetMultipleControls(gamepad.pidShoot, gamepad.shootBack, gamepad.shootFront, gamepad.intake);
+                    gamepad.resetMultipleControls(gamepad.pidShoot, gamepad.shootBack, gamepad.shootFront, gamepad.intake, gamepad.transfer);
                 }
                 break;
 
