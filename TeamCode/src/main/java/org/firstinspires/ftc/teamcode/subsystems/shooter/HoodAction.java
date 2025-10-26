@@ -18,7 +18,7 @@ public class HoodAction implements Action {
         this.variableHood = variableHood;
         this.hoodPos = hoodPos;
 
-        variableHood.setDirection(Servo.Direction.REVERSE);
+        //variableHood.setDirection(Servo.Direction.REVERSE);
     }
 
     @Override

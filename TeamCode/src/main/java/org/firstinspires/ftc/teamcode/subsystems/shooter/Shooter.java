@@ -20,7 +20,7 @@ public class Shooter {
     public Shooter(HardwareMap hardwareMap) {
         outtake = hardwareMap.get(DcMotorEx.class, "outtake");
         outtake.setVelocityPIDFCoefficients(0,0,0,0);
-        outtake.setDirection(DcMotorSimple.Direction.REVERSE);
+        outtake.setDirection(DcMotorSimple.Direction.FORWARD);
 
         variableHood = hardwareMap.get(Servo.class, "variableHood");
 
@@ -105,7 +105,8 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setPower(-0.6);
+            outtake.setPower(-0.65);
+            //outtake.setVelocity(1800);
             return false;
         }
     }

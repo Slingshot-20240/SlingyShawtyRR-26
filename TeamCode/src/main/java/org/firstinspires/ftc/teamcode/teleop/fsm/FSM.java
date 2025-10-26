@@ -135,7 +135,9 @@ public class FSM {
                     if (gamepad.transfer.value()) {
                         robot.transfer.transferOn();
                     } else {
-                        robot.transfer.transferOff();
+                        //robot.transfer.transferOff();
+                        //ISHAAN ADDED HOTDOG
+                        robot.transfer.backReverseFrontForward();
                     }
                 }
                 // Hardcoded control AND we're at the tip of the triangle of the front shooting zone

@@ -33,21 +33,23 @@ public class AutonSequencesLM1 {
     public Action preparePreloads() {
         return new ParallelAction(
                 intake.in(),
-                shooter.out()
+                //transfer.hotdog(),
+                //shooter.out()
+                new ShooterAction(shooter.outtake, -1),
+                new SleepAction(3.5),
+                new ShooterAction(shooter.outtake, -0.65)
 
         );
     }
-
     public Action scorePreloads() {
         return new SequentialAction(
-                intake.in(),
-                new ParallelAction(
-                        hws.transferUpFor(5),
-                        hws.shootFor(5)
-                )
+                new SleepAction(3),
+                hws.transferUpFor(7)
 
         );
     }
+
+
     /**
      * Code todo
      * keep in mind to wait between each shot
@@ -80,6 +82,7 @@ public class AutonSequencesLM1 {
     public Action intakeSet() {
         return new SequentialAction(
                 new ParallelAction(
+                        transfer.hotdog(),
                         intake.in(),
                 //TODO - Tune this transfer value to determine how high up the first ball goes
                         hws.transferUpFor(2)
@@ -95,6 +98,7 @@ public class AutonSequencesLM1 {
     public Action prepareForSet() {
         return new ParallelAction(
                 intake.in(),
+                transfer.hotdog(),
                 shooter.out()
         );
     }

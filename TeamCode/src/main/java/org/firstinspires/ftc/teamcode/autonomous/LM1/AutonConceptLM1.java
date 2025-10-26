@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.SleepAction;
 import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
@@ -42,26 +43,25 @@ public class AutonConceptLM1 extends LinearOpMode {
 
         // Set 1
         Action prepareSet1 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(-12, -24), Math.toRadians(270),
-                        new TranslationalVelConstraint(75)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270),
+                        new TranslationalVelConstraint(70)) // prepareSet1Pose
                 .build();
 
-        Action grabSet1 = drive.actionBuilder(new Pose2d(-12, -24, Math.toRadians(270))) // ends of prepareSet1
-                .strafeToLinearHeading(new Vector2d(-12, -53), Math.toRadians(270)
-                ) // grabSet1Pose
+        Action grabSet1 = drive.actionBuilder(new Pose2d(-11, -22, Math.toRadians(270))) // ends of prepareSet1
+                .strafeToLinearHeading(new Vector2d(-12, -51.5), Math.toRadians(270)) // grabSet1Pose
                 .build();
 
-        Action scoreSet1 = drive.actionBuilder(new Pose2d(-12, -53, Math.toRadians(270))) // ends of grabSet1
+        Action scoreSet1 = drive.actionBuilder(new Pose2d(-12, -51.5, Math.toRadians(270))) // ends of grabSet1
                 .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
                 .build();
 
         // Set 2
         Action prepareSet2 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scoreSet1
-                .strafeToLinearHeading(new Vector2d(12, -24), Math.toRadians(270),
+                .strafeToLinearHeading(new Vector2d(12, -22), Math.toRadians(270),
                         new TranslationalVelConstraint(80)) // prepareSet2Pose
                 .build();
 
-        Action grabSet2 = drive.actionBuilder(new Pose2d(12, -24, Math.toRadians(270))) // ends of prepareSet2
+        Action grabSet2 = drive.actionBuilder(new Pose2d(12, -23, Math.toRadians(270))) // ends of prepareSet2
                 .strafeToLinearHeading(new Vector2d(12, -53), Math.toRadians(270)) // grabSet2Pose
                 .build();
 
@@ -71,11 +71,11 @@ public class AutonConceptLM1 extends LinearOpMode {
 
         // Set 3
         Action prepareSet3 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scoreSet2
-                .strafeToLinearHeading(new Vector2d(36.5, -24), Math.toRadians(270),
+                .strafeToLinearHeading(new Vector2d(36.5, -22), Math.toRadians(270),
                         new TranslationalVelConstraint(80)) // prepareSet3Pose
                 .build();
 
-        Action grabSet3 = drive.actionBuilder(new Pose2d(36.5, -24, Math.toRadians(270))) // ends of prepareSet3
+        Action grabSet3 = drive.actionBuilder(new Pose2d(36.5, -22, Math.toRadians(270))) // ends of prepareSet3
                 .strafeToLinearHeading(new Vector2d(36.5, -53), Math.toRadians(270))
                 .build();
 
@@ -93,9 +93,8 @@ public class AutonConceptLM1 extends LinearOpMode {
 //-----------------Initialization-----------------\\
         Actions.runBlocking(
                 new ParallelAction(
-                        new HoodAction(shooter.variableHood,0.27),
-                        hws.intakeInFor(2),
-                        hws.transferUpFor(3)
+                        new HoodAction(shooter.variableHood, 0.298)
+
                 )
         );
 
@@ -114,6 +113,7 @@ public class AutonConceptLM1 extends LinearOpMode {
                                 scorePreload,
                                 acl.preparePreloads()
                         ),
+
                         acl.scorePreloads(),
 
 
@@ -124,6 +124,7 @@ public class AutonConceptLM1 extends LinearOpMode {
                                 prepareSet1,
 
                                 new ParallelAction(
+                                        new HoodAction(shooter.variableHood,0.3),
                                         grabSet1,
                                         acl.intakeSet(),
                                         //start spinning up shooter
@@ -135,57 +136,57 @@ public class AutonConceptLM1 extends LinearOpMode {
                         new SequentialAction(
                                 scoreSet1,
                                 acl.scoreSet()
-                        ),
-
-
-
-                //--------Set 2--------\\
-                        //Grab Set 2
-                        new SequentialAction(
-                                prepareSet2,
-
-                                new ParallelAction(
-                                        grabSet2,
-                                        acl.intakeSet(),
-                                        //start spinning up shooter
-                                        shooter.out()
-                                )
-                        ),
-
-                        //Shoot Set 2
-                        new SequentialAction(
-                                scoreSet2,
-                                acl.scoreSet()
-                        ),
-
-                //--------Set 3--------\\
-                        //Grab Set 3
-                        new SequentialAction(
-                                prepareSet3,
-
-                                new ParallelAction(
-                                        grabSet3,
-                                        acl.intakeSet(),
-                                        //start spinning up shooter
-                                        shooter.out()
-                                )
-                        ),
-
-                        //Shoot Set 3
-                        new SequentialAction(
-                                scoreSet3,
-                                acl.scoreSet()
-                        ),
-
-                //--------Park--------\\
-                        //Park and Safety Resets
-                        new ParallelAction(
-                                park,
-                                intake.idle(),
-                                transfer.off(),
-                                shooter.idle()
                         )
-
+//
+//
+//
+//                //--------Set 2--------\\
+//                        //Grab Set 2
+//                        new SequentialAction(
+//                                prepareSet2,
+//
+//                                new ParallelAction(
+//                                        grabSet2,
+//                                        acl.intakeSet(),
+//                                        //start spinning up shooter
+//                                        shooter.out()
+//                                )
+//                        ),
+//
+//                        //Shoot Set 2
+//                        new SequentialAction(
+//                                scoreSet2,
+//                                acl.scoreSet()
+//                        )
+//
+//                //--------Set 3--------\\
+//                        //Grab Set 3
+//                        new SequentialAction(
+//                                prepareSet3,
+//
+//                                new ParallelAction(
+//                                        grabSet3,
+//                                        acl.intakeSet(),
+//                                        //start spinning up shooter
+//                                        shooter.out()
+//                                )
+//                        ),
+//
+//                        //Shoot Set 3
+//                        new SequentialAction(
+//                                scoreSet3,
+//                                acl.scoreSet()
+//                        ),
+//
+//                //--------Park--------\\
+//                        //Park and Safety Resets
+//                        new ParallelAction(
+//                                park,
+//                                intake.idle(),
+//                                transfer.off(),
+//                                shooter.idle()
+//                        )
+//
                 )
         );
 

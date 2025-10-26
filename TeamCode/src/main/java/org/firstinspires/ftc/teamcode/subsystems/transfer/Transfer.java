@@ -25,7 +25,7 @@ public class Transfer {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            backTransfer.setPower(1.0);
+            backTransfer.setPower(-1.0);
             frontTransfer.setPower(1.0);
             return false;
         }
@@ -55,13 +55,29 @@ public class Transfer {
         //Most likely down will only be used for flow of balls etc. 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            backTransfer.setPower(-0.4);
+            backTransfer.setPower(0.4);
             frontTransfer.setPower(-0.4);
             return false;
         }
     }
     public Action down() {
         return new TransferDown();
+    }
+
+    //-----------------------------Hotdog--------------------------------------\\
+    public class TransferHotdog implements Action {
+
+        //Changed in git online lol, to not set power full when transfer down.
+        //Most likely down will only be used for flow of balls etc.
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            backTransfer.setPower(-1);
+            frontTransfer.setPower(0.09);
+            return false;
+        }
+    }
+    public Action hotdog() {
+        return new TransferHotdog();
     }
 
     public void transferOn() {
@@ -76,7 +92,7 @@ public class Transfer {
 
     public void backReverseFrontForward() {
         backTransfer.setPower(1);
-        frontTransfer.setPower(.25);
+        frontTransfer.setPower(0.15);
     }
 
 }
