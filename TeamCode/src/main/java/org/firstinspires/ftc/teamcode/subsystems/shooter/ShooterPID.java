@@ -6,67 +6,71 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
+import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
 
 
 @Config
 @TeleOp(name = "ShooterPID", group = "Testing")
-public class ShooterPID extends LinearOpMode {
-
+public class ShooterPID extends OpMode {
 
     DcMotorEx flywheel;
     public static double p = 0.2, i = 2.0, d = 0.002, f = 0.0;
     public static int targetVel = 500;
     private Telemetry dashboardTelemetry;
+    Robot robot;
+    GamepadMapping controls;
+
     @Override
-    public void runOpMode() {
-        flywheel.setDirection(DcMotorSimple.Direction.REVERSE);
+    public void init() {
+        double time = 0;
         dashboardTelemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         flywheel = hardwareMap.get(DcMotorEx.class, "outtake");
 
         // Set PIDF (start with defaults, tune later)
         flywheel.setVelocityPIDFCoefficients(0.2, 2.0, 0.002, 0.0);
+        controls = new GamepadMapping(gamepad1, gamepad2);
+        robot = new Robot(hardwareMap, controls);
+
+        flywheel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    @Override
+    public void loop() {
+        //time += 0.02; // ~50 Hz loop
+
+        robot.intake.intakeOn();
+        robot.transfer.transferOn();
+
+        //sine wave/variable setpoint between 2000 and 5000 ticks/sec
+        //double targetVel = 3500 + 1500 * Math.sin(2 * Math.PI * 0.5 * time);
+
+      // Send target to REV Hub PID
+        flywheel.setVelocity(targetVel);
+        flywheel.setVelocityPIDFCoefficients(p, i, d, f);
+
+        // Read actual velocity
+        double actualVel = flywheel.getVelocity();
 
 
-        waitForStart();
+        // Telemetry
+        dashboardTelemetry.addData("Target (ticks/s): ", targetVel);
+        dashboardTelemetry.addData("Actual (ticks/s): ", actualVel);
+        dashboardTelemetry.addData("P:",p);
+        dashboardTelemetry.addData("I:",i);
+        dashboardTelemetry.addData("D:",d);
+        dashboardTelemetry.addData("Encoder:",flywheel.getCurrentPosition());
+        dashboardTelemetry.update();
 
-
-        double time = 0;
-        while (opModeIsActive()) {
-            time += 0.02; // ~50 Hz loop
-
-
-            //sine wave/variable setpoint between 2000 and 5000 ticks/sec
-//            double targetVel = 3500 + 1500 * Math.sin(2 * Math.PI * 0.5 * time);
-
-
-            // Send target to REV Hub PID
-            flywheel.setVelocity(-targetVel);
-
-
-            // Read actual velocity                
-            double actualVel = flywheel.getVelocity();
-
-
-            // Telemetry
-            dashboardTelemetry.addData("Target (ticks/s): ", targetVel);
-            dashboardTelemetry.addData("Actual (ticks/s): ", actualVel);
-            dashboardTelemetry.addData("P:",p);
-            dashboardTelemetry.addData("I:",i);
-            dashboardTelemetry.addData("D:",d);
-            dashboardTelemetry.update();
-
-            TelemetryPacket packet = new TelemetryPacket();
-            packet.fieldOverlay().setStroke("#3F51B5");
-            FtcDashboard.getInstance().sendTelemetryPacket(packet);
-
-            sleep(20);
-        }
+        // sleep(20);
     }
 }
 

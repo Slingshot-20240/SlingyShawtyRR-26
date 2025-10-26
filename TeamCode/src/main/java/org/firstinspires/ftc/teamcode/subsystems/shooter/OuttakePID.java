@@ -4,14 +4,21 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-@TeleOp(name = "ShooterPID", group = "Testing")
+import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
+import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
+
+@TeleOp
 public class OuttakePID extends LinearOpMode {
 
     DcMotorEx outtake;
+    Robot robot;
+    GamepadMapping gamepad;
 
     @Override
     public void runOpMode() {
+        gamepad = new GamepadMapping(gamepad1, gamepad2);
         outtake = hardwareMap.get(DcMotorEx.class, "outtake");
+        robot = new Robot(hardwareMap, gamepad);
         
         // Set PIDF (start with defaults, tune later)
         outtake.setVelocityPIDFCoefficients(0.2, 2.0, 0.002, 0.0);

@@ -52,6 +52,6 @@ public class Robot {
         transfer.transferOff();
         shooter.hoodToBackTriPos();
         intake.intakeOff();
-        shooter.setShooterPower(0);
+        shooter.setShooterVelocity(0);
     }
 }

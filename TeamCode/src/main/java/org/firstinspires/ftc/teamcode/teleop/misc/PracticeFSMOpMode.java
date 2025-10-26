@@ -20,7 +20,7 @@ public class PracticeFSMOpMode extends OpMode {
         robot.drivetrain.update();
 
         if(gamepad1.a) {
-            robot.shooter.setShooterPower(1);
+            robot.shooter.setShooterVelocity(1);
         } else {
             // turn off shooter
         }

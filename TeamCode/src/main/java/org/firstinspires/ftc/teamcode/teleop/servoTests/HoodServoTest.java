@@ -33,7 +33,7 @@ public class HoodServoTest extends OpMode {
     @Override
     public void loop() {
         controls.update();
-        robot.shooter.setShooterPower(-power);
+        robot.shooter.setShooterVelocity(-power);
         variableHood.setPosition(servoPos);
 
         // right bumper
