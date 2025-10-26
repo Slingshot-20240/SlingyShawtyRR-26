@@ -19,7 +19,7 @@ public class GamepadMapping {
     // SHOOTER
     public Toggle pidShoot;
     public Toggle shootBack;
-    public Toggle shootTriangle;
+    public Toggle shootFront;
 
     // PARK
     public Toggle park;
@@ -40,7 +40,7 @@ public class GamepadMapping {
 
         // SHOOTER
         shootBack = new Toggle(false);
-        shootTriangle = new Toggle(false);
+        shootFront = new Toggle(false);
         pidShoot = new Toggle(false);
 
         // PARK
@@ -66,15 +66,15 @@ public class GamepadMapping {
         intake.update(gamepad1.left_bumper);
 
         // SHOOTER
-        shootBack.update(gamepad1.right_trigger >= 0.5);
-        shootTriangle.update(gamepad1.left_trigger >= 0.5);
-        pidShoot.update(gamepad1.right_bumper);
+        shootBack.update(gamepad2.left_trigger >= 0.5);
+        shootFront.update(gamepad2.left_bumper);
+        //pidShoot.update(gamepad2.right_bumper);
 
-        failSafeReset.update(gamepad2.dpad_down);
-        transferCounter.update(gamepad2.right_bumper);
+        failSafeReset.update(gamepad1.dpad_down);
+        // transferCounter.update(gamepad2.right_bumper);
 
         // TEMP TRANSFER
-        transfer.update(gamepad1.dpad_up);
+        transfer.update(gamepad2.dpad_up);
 
         outtake.update(gamepad1.y);
     }

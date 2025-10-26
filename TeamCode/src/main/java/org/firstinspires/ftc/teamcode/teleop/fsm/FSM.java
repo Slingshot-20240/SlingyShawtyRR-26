@@ -97,7 +97,7 @@ public class FSM {
                 } else if (!gamepad.intake.value())
                     intake.intakeOff();
 
-                if (gamepad.pidShoot.value() || gamepad.shootTriangle.value() || gamepad.shootBack.value()) {
+                if (gamepad.pidShoot.value() || gamepad.shootFront.value() || gamepad.shootBack.value()) {
                     state = FSMStates.SHOOTING;
                 }
 
@@ -141,7 +141,7 @@ public class FSM {
                     }
                 }
                 // Hardcoded control AND we're at the tip of the triangle of the front shooting zone
-                else if (type == ControlType.HARDCODED_CONTROL && gamepad.shootTriangle.value()) {
+                else if (type == ControlType.HARDCODED_CONTROL && gamepad.shootFront.value()) {
                     shooter.hoodToFrontTriPos();
                     shooter.shootFromFront();
 
@@ -158,11 +158,11 @@ public class FSM {
                 }
                 // Return to base state if shooting is false
                 // TODO: this may not work
-                if (gamepad.pidShoot.changed() || gamepad.shootTriangle.changed() || gamepad.shootBack.changed()) {
+                if (gamepad.pidShoot.changed() || gamepad.shootFront.changed() || gamepad.shootBack.changed()) {
                     countBalls = 0;
                     state = FSMStates.BASE_STATE;
                     transfer.transferOff();
-                    gamepad.resetMultipleControls(gamepad.pidShoot, gamepad.shootBack, gamepad.shootTriangle, gamepad.intake);
+                    gamepad.resetMultipleControls(gamepad.pidShoot, gamepad.shootBack, gamepad.shootFront, gamepad.intake);
                 }
                 break;
 
