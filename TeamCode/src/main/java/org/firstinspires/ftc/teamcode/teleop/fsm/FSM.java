@@ -64,8 +64,7 @@ public class FSM {
             case BASE_STATE:
                 // if hardcoded control, set hood to back shooting position
                 if (type.equals(ControlType.HARDCODED_CONTROL)) {
-                    //shooter.hoodToBackTriPos();
-                    shooter.variableHood.setPosition(.55);
+                    shooter.hoodToBackTriPos();
                 }
 
                 if (gamepad.outtake.value()) {
@@ -73,7 +72,7 @@ public class FSM {
                 }
 
                 // shooter off :)
-                shooter.setShooterPower(0);
+                shooter.setShooterVelocity(0);
 
                 // TRANSFER ALT
                 // always have transfer on but back running backwards, should keep ball in place
@@ -89,13 +88,13 @@ public class FSM {
                 // Intake button toggle, intake on/off
                 if (gamepad.intake.value()) {
                     intake.intakeOn();
-//                    if (countBalls == 0) {
-//                        state = FSMStates.TRANSFER_FIRST;
-//                        startTime = loopTime.milliseconds();
-//                        countBalls++;
-//                    }
+                    transfer.backReverseFrontForward();
+
+                    // add set power 1 and then find the smallest wait time to then move it down to get it to the power needed
                 } else if (!gamepad.intake.value())
                     intake.intakeOff();
+                    transfer.backReverseFrontForward();
+
 
                 if (gamepad.pidShoot.value() || gamepad.shootFront.value() || gamepad.shootBack.value()) {
                     state = FSMStates.SHOOTING;
@@ -107,18 +106,18 @@ public class FSM {
 
                 break;
 
-            case TRANSFER_FIRST:
-                // counter, everytime we shoot it resets and that first one is the one we do this
-                // manual override
-                if (loopTime.milliseconds() - startTime <= 1700) {
-                    transfer.transferOn();
-                } else {
-                    transfer.transferOff();
-                    state = FSMStates.BASE_STATE;
-                    gamepad.resetMultipleControls(gamepad.intake);
-                    break;
-                }
-                break;
+//            case TRANSFER_FIRST:
+//                // counter, everytime we shoot it resets and that first one is the one we do this
+//                // manual override
+//                if (loopTime.milliseconds() - startTime <= 1700) {
+//                    transfer.transferOn();
+//                } else {
+//                    transfer.transferOff();
+//                    state = FSMStates.BASE_STATE;
+//                    gamepad.resetMultipleControls(gamepad.intake);
+//                    break;
+//                }
+//                break;
 
             case SHOOTING:
                 intake.intakeOn();
@@ -153,7 +152,7 @@ public class FSM {
                 }
                 // PID control that adjusts depending on our distance - TO BE IMPLEMENTED
                 else if (type == ControlType.PID_CONTROL && gamepad.pidShoot.value()) {
-                   shooter.setShooterPower(shooter.calculateShooterVel());
+                   shooter.setShooterVelocity(shooter.calculateShooterVel());
                    shooter.setHoodAngle(shooter.calculateHoodAngle());
                 }
                 // Return to base state if shooting is false

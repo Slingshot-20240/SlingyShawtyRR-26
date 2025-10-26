@@ -19,7 +19,7 @@ public class Shooter {
 
     public Shooter(HardwareMap hardwareMap) {
         outtake = hardwareMap.get(DcMotorEx.class, "outtake");
-        outtake.setVelocityPIDFCoefficients(0,0,0,0);
+        outtake.setVelocityPIDFCoefficients(0,0.4,0.008,0);
         outtake.setDirection(DcMotorSimple.Direction.FORWARD);
 
         variableHood = hardwareMap.get(Servo.class, "variableHood");
@@ -30,9 +30,9 @@ public class Shooter {
     public enum outtakeVels {
         PID_SHOOT(shootVel),
         // 5.059
-        HARDCODED_SHOOT_FRONT(-.6),
+        HARDCODED_SHOOT_FRONT(-1000),
         // 5.954
-        HARDCODED_SHOOT_BACK(-.7),
+        HARDCODED_SHOOT_BACK(-1500),
         IDLE(0);
 
         private final double outtake_vels;
@@ -118,8 +118,8 @@ public class Shooter {
 
 
 
-    public void setShooterPower(double power) {
-        outtake.setPower(power);
+    public void setShooterVelocity(double power) {
+        outtake.setVelocity(power);
     }
 
     public void setHoodAngle(double angle) {
@@ -135,11 +135,11 @@ public class Shooter {
     }
 
     public void shootFromBack() {
-        outtake.setPower(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
+        outtake.setVelocity(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
     }
 
     public void shootFromFront() {
-        outtake.setPower(outtakeVels.HARDCODED_SHOOT_FRONT.getOuttakeVel());
+        outtake.setVelocity(outtakeVels.HARDCODED_SHOOT_FRONT.getOuttakeVel());
     }
 
 }

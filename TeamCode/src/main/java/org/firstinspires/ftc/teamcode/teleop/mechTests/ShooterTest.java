@@ -56,14 +56,18 @@ public class ShooterTest extends OpMode {
 //            robot.transfer.transferOn();
 //        }
 
-        if (controls.shootBack.value()) {
-            robot.shooter.shootFromFront();
-        }
+//        if (controls.shootBack.value()) {
+//            robot.shooter.shootFromFront();
+//        }
+
+        //robot.shooter.setShooterPower(power);
+        robot.shooter.outtake.setVelocity(500);
 
 
         dashboardTelemetry.addData("backShootValue", Shooter.outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
         // once we get to 1500 velo
         dashboardTelemetry.addData("velo", robot.shooter.outtake.getVelocity());
+        dashboardTelemetry.addData("Encoder:",robot.shooter.outtake.getCurrentPosition());
         dashboardTelemetry.update();
     }
 }
