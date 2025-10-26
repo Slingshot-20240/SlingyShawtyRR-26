@@ -30,7 +30,7 @@ public class Shooter {
     public enum outtakeVels {
         PID_SHOOT(shootVel),
         // 5.059
-        HARDCODED_SHOOT_FRONT(-1000),
+        HARDCODED_SHOOT_FRONT(-1100),
         // 5.954
         HARDCODED_SHOOT_BACK(-1500),
         IDLE(0);
