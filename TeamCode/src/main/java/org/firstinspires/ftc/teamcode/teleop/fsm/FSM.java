@@ -67,20 +67,15 @@ public class FSM {
                     shooter.hoodToBackTriPos();
                 }
 
-                if (gamepad.outtake.value()) {
-                    intake.intakeReverse();
+                if (gamepad.outtake.locked()) {
+                    state = FSMStates.OUTTAKING;
                 }
 
-                // shooter off :)
                 shooter.setShooterVelocity(0);
 
                 // TRANSFER ALT
                 // always have transfer on but back running backwards, should keep ball in place
                 transfer.backReverseFrontForward();
-
-//                if (gamepad.transferCounter.value()) {
-//                    countBalls = 0;
-//                }
 
                 // Going to try transfer always on, may need to add some delays
                 // transfer.transferOn();
@@ -90,7 +85,6 @@ public class FSM {
                     intake.intakeOn();
                     transfer.backReverseFrontForward();
 
-                    // add set power 1 and then find the smallest wait time to then move it down to get it to the power needed
                 } else if (!gamepad.intake.value())
                     intake.intakeOff();
                     transfer.backReverseFrontForward();
@@ -118,6 +112,13 @@ public class FSM {
 //                    break;
 //                }
 //                break;
+            case OUTTAKING:
+                intake.intakeReverse();
+                if (!gamepad.outtake.locked()) {
+                    state = FSMStates.BASE_STATE;
+                    gamepad.resetMultipleControls(gamepad.intake, gamepad.shootBack, gamepad.shootFront, gamepad.transfer);
+                }
+                break;
 
             case SHOOTING:
                 intake.intakeOn();
@@ -181,7 +182,7 @@ public class FSM {
         BASE_STATE,
         SHOOTING,
         PARK,
-        TRANSFER_FIRST
+        OUTTAKING
     }
 
     public enum ControlType {
