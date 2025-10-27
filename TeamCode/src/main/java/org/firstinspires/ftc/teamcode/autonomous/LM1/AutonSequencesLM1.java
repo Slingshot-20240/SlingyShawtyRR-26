@@ -34,7 +34,7 @@ public class AutonSequencesLM1 {
         return new ParallelAction(
                 intake.in(),
                 //shooter.out()
-                new ShooterAction(shooter.outtake, -960)
+                new ShooterAction(shooter.outtake, -945)
 
         );
     }
