@@ -108,11 +108,10 @@ public class AutonConceptLM1 extends LinearOpMode {
 
                 //--------Preloads--------\\
                         //Shoot Preloads
-                        new ParallelAction(
+                         new ParallelAction(
                                 scorePreload,
                                 acl.preparePreloads()
                         ),
-
                         acl.scorePreloads(),
 
 

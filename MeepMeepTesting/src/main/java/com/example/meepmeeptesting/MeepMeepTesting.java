@@ -16,39 +16,27 @@ public class MeepMeepTesting {
                 .setConstraints(65, 65, Math.toRadians(180), Math.toRadians(180), 14.8)
                 .build();
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-49.3, -49, Math.toRadians(55)))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-49.3, 49, Math.toRadians(125+180)))
                 .waitSeconds(2)
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
-                .waitSeconds(2)
+                .strafeToLinearHeading(new Vector2d(-24, 24), Math.toRadians(-225))
 
-                // Set1 Poses
-                .strafeToLinearHeading(new Vector2d(-12, -29), Math.toRadians(270),
-                        new TranslationalVelConstraint(75)) // prepareSet1Pose
-                .strafeToLinearHeading(new Vector2d(-12, -53), Math.toRadians(270),
-                        new TranslationalVelConstraint(20)) // grabSet1Pose
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
-                .waitSeconds(2)
+                // Set 1
+                .strafeToLinearHeading(new Vector2d(-11, 22), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(-12, 51.5), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(-24, 24), Math.toRadians(-225))
 
-                // Set2 Poses
-                .strafeToLinearHeading(new Vector2d(12, -29), Math.toRadians(270),
-                        new TranslationalVelConstraint(75)) // prepareSet2Pose
-                .strafeToLinearHeading(new Vector2d(12, -53), Math.toRadians(270),
-                        new TranslationalVelConstraint(20)) // grabSet2Pose
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
-                .waitSeconds(2)
+                // Set 2
+                .strafeToLinearHeading(new Vector2d(12, 22), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(12, 53), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(-24, 24), Math.toRadians(-225))
 
-                // Set3 Poses
-                .strafeToLinearHeading(new Vector2d(36.5, -29), Math.toRadians(270),
-                        new TranslationalVelConstraint(75)) // prepareSet3Pose
-                .strafeToLinearHeading(new Vector2d(36.5, -53), Math.toRadians(270),
-                        new TranslationalVelConstraint(20)) // grabSet3Pose
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
-                .waitSeconds(2)
+                // Set 3
+                .strafeToLinearHeading(new Vector2d(36.5, 22), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(36.5, 53), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(-24, 24), Math.toRadians(-225))
 
-                // Park Pose
-                .strafeToLinearHeading(new Vector2d(-48, -24), Math.toRadians(180),
-                        new TranslationalVelConstraint(75)) // parkPose
-
+                // Park
+                .strafeToLinearHeading(new Vector2d(-48, 24), Math.toRadians(-180))
 
                 .build());
         meepMeep.setBackground(MeepMeep.Background.FIELD_DECODE_JUICE_DARK)
