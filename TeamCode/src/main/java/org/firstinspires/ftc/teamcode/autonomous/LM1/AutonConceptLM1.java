@@ -138,56 +138,6 @@ public class AutonConceptLM1 extends LinearOpMode {
                                 acl.scoreSet()
                         ),
                         park
-
-
-
-//                //--------Set 2--------\\
-//                        //Grab Set 2
-//                        new SequentialAction(
-//                                prepareSet2,
-//
-//                                new ParallelAction(
-//                                        grabSet2,
-//                                        acl.intakeSet(),
-//                                        //start spinning up shooter
-//                                        shooter.out()
-//                                )
-//                        )
-//
-//                        //Shoot Set 2
-//                        new SequentialAction(
-//                                scoreSet2,
-//                                acl.scoreSet()
-//                        )
-//
-//                //--------Set 3--------\\
-//                        //Grab Set 3
-//                        new SequentialAction(
-//                                prepareSet3,
-//
-//                                new ParallelAction(
-//                                        grabSet3,
-//                                        acl.intakeSet(),
-//                                        //start spinning up shooter
-//                                        shooter.out()
-//                                )
-//                        ),
-//
-//                        //Shoot Set 3
-//                        new SequentialAction(
-//                                scoreSet3,
-//                                acl.scoreSet()
-//                        ),
-//
-//                //--------Park--------\\
-//                        //Park and Safety Resets
-//                        new ParallelAction(
-//                                park,
-//                                intake.idle(),
-//                                transfer.off(),
-//                                shooter.idle()
-//                        )
-//
                 )
         );
 
