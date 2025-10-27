@@ -24,7 +24,7 @@ public class AprilTagLimelight {
         return Stream.of(limelight.getLatestResult().getFiducialResults()).map((a)->(FiducialResult)a).filter(Objects::nonNull).map(a->a.getFiducialId()).map(ObeliskLocation::fromInt).filter(Objects::nonNull).findFirst().orElse(null);
     }
     public Pose3D getDist() {
-        return Stream.of(limelight.getLatestResult().getFiducialResults()).map((a) -> (FiducialResult) a).filter(Objects::nonNull).filter((a) -> (!isBlue && a.getFiducialId() == 24) || (isBlue && a.getFiducialId() == 20).map(FiducialResult::getRobotPoseTargetSpace).findFirst().orElse(null); // If loop time is bad, I can fix
+        return Stream.of(limelight.getLatestResult().getFiducialResults()).map((a) -> (FiducialResult) a).filter(Objects::nonNull).filter((a) -> (!isBlue && a.getFiducialId() == 24) || (isBlue && a.getFiducialId() == 20)).map(FiducialResult::getRobotPoseTargetSpace).findFirst().orElse(null); // If loop time is bad, I can fix
     }
     public enum ObeliskLocation //measured by the location of the green
     {
