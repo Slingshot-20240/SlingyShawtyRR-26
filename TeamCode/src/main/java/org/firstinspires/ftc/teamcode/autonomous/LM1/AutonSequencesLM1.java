@@ -2,16 +2,14 @@ package org.firstinspires.ftc.teamcode.autonomous.LM1;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
-import com.acmerobotics.roadrunner.RaceAction;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.SleepAction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
-import org.firstinspires.ftc.teamcode.subsystems.intake.IntakeAction;
-import org.firstinspires.ftc.teamcode.subsystems.shooter.HoodAction;
+import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
-import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterAction;
+import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 

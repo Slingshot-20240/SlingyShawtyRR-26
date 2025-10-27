@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.subsystems.shooter;
+package org.firstinspires.ftc.teamcode.subsystems.shooter.action;
 
 import androidx.annotation.NonNull;
 
@@ -22,3 +22,4 @@ public class ShooterAction implements Action {
         return false;
     }
 }
+

@@ -92,7 +92,8 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setPower(0);
+            outtake.setVelocityPIDFCoefficients(0,0.4,0.011,0);
+            outtake.setVelocity(0);
             return false;
         }
     }
