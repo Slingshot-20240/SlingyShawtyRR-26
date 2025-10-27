@@ -147,7 +147,7 @@ public class FSM {
                     if (gamepad.transfer.value()) {
                         robot.transfer.transferOn();
                     } else {
-                        robot.transfer.transferOff();
+                        robot.transfer.backReverseFrontForward();
                     }
                 }
                 // PID control that adjusts depending on our distance - TO BE IMPLEMENTED

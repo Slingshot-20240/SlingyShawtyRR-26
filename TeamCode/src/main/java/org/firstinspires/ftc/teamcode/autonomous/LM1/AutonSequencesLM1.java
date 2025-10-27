@@ -33,18 +33,17 @@ public class AutonSequencesLM1 {
     public Action preparePreloads() {
         return new ParallelAction(
                 intake.in(),
-                //transfer.hotdog(),
-                //shooter.out()
-                new ShooterAction(shooter.outtake, -1),
-                new SleepAction(3.5),
-                new ShooterAction(shooter.outtake, -0.65)
+
+                new ShooterAction(shooter.outtake, -1020)
 
         );
     }
     public Action scorePreloads() {
         return new SequentialAction(
-                new SleepAction(3),
-                hws.transferUpFor(7)
+                new SleepAction(2),
+                hws.transferUpFor(2),
+                new SleepAction(1),
+                hws.transferUpFor(5)
 
         );
     }

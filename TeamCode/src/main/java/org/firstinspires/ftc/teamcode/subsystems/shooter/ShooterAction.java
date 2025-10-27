@@ -8,16 +8,17 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 public class ShooterAction implements Action {
     DcMotorEx outtake;
-    double outtakePower;
+    double outtakeVel;
 
-    public ShooterAction(DcMotorEx outtake, double outtakePower) {
+    public ShooterAction(DcMotorEx outtake, double outtakeVel) {
         this.outtake = outtake;
-        this.outtakePower = outtakePower;
+        this.outtakeVel = outtakeVel;
     }
 
     @Override
     public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-        outtake.setPower(outtakePower);
+        outtake.setVelocityPIDFCoefficients(0,0.44,0.01,0);
+        outtake.setVelocity(outtakeVel);
         return false;
     }
 }
