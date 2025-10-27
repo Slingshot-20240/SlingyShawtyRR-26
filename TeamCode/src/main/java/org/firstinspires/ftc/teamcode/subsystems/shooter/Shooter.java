@@ -30,9 +30,9 @@ public class Shooter {
     public enum outtakeVels {
         PID_SHOOT(shootVel),
         // 5.059
-        HARDCODED_SHOOT_FRONT(-1100),
+        HARDCODED_SHOOT_FRONT(-1120),
         // 5.954
-        HARDCODED_SHOOT_BACK(-1500),
+        HARDCODED_SHOOT_BACK(-1420),
         IDLE(0);
 
         private final double outtake_vels;
@@ -105,8 +105,8 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setPower(-0.65);
-            //outtake.setVelocity(1800);
+            outtake.setVelocityPIDFCoefficients(0,0.4,0.011,0);
+            outtake.setVelocity(-1020);
             return false;
         }
     }

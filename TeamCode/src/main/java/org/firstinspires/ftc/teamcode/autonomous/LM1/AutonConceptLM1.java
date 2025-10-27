@@ -93,7 +93,7 @@ public class AutonConceptLM1 extends LinearOpMode {
 //-----------------Initialization-----------------\\
         Actions.runBlocking(
                 new ParallelAction(
-                        new HoodAction(shooter.variableHood, 0.298)
+                        new HoodAction(shooter.variableHood, 0.21)
 
                 )
         );
@@ -136,10 +136,11 @@ public class AutonConceptLM1 extends LinearOpMode {
                         new SequentialAction(
                                 scoreSet1,
                                 acl.scoreSet()
-                        )
-//
-//
-//
+                        ),
+                        park
+
+
+
 //                //--------Set 2--------\\
 //                        //Grab Set 2
 //                        new SequentialAction(
@@ -151,7 +152,7 @@ public class AutonConceptLM1 extends LinearOpMode {
 //                                        //start spinning up shooter
 //                                        shooter.out()
 //                                )
-//                        ),
+//                        )
 //
 //                        //Shoot Set 2
 //                        new SequentialAction(

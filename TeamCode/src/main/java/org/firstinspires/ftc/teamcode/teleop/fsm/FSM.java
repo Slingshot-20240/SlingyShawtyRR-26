@@ -148,7 +148,7 @@ public class FSM {
                     if (gamepad.transfer.value() && robot.shooter.outtake.getVelocity() <= Shooter.outtakeVels.HARDCODED_SHOOT_FRONT.getOuttakeVel()) {
                         robot.transfer.transferOn();
                     } else {
-                        robot.transfer.transferOff();
+                        robot.transfer.backReverseFrontForward();
                     }
                 }
                 // PID control that adjusts depending on our distance - TO BE IMPLEMENTED
