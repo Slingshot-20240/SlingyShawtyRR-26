@@ -72,7 +72,7 @@ public class Transfer {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             backTransfer.setPower(-1);
-            frontTransfer.setPower(0.09);
+            frontTransfer.setPower(0.06);
             return false;
         }
     }

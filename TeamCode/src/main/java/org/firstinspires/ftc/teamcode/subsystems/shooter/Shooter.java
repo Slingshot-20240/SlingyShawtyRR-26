@@ -105,8 +105,8 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setVelocityPIDFCoefficients(0,0.4,0.008,0);
-            outtake.setVelocity(-1100);
+            outtake.setVelocityPIDFCoefficients(0,0.4,0.011,0);
+            outtake.setVelocity(-1020);
             return false;
         }
     }

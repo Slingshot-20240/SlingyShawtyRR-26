@@ -33,17 +33,25 @@ public class AutonSequencesLM1 {
     public Action preparePreloads() {
         return new ParallelAction(
                 intake.in(),
-
-                new ShooterAction(shooter.outtake, -1020)
+                //shooter.out()
+                new ShooterAction(shooter.outtake, -960)
 
         );
     }
     public Action scorePreloads() {
         return new SequentialAction(
-                new SleepAction(2),
-                hws.transferUpFor(2),
-                new SleepAction(1),
-                hws.transferUpFor(5)
+
+                intake.in(),
+                new SequentialAction(
+                        //TODO - Tune the time the flywheel tune to get to good speed
+                        new SleepAction(3.3),
+                        hws.transferUpFor(2),
+                        new HoodAction(shooter.variableHood, 0.22),
+                        hws.transferUpFor(5)
+                        //shooter.idle()
+
+                )
+
 
         );
     }
@@ -64,7 +72,7 @@ public class AutonSequencesLM1 {
                 new SequentialAction(
                         //TODO - Tune the time the flywheel tune to get to good speed
                         new SleepAction(2),
-                        hws.transferUpFor(5),
+                        hws.transferUpFor(6.7),
                         shooter.idle()
 
                 )
@@ -84,7 +92,7 @@ public class AutonSequencesLM1 {
                         transfer.hotdog(),
                         intake.in(),
                 //TODO - Tune this transfer value to determine how high up the first ball goes
-                        hws.transferUpFor(2)
+                        transfer.hotdog()
                 ),
                 shooter.out()
 
