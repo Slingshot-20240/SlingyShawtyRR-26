@@ -131,7 +131,7 @@ public class FSM {
                     shooter.hoodToBackTriPos();
                     shooter.shootFromBack();
 
-                    if (gamepad.transfer.value()) {
+                    if (gamepad.transfer.value() && robot.shooter.outtake.getVelocity() <= Shooter.outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel()) {
                         robot.transfer.transferOn();
                     } else {
                         //robot.transfer.transferOff();
@@ -144,7 +144,7 @@ public class FSM {
                     shooter.hoodToFrontTriPos();
                     shooter.shootFromFront();
 
-                    if (gamepad.transfer.value()) {
+                    if (gamepad.transfer.value() && robot.shooter.outtake.getVelocity() <= Shooter.outtakeVels.HARDCODED_SHOOT_FRONT.getOuttakeVel()) {
                         robot.transfer.transferOn();
                     } else {
                         robot.transfer.transferOff();
