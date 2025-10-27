@@ -19,7 +19,7 @@ public class Shooter {
 
     public Shooter(HardwareMap hardwareMap) {
         outtake = hardwareMap.get(DcMotorEx.class, "outtake");
-        outtake.setVelocityPIDFCoefficients(0,0.4,0.008,0);
+        outtake.setVelocityPIDFCoefficients(575,0,0,70);
         outtake.setDirection(DcMotorSimple.Direction.FORWARD);
 
         variableHood = hardwareMap.get(Servo.class, "variableHood");
@@ -92,7 +92,7 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setVelocityPIDFCoefficients(0,0.4,0.011,0);
+            outtake.setVelocityPIDFCoefficients(575,0,0,70);
             outtake.setVelocity(0);
             return false;
         }
@@ -106,7 +106,7 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setVelocityPIDFCoefficients(0,0.4,0.011,0);
+            outtake.setVelocityPIDFCoefficients(575,0,0,70);
             outtake.setVelocity(-1020);
             return false;
         }
@@ -128,7 +128,7 @@ public class Shooter {
     }
 
     public void hoodToBackTriPos() {
-        variableHood.setPosition(.05);
+        variableHood.setPosition(.65);
     }
 
     public void hoodToFrontTriPos() {
