@@ -11,10 +11,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Shooter {
     public final DcMotorEx outtake;
-
-    // HOOD SERVO RANGE
-    // .55 is all the way down
-    // .05 is all the way up
     public final Servo variableHood;
 
     public Shooter(HardwareMap hardwareMap) {
@@ -119,8 +115,8 @@ public class Shooter {
 
 
 
-    public void setShooterVelocity(double power) {
-        outtake.setVelocity(power);
+    public void setShooterVelocity(double velo) {
+        outtake.setVelocity(velo);
     }
 
     public void setHoodAngle(double angle) {

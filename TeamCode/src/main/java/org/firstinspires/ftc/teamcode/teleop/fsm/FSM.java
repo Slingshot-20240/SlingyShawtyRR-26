@@ -48,9 +48,9 @@ public class FSM {
         // Updates all other controls
         gamepad.update();
 
-//        drive.update();
-//        pose = drive.getPose();
-        //TODO - Get robot pos from localization
+        // drive.update();
+        // pose = drive.getPose();
+        // TODO - Get robot pos from localization
 
         switch (state) {
             case BASE_STATE:
