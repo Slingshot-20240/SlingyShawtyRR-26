@@ -40,7 +40,7 @@ public class AutonConceptLM1 extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
                 .build();
 
-        // Set 1
+        // Set 21
         Action prepareSet1 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scorePreload
                 .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270),
                         new TranslationalVelConstraint(70)) // prepareSet1Pose
