@@ -11,15 +11,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Shooter {
     public final DcMotorEx outtake;
-
-    // HOOD SERVO RANGE
-    // .55 is all the way down
-    // .05 is all the way up
     public final Servo variableHood;
 
     public Shooter(HardwareMap hardwareMap) {
         outtake = hardwareMap.get(DcMotorEx.class, "outtake");
-        outtake.setVelocityPIDFCoefficients(0,0.4,0.008,0);
+        outtake.setVelocityPIDFCoefficients(575,0,0,70);
         outtake.setDirection(DcMotorSimple.Direction.FORWARD);
 
         variableHood = hardwareMap.get(Servo.class, "variableHood");
@@ -92,7 +88,7 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setVelocityPIDFCoefficients(0,0.4,0.011,0);
+            outtake.setVelocityPIDFCoefficients(575,0,0,70);
             outtake.setVelocity(0);
             return false;
         }
@@ -106,7 +102,7 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setVelocityPIDFCoefficients(0,0.4,0.011,0);
+            outtake.setVelocityPIDFCoefficients(575,0,0,70);
             outtake.setVelocity(-1020);
             return false;
         }
@@ -119,8 +115,8 @@ public class Shooter {
 
 
 
-    public void setShooterVelocity(double power) {
-        outtake.setVelocity(power);
+    public void setShooterVelocity(double velo) {
+        outtake.setVelocity(velo);
     }
 
     public void setHoodAngle(double angle) {
@@ -128,7 +124,7 @@ public class Shooter {
     }
 
     public void hoodToBackTriPos() {
-        variableHood.setPosition(.05);
+        variableHood.setPosition(.65);
     }
 
     public void hoodToFrontTriPos() {

@@ -88,9 +88,9 @@ public class AutonSequencesLM1 {
         return new SequentialAction(
                 new ParallelAction(
                         transfer.hotdog(),
-                        intake.in(),
+                        intake.in()
                 //TODO - Tune this transfer value to determine how high up the first ball goes
-                        transfer.hotdog()
+                       // transfer.hotdog()
                 ),
                 shooter.out()
 
