@@ -38,25 +38,27 @@ public class LM1FarAuton extends LinearOpMode {
 //-----------------Pathing Actions-----------------\\
         // Score Preload
         Action scorePreload = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(205))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201.04))
                 .build();
 
         // Set 1
-        Action prepareSet1 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(205))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(35, -27), Math.toRadians(270)) // prepareSet1Pose
+        Action prepareSet1 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201.04))) // ends of scorePreload
+                .strafeToLinearHeading(new Vector2d(34, -27), Math.toRadians(270)) // prepareSet1Pose
                 .build();
 
-        Action grabSet1 = drive.actionBuilder(new Pose2d(35.5, -27, Math.toRadians(270))) // ends of prepareSet1
-                .strafeToLinearHeading(new Vector2d(35, -61.5), Math.toRadians(270))
+        Action grabSet1 = drive.actionBuilder(new Pose2d(34, -27, Math.toRadians(270))) // ends of prepareSet1
+                .strafeToLinearHeading(new Vector2d(34, -61.5), Math.toRadians(270),
+                        new TranslationalVelConstraint(78))
+
                 .build();
 
-        Action scoreSet1 = drive.actionBuilder(new Pose2d(35, -61.5, Math.toRadians(270))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(205))
+        Action scoreSet1 = drive.actionBuilder(new Pose2d(34, -61.5, Math.toRadians(270))) // ends of grabSet1
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(204))
                 .build();
 
 
         // Park
-        Action park = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(205))) // ends of scoreSet3
+        Action park = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(204))) // ends of scoreSet3
                 .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(180)) // parkPose
                 .build();
 
@@ -64,7 +66,7 @@ public class LM1FarAuton extends LinearOpMode {
 //-----------------Initialization-----------------\\
         Actions.runBlocking(
                 new ParallelAction(
-                        new HoodAction(shooter.variableHood, 0.2)
+                        new HoodAction(shooter.variableHood, 0.28)
 
                 )
         );
@@ -98,7 +100,7 @@ public class LM1FarAuton extends LinearOpMode {
                                         grabSet1,
                                         acl.intakeSet(),
                                         //start spinning up shooter
-                                        new ShooterAction(shooter.outtake, -1600)
+                                        new ShooterAction(shooter.outtake, -1390)
                                 )
                         ),
 

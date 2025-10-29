@@ -31,7 +31,7 @@ public class LM1FarSequences {
         return new ParallelAction(
                 intake.in(),
                 //shooter.out()
-                new ShooterAction(shooter.outtake, -1720)
+                new ShooterAction(shooter.outtake, -1390)
 
         );
     }
@@ -41,7 +41,7 @@ public class LM1FarSequences {
                 intake.in(),
                 new SequentialAction(
                         //TODO - Tune the time the flywheel tune to get to good speed
-                        new SleepAction(7),
+                        new SleepAction(6),
                         hws.transferUpFor(7)
                         //hws.transferUpFor(5)
 
@@ -66,8 +66,8 @@ public class LM1FarSequences {
                 intake.in(),
                 new SequentialAction(
                         //TODO - Tune the time the flywheel tune to get to good speed
-                        new SleepAction(2),
-                        hws.transferUpFor(6.7),
+                        new SleepAction(1),
+                        hws.transferUpFor(7),
                         shooter.idle()
 
                 )
@@ -88,8 +88,8 @@ public class LM1FarSequences {
                         intake.in()
                         //TODO - Tune this transfer value to determine how high up the first ball goes
                         // transfer.hotdog()
-                ),
-                shooter.out()
+                )
+                //shooter.out()
 
         );
     }

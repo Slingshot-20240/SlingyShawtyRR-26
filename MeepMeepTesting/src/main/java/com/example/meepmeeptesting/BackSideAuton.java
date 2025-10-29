@@ -20,8 +20,8 @@ public class BackSideAuton {
                 .waitSeconds(2)
                 .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(210))
                 .waitSeconds(2)
-                .strafeToLinearHeading(new Vector2d(35.5, -27), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(35.5, -61.5), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(36, -27), Math.toRadians(270), new TranslationalVelConstraint(78))
+                .strafeToLinearHeading(new Vector2d(34, -61.5), Math.toRadians(270))
                 .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(210))
                 .waitSeconds(2)
 
