@@ -37,11 +37,11 @@ public class AutonConceptLM1 extends LinearOpMode {
 //-----------------Pathing Actions-----------------\\
         // Score Preload
         Action scorePreload = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
                 .build();
 
         // Set 1
-        Action prepareSet1 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scorePreload
+        Action prepareSet1 = drive.actionBuilder(new Pose2d(-25, -25, Math.toRadians(225))) // ends of scorePreload
                 .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270),
                         new TranslationalVelConstraint(70)) // prepareSet1Pose
                 .build();
@@ -60,7 +60,7 @@ public class AutonConceptLM1 extends LinearOpMode {
                         new TranslationalVelConstraint(80)) // prepareSet2Pose
                 .build();
 
-        Action grabSet2 = drive.actionBuilder(new Pose2d(12, -23, Math.toRadians(270))) // ends of prepareSet2
+        Action grabSet2 = drive.actionBuilder(new Pose2d(12, -22, Math.toRadians(270))) // ends of prepareSet2
                 .strafeToLinearHeading(new Vector2d(12, -53), Math.toRadians(270)) // grabSet2Pose
                 .build();
 
@@ -92,7 +92,7 @@ public class AutonConceptLM1 extends LinearOpMode {
 //-----------------Initialization-----------------\\
         Actions.runBlocking(
                 new ParallelAction(
-                        new HoodAction(shooter.variableHood, 0.21)
+                        //new HoodAction(shooter.variableHood, 0.21)
 
                 )
         );
@@ -122,7 +122,7 @@ public class AutonConceptLM1 extends LinearOpMode {
                                 prepareSet1,
 
                                 new ParallelAction(
-                                        new HoodAction(shooter.variableHood,0.3),
+                                        //new HoodAction(shooter.variableHood,0.3),
                                         grabSet1,
                                         acl.intakeSet(),
                                         //start spinning up shooter

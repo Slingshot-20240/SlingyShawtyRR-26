@@ -24,7 +24,7 @@ public class FSMTest extends OpMode {
 
     @Override
     public void loop() {
-        telemetry.addData("loopTime", fsm.loopTime.milliseconds() - fsm.startTime);
+//        telemetry.addData("loopTime", fsm.loopTime.milliseconds() - fsm.startTime);
         telemetry.addData("velo", fsm.robot.shooter.outtake.getVelocity());
         fsm.update();
     }

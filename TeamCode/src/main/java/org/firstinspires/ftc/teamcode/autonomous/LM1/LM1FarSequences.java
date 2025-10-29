@@ -7,20 +7,19 @@ import com.acmerobotics.roadrunner.SleepAction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
-import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 
-public class AutonSequencesLM1 {
+public class LM1FarSequences {
 
     Intake intake;
     Transfer transfer;
     Shooter shooter;
     HardwareSequences hws;
 
-    AutonSequencesLM1(HardwareMap hardwareMap) {
+    LM1FarSequences(HardwareMap hardwareMap) {
         intake = new Intake(hardwareMap);
         transfer = new Transfer(hardwareMap);
         shooter = new Shooter(hardwareMap);
@@ -32,7 +31,7 @@ public class AutonSequencesLM1 {
         return new ParallelAction(
                 intake.in(),
                 //shooter.out()
-                new ShooterAction(shooter.outtake, -945)
+                new ShooterAction(shooter.outtake, -1720)
 
         );
     }
@@ -42,11 +41,9 @@ public class AutonSequencesLM1 {
                 intake.in(),
                 new SequentialAction(
                         //TODO - Tune the time the flywheel tune to get to good speed
-                        new SleepAction(3.3),
-                        hws.transferUpFor(2),
-                        //new HoodAction(shooter.variableHood, 0.22),
-                        hws.transferUpFor(5)
-                        //shooter.idle()
+                        new SleepAction(7),
+                        hws.transferUpFor(7)
+                        //hws.transferUpFor(5)
 
                 )
 
@@ -89,8 +86,8 @@ public class AutonSequencesLM1 {
                 new ParallelAction(
                         transfer.hotdog(),
                         intake.in()
-                //TODO - Tune this transfer value to determine how high up the first ball goes
-                       // transfer.hotdog()
+                        //TODO - Tune this transfer value to determine how high up the first ball goes
+                        // transfer.hotdog()
                 ),
                 shooter.out()
 

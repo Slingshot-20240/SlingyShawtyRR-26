@@ -26,11 +26,11 @@ public class TransferTest extends OpMode {
 
 //i may be wrong but idk if calling rr action like on and off willl work here
 //im prolly wrong (dis ishaan)
-        if(controls.failSafeReset.value()) {
-            robot.transfer.transferOn();
-        } else {
-            robot.transfer.transferOff();
-        }
+//        if(controls.failSafeReset.value()) {
+//            robot.transfer.transferOn();
+//        } else {
+//            robot.transfer.transferOff();
+//        }
 
     }
 }
