@@ -40,7 +40,6 @@ public class LM1FarAuton extends LinearOpMode {
         Action scorePreload = drive.actionBuilder(initialPose)
                 .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201.04))
                 .build();
-
         // Set 1
         Action prepareSet1 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201.04))) // ends of scorePreload
                 .strafeToLinearHeading(new Vector2d(34, -27), Math.toRadians(270)) // prepareSet1Pose
