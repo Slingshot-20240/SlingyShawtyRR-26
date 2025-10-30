@@ -20,8 +20,8 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 @Config
-@Autonomous(name = "Blue Far Auton", group = "Autonomous")
-public class LM1FarAuton extends LinearOpMode {
+@Autonomous(name = "Red Far Auton", group = "Autonomous")
+public class RedFarAuton extends LinearOpMode {
 
 
     @Override

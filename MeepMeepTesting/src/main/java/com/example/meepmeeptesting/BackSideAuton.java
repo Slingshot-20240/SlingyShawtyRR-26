@@ -16,7 +16,7 @@ public class BackSideAuton {
                 .setConstraints(65, 65, Math.toRadians(180), Math.toRadians(180), 14.8)
                 .build();
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(61.5, -9, Math.toRadians(180)))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(61.5, -13, Math.toRadians(180)))
                 .waitSeconds(2)
                 .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(210))
                 .waitSeconds(2)
