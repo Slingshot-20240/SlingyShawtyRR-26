@@ -91,7 +91,7 @@ public class FSM {
                 intake.intakeReverse();
                 if (!gamepad.outtake.locked()) {
                     state = FSMStates.BASE_STATE;
-                    gamepad.resetMultipleControls(gamepad.intake, gamepad.shootBack, gamepad.shootFront, gamepad.transfer);
+                    gamepad.resetMultipleControls(gamepad.transfer);
                 }
                 break;
 
