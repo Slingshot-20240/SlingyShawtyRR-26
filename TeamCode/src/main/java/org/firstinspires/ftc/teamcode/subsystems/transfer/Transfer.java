@@ -5,9 +5,7 @@ import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 public class Transfer {
     public final CRServo backTransfer;
@@ -90,7 +88,7 @@ public class Transfer {
         frontTransfer.setPower(0);
     }
 
-    public void backReverseFrontForward() {
+    public void hotDog() {
         backTransfer.setPower(1);
         frontTransfer.setPower(0.15);
     }
