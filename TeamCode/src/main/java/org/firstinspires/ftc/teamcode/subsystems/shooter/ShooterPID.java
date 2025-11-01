@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.teleop.fsm.FSM;
 public class ShooterPID extends OpMode {
 
     DcMotorEx flywheel;
-    public static double p = 0.2, i = 2.0, d = 0.002, f = 0.0;
+    public static double p = 575, i = 0.0, d = 0.0, f = 70;
     public static int targetVel = 500;
     private Telemetry dashboardTelemetry;
     Robot robot;
