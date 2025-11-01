@@ -48,7 +48,6 @@ public class BlueFarAuton extends LinearOpMode {
         Action grabSet1 = drive.actionBuilder(new Pose2d(34, -27, Math.toRadians(270))) // ends of prepareSet1
                 .strafeToLinearHeading(new Vector2d(34, -61.5), Math.toRadians(270),
                         new TranslationalVelConstraint(78))
-
                 .build();
 
         Action scoreSet1 = drive.actionBuilder(new Pose2d(34, -61.5, Math.toRadians(270))) // ends of grabSet1
