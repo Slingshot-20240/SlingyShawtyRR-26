@@ -21,8 +21,8 @@ import org.firstinspires.ftc.teamcode.teleop.fsm.FSM;
 public class ShooterPID extends OpMode {
 
     DcMotorEx flywheel;
-    public static double p = 575, i = 0.0, d = 0.0, f = 70;
-    public static int targetVel = 500;
+    public static double p = 578, i = 0.0, d = 0.0, f = 70;
+    public static int targetVel = -1095;
     private Telemetry dashboardTelemetry;
     Robot robot;
     GamepadMapping controls;
@@ -35,7 +35,7 @@ public class ShooterPID extends OpMode {
         flywheel = hardwareMap.get(DcMotorEx.class, "outtake");
 
         // Set PIDF (start with defaults, tune later)
-        flywheel.setVelocityPIDFCoefficients(575, 0, 0, 70);
+        flywheel.setVelocityPIDFCoefficients(578, 0, 0, 70);
         controls = new GamepadMapping(gamepad1, gamepad2);
         robot = new Robot(hardwareMap, controls);
 
@@ -53,12 +53,18 @@ public class ShooterPID extends OpMode {
         // Updates all other controls
         controls.update();
 
-        robot.intake.intakeOn();
+        //robot.intake.intakeOn();
 
-        if (controls.transfer.value()) {
+        if (controls.transfer.locked()) {
             robot.transfer.transferOn();
         } else {
             robot.transfer.hotDog();
+        }
+
+        if (controls.outtake.locked()) {
+            robot.intake.intakeReverse();
+        } else {
+            robot.intake.intakeOn();
         }
 
         //sine wave/variable setpoint between 2000 and 5000 ticks/sec
