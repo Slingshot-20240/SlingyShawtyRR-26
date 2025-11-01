@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 @Config
 @Autonomous(name = "BLUE LM1 Auton 67", group = "Autonomous")
-public class AutonConceptLM1 extends LinearOpMode {
+public class BlueCloseAuton extends LinearOpMode {
 
 
     @Override
@@ -27,7 +27,7 @@ public class AutonConceptLM1 extends LinearOpMode {
         Pose2d initialPose = new Pose2d(-55, -45, Math.toRadians(143));
 
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
-        AutonSequencesLM1 acl = new AutonSequencesLM1(hardwareMap);
+        LM1CloseSequences acl = new LM1CloseSequences(hardwareMap);
         HardwareSequences hws = new HardwareSequences(hardwareMap);
 
         Intake intake = new Intake(hardwareMap);

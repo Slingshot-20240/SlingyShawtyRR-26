@@ -28,7 +28,7 @@ public class SequenceTests extends LinearOpMode {
     public void runOpMode() {
         Pose2d initialPose = new Pose2d(-49.3, -49, Math.toRadians(55));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
-        AutonSequencesLM1 acl = new AutonSequencesLM1(hardwareMap);
+        LM1CloseSequences acl = new LM1CloseSequences(hardwareMap);
         HardwareSequences hws = new HardwareSequences(hardwareMap);
 
         Intake intake = new Intake(hardwareMap);
