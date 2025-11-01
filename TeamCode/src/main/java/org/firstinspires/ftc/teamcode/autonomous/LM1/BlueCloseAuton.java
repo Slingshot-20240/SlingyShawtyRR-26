@@ -54,33 +54,7 @@ public class BlueCloseAuton extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
                 .build();
 
-        // Set 2
-        Action prepareSet2 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scoreSet1
-                .strafeToLinearHeading(new Vector2d(12, -22), Math.toRadians(270),
-                        new TranslationalVelConstraint(80)) // prepareSet2Pose
-                .build();
 
-        Action grabSet2 = drive.actionBuilder(new Pose2d(12, -22, Math.toRadians(270))) // ends of prepareSet2
-                .strafeToLinearHeading(new Vector2d(12, -53), Math.toRadians(270)) // grabSet2Pose
-                .build();
-
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(12, -53, Math.toRadians(270))) // ends of grabSet2
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
-                .build();
-
-        // Set 3
-        Action prepareSet3 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scoreSet2
-                .strafeToLinearHeading(new Vector2d(36.5, -22), Math.toRadians(270),
-                        new TranslationalVelConstraint(80)) // prepareSet3Pose
-                .build();
-
-        Action grabSet3 = drive.actionBuilder(new Pose2d(36.5, -22, Math.toRadians(270))) // ends of prepareSet3
-                .strafeToLinearHeading(new Vector2d(36.5, -53), Math.toRadians(270))
-                .build();
-
-        Action scoreSet3 = drive.actionBuilder(new Pose2d(36.5, -53, Math.toRadians(270))) // ends of grabSet3
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
-                .build();
 
         // Park
         Action park = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scoreSet3

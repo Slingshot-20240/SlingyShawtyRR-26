@@ -38,10 +38,10 @@ public class RedFarAuton extends LinearOpMode {
 //-----------------Pathing Actions-----------------\\
         // Score Preload
         Action scorePreload = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(156))
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(158))
                 .build();
         // Set 1
-        Action prepareSet1 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(156))) // ends of scorePreload
+        Action prepareSet1 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(158))) // ends of scorePreload
                 .strafeToLinearHeading(new Vector2d(34, 27), Math.toRadians(90), new TranslationalVelConstraint(78))
                 .build();
 
@@ -52,12 +52,12 @@ public class RedFarAuton extends LinearOpMode {
                 .build();
 
         Action scoreSet1 = drive.actionBuilder(new Pose2d(34, 61.5, Math.toRadians(90))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(156))
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(158))
                 .build();
 
 
         // Park
-        Action park = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(156))) // ends of scoreSet3
+        Action park = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(158))) // ends of scoreSet3
                 .strafeToLinearHeading(new Vector2d(35, 20), Math.toRadians(180))
                 .build();
 
