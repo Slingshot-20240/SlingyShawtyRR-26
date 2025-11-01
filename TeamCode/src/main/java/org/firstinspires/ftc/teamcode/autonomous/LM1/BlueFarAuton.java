@@ -26,7 +26,7 @@ public class BlueFarAuton extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        Pose2d initialPose = new Pose2d(61.5, -9, Math.toRadians(180));
+        Pose2d initialPose = new Pose2d(61.5, -14, Math.toRadians(180));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
         LM1FarSequences acl = new LM1FarSequences(hardwareMap);
         HardwareSequences hws = new HardwareSequences(hardwareMap);

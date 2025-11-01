@@ -26,7 +26,7 @@ public class RedFarAuton extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        Pose2d initialPose = new Pose2d(61.5, -9, Math.toRadians(180));
+        Pose2d initialPose = new Pose2d(61.5, 14, Math.toRadians(180));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
         LM1FarSequences acl = new LM1FarSequences(hardwareMap);
         HardwareSequences hws = new HardwareSequences(hardwareMap);
@@ -38,27 +38,27 @@ public class RedFarAuton extends LinearOpMode {
 //-----------------Pathing Actions-----------------\\
         // Score Preload
         Action scorePreload = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201.04))
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(156))
                 .build();
         // Set 1
-        Action prepareSet1 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201.04))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(34, -27), Math.toRadians(270)) // prepareSet1Pose
+        Action prepareSet1 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(156))) // ends of scorePreload
+                .strafeToLinearHeading(new Vector2d(34, 27), Math.toRadians(90), new TranslationalVelConstraint(78))
                 .build();
 
-        Action grabSet1 = drive.actionBuilder(new Pose2d(34, -27, Math.toRadians(270))) // ends of prepareSet1
-                .strafeToLinearHeading(new Vector2d(34, -61.5), Math.toRadians(270),
-                        new TranslationalVelConstraint(78))
+        Action grabSet1 = drive.actionBuilder(new Pose2d(34, 27, Math.toRadians(90))) // ends of prepareSet1
+                .strafeToLinearHeading(new Vector2d(34, 61.5), Math.toRadians(90))
+
 
                 .build();
 
-        Action scoreSet1 = drive.actionBuilder(new Pose2d(34, -61.5, Math.toRadians(270))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(204))
+        Action scoreSet1 = drive.actionBuilder(new Pose2d(34, 61.5, Math.toRadians(90))) // ends of grabSet1
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(156))
                 .build();
 
 
         // Park
-        Action park = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(204))) // ends of scoreSet3
-                .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(180)) // parkPose
+        Action park = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(156))) // ends of scoreSet3
+                .strafeToLinearHeading(new Vector2d(35, 20), Math.toRadians(180))
                 .build();
 
 
