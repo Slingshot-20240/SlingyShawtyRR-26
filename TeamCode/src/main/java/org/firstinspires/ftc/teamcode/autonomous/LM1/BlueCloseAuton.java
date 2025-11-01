@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 @Config
-@Autonomous(name = "BLUE LM1 Auton 67", group = "Autonomous")
+@Autonomous(name = "Blue CLOSE Auton", group = "Autonomous")
 public class BlueCloseAuton extends LinearOpMode {
 
 
