@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.teleop.fsm;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
 import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
@@ -62,7 +61,7 @@ public class FSM {
                     transfer.transferOn();
                 } else {
                     // Hotdog the ball!
-                    transfer.backReverseFrontForward();
+                    transfer.hotDog();
                 }
 
                 if (gamepad.outtake.locked()) {

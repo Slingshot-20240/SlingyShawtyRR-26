@@ -28,7 +28,7 @@ public class ShooterReachVelAction implements Action {
             outtake.setVelocity(outtakeVel);
             return false;
         } else {
-            transfer.backReverseFrontForward();
+            transfer.hotDog();
             return true;
         }
     }
