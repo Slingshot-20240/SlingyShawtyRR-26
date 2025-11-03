@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 @Disabled
 @Config
-@Autonomous(name = "Red CLOSE Auton", group = "Autonomous")
+@Autonomous(name = "6 Red CLOSE Auton", group = "Autonomous")
 public class LM1RedCloseAuton extends LinearOpMode {
 
     @Override

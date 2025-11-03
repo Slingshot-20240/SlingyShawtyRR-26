@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 @Disabled
 @Config
-@Autonomous(name = "Red FAR Auton", group = "Autonomous")
+@Autonomous(name = "6 Red FAR Auton", group = "Autonomous")
 public class LM1RedFarAuton extends LinearOpMode {
 
 
