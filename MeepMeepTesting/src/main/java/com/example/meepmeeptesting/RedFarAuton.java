@@ -13,7 +13,7 @@ public class RedFarAuton {
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(65, 65, Math.toRadians(180), Math.toRadians(180), 14.8)
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 14.8)
                 .build();
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(61.5, 14, Math.toRadians(180)))
