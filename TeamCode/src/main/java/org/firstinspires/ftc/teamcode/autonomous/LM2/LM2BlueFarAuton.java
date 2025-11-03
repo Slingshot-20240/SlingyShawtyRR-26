@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autonomous.LM1;
+package org.firstinspires.ftc.teamcode.autonomous.LM2;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.Action;
@@ -11,24 +11,24 @@ import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-//Subsystems Imports
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
+import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
+import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 @Config
-@Autonomous(name = "Blue CLOSE Auton", group = "Autonomous")
-public class BlueCloseAuton extends LinearOpMode {
+@Autonomous(name = "Blue FAR Auton", group = "Autonomous")
+public class LM2BlueFarAuton extends LinearOpMode {
 
 
     @Override
     public void runOpMode() {
-        Pose2d initialPose = new Pose2d(-55, -45, Math.toRadians(143));
-
+        Pose2d initialPose = new Pose2d(61.5, -14, Math.toRadians(180));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
-        LM1CloseSequences acl = new LM1CloseSequences(hardwareMap);
-        HardwareSequences hws = new HardwareSequences(hardwareMap);
+        LM2FarSequences acl = new LM2FarSequences(hardwareMap);
+        LM2HardwareSequences hws = new LM2HardwareSequences(hardwareMap);
 
         Intake intake = new Intake(hardwareMap);
         Transfer transfer = new Transfer(hardwareMap);
@@ -37,36 +37,33 @@ public class BlueCloseAuton extends LinearOpMode {
 //-----------------Pathing Actions-----------------\\
         // Score Preload
         Action scorePreload = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201.04))
                 .build();
-
         // Set 1
-        Action prepareSet1 = drive.actionBuilder(new Pose2d(-25, -25, Math.toRadians(225))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270),
-                        new TranslationalVelConstraint(70)) // prepareSet1Pose
+        Action prepareSet1 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201.04))) // ends of scorePreload
+                .strafeToLinearHeading(new Vector2d(34, -27), Math.toRadians(270)) // prepareSet1Pose
                 .build();
 
-        Action grabSet1 = drive.actionBuilder(new Pose2d(-11, -22, Math.toRadians(270))) // ends of prepareSet1
-                .strafeToLinearHeading(new Vector2d(-12, -51.5), Math.toRadians(270)) // grabSet1Pose
+        Action grabSet1 = drive.actionBuilder(new Pose2d(34, -27, Math.toRadians(270))) // ends of prepareSet1
+                .strafeToLinearHeading(new Vector2d(34, -61.5), Math.toRadians(270),
+                        new TranslationalVelConstraint(78))
                 .build();
 
-        Action scoreSet1 = drive.actionBuilder(new Pose2d(-12, -51.5, Math.toRadians(270))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
+        Action scoreSet1 = drive.actionBuilder(new Pose2d(34, -61.5, Math.toRadians(270))) // ends of grabSet1
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(204))
                 .build();
-
 
 
         // Park
-        Action park = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scoreSet3
-                .strafeToLinearHeading(new Vector2d(-48, -24), Math.toRadians(180),
-                        new TranslationalVelConstraint(80)) // parkPose
+        Action park = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(204))) // ends of scoreSet3
+                .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(180)) // parkPose
                 .build();
 
 
 //-----------------Initialization-----------------\\
         Actions.runBlocking(
                 new ParallelAction(
-                        //new HoodAction(shooter.variableHood, 0.21)
+                        new HoodAction(shooter.variableHood, 0.28)
 
                 )
         );
@@ -80,9 +77,9 @@ public class BlueCloseAuton extends LinearOpMode {
         Actions.runBlocking(
                 new SequentialAction(
 
-                //--------Preloads--------\\
+                        //--------Preloads--------\\
                         //Shoot Preloads
-                         new ParallelAction(
+                        new ParallelAction(
                                 scorePreload,
                                 acl.preparePreloads()
                         ),
@@ -90,7 +87,7 @@ public class BlueCloseAuton extends LinearOpMode {
 
 
 
-                //--------Set 1--------\\
+                        //--------Set 1--------\\
                         //Grab Set 1
                         new SequentialAction(
                                 prepareSet1,
@@ -100,7 +97,7 @@ public class BlueCloseAuton extends LinearOpMode {
                                         grabSet1,
                                         acl.intakeSet(),
                                         //start spinning up shooter
-                                        shooter.out()
+                                        new ShooterAction(shooter.outtake, -1390)
                                 )
                         ),
 

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autonomous.LM1;
+package org.firstinspires.ftc.teamcode.autonomous.LM2;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
@@ -12,18 +12,18 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 
-public class LM1CloseSequences {
+public class LM2CloseSequences {
 
     Intake intake;
     Transfer transfer;
     Shooter shooter;
-    LM1HardwareSequences hws;
+    LM2HardwareSequences hws;
 
-    LM1CloseSequences(HardwareMap hardwareMap) {
+    LM2CloseSequences(HardwareMap hardwareMap) {
         intake = new Intake(hardwareMap);
         transfer = new Transfer(hardwareMap);
         shooter = new Shooter(hardwareMap);
-        hws = new LM1HardwareSequences(hardwareMap);
+        hws = new LM2HardwareSequences(hardwareMap);
     }
 
 

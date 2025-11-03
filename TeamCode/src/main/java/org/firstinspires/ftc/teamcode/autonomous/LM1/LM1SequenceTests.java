@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 @Config
 @Autonomous(name = "Sequence Tests", group = "Autonomous")
-public class SequenceTests extends LinearOpMode {
+public class LM1SequenceTests extends LinearOpMode {
 
 
     @Override
@@ -29,7 +29,7 @@ public class SequenceTests extends LinearOpMode {
         Pose2d initialPose = new Pose2d(-49.3, -49, Math.toRadians(55));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
         LM1CloseSequences acl = new LM1CloseSequences(hardwareMap);
-        HardwareSequences hws = new HardwareSequences(hardwareMap);
+        LM1HardwareSequences hws = new LM1HardwareSequences(hardwareMap);
 
         Intake intake = new Intake(hardwareMap);
         Transfer transfer = new Transfer(hardwareMap);

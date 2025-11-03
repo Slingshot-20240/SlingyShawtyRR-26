@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autonomous.LM1;
+package org.firstinspires.ftc.teamcode.autonomous.LM2;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
@@ -12,18 +12,18 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 
-public class LM1CloseSequences {
+public class LM2FarSequences {
 
     Intake intake;
     Transfer transfer;
     Shooter shooter;
-    LM1HardwareSequences hws;
+    LM2HardwareSequences hws;
 
-    LM1CloseSequences(HardwareMap hardwareMap) {
+    LM2FarSequences(HardwareMap hardwareMap) {
         intake = new Intake(hardwareMap);
         transfer = new Transfer(hardwareMap);
         shooter = new Shooter(hardwareMap);
-        hws = new LM1HardwareSequences(hardwareMap);
+        hws = new LM2HardwareSequences(hardwareMap);
     }
 
 
@@ -31,7 +31,7 @@ public class LM1CloseSequences {
         return new ParallelAction(
                 intake.in(),
                 //shooter.out()
-                new ShooterAction(shooter.outtake, -945)
+                new ShooterAction(shooter.outtake, -1387)
 
         );
     }
@@ -41,14 +41,11 @@ public class LM1CloseSequences {
                 intake.in(),
                 new SequentialAction(
                         //TODO - Tune the time the flywheel tune to get to good speed
-                        new SleepAction(3.3),
-                        hws.transferUpFor(2),
-                        //new HoodAction(shooter.variableHood, 0.22),
-                        hws.transferUpFor(5)
-                        //shooter.idle()
+                        new SleepAction(6),
+                        hws.transferUpFor(7)
+                        //hws.transferUpFor(5)
 
                 )
-
 
         );
     }
@@ -68,8 +65,8 @@ public class LM1CloseSequences {
                 intake.in(),
                 new SequentialAction(
                         //TODO - Tune the time the flywheel tune to get to good speed
-                        new SleepAction(2),
-                        hws.transferUpFor(6.7),
+                        new SleepAction(1),
+                        hws.transferUpFor(7),
                         shooter.idle()
 
                 )
@@ -88,10 +85,10 @@ public class LM1CloseSequences {
                 new ParallelAction(
                         transfer.hotdog(),
                         intake.in()
-                //TODO - Tune this transfer value to determine how high up the first ball goes
-                       // transfer.hotdog()
-                ),
-                shooter.out()
+                        //TODO - Tune this transfer value to determine how high up the first ball goes
+                        // transfer.hotdog()
+                )
+                //shooter.out()
 
         );
     }

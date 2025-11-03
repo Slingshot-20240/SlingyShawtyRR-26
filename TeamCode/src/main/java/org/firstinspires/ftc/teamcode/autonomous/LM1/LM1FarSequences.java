@@ -17,13 +17,13 @@ public class LM1FarSequences {
     Intake intake;
     Transfer transfer;
     Shooter shooter;
-    HardwareSequences hws;
+    LM1HardwareSequences hws;
 
     LM1FarSequences(HardwareMap hardwareMap) {
         intake = new Intake(hardwareMap);
         transfer = new Transfer(hardwareMap);
         shooter = new Shooter(hardwareMap);
-        hws = new HardwareSequences(hardwareMap);
+        hws = new LM1HardwareSequences(hardwareMap);
     }
 
 

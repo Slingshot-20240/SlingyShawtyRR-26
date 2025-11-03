@@ -9,6 +9,7 @@ import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 //Subsystems Imports
@@ -19,9 +20,10 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
+@Disabled
 @Config
 @Autonomous(name = "Blue FAR Auton", group = "Autonomous")
-public class BlueFarAuton extends LinearOpMode {
+public class LM1BlueFarAuton extends LinearOpMode {
 
 
     @Override
@@ -29,7 +31,7 @@ public class BlueFarAuton extends LinearOpMode {
         Pose2d initialPose = new Pose2d(61.5, -14, Math.toRadians(180));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
         LM1FarSequences acl = new LM1FarSequences(hardwareMap);
-        HardwareSequences hws = new HardwareSequences(hardwareMap);
+        LM1HardwareSequences hws = new LM1HardwareSequences(hardwareMap);
 
         Intake intake = new Intake(hardwareMap);
         Transfer transfer = new Transfer(hardwareMap);
