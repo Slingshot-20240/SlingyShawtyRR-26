@@ -43,6 +43,7 @@ public class ShooterPID extends OpMode {
         robot = new Robot(hardwareMap, controls);
 
         flywheel1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        flywheel2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         fsm = new FSM(hardwareMap, controls);
     }
