@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 
 @Config
-@Autonomous(name = "Blue FAR Auton", group = "Autonomous")
+@Autonomous(name = "9 Blue FAR Auton", group = "Autonomous")
 public class LM2BlueFarAuton extends LinearOpMode {
 
 
