@@ -22,7 +22,8 @@ public class ShooterPID extends OpMode {
 
     DcMotorEx flywheel1;
     DcMotorEx flywheel2;
-    public static double p = 578, i = 0.0, d = 0.0, f = 70;
+    public static double p1 = 578, i1 = 0.0, d1 = 0.0, f1 = 70;
+    public static double p2 = 578, i2 = 0.0, d2 = 0.0, f2 = 70;
     public static int targetVel = -1095;
     private Telemetry dashboardTelemetry;
     Robot robot;
@@ -77,8 +78,8 @@ public class ShooterPID extends OpMode {
       // Send target to REV Hub PID
         flywheel1.setVelocity(targetVel);
         flywheel2.setVelocity(targetVel);
-        flywheel1.setVelocityPIDFCoefficients(p, i, d, f);
-        flywheel2.setVelocityPIDFCoefficients(p, i, d, f);
+        flywheel1.setVelocityPIDFCoefficients(p1, i1, d1, f1);
+        flywheel2.setVelocityPIDFCoefficients(p2, i2, d2, f2);
 
         // Read actual velocity
         double actualVel = flywheel1.getVelocity();
@@ -87,9 +88,6 @@ public class ShooterPID extends OpMode {
         // Telemetry
         dashboardTelemetry.addData("Target (ticks/s): ", targetVel);
         dashboardTelemetry.addData("Actual (ticks/s): ", actualVel);
-        dashboardTelemetry.addData("P:",p);
-        dashboardTelemetry.addData("I:",i);
-        dashboardTelemetry.addData("D:",d);
         dashboardTelemetry.addData("Encoder:", flywheel1.getCurrentPosition());
         dashboardTelemetry.addData("Encoder:", flywheel2.getCurrentPosition());
         dashboardTelemetry.update();
