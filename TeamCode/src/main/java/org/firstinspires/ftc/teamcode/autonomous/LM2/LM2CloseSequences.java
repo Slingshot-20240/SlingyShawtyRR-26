@@ -31,7 +31,7 @@ public class LM2CloseSequences {
         return new ParallelAction(
                 intake.in(),
                 //shooter.out()
-                new ShooterAction(shooter.outtake, -945)
+                new ShooterAction(shooter.outtake1, -945)
 
         );
     }

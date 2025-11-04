@@ -10,17 +10,18 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Shooter {
-    public final DcMotorEx outtake;
+    public final DcMotorEx outtake1;
+    public final DcMotorEx outtake2;
     public final Servo variableHood;
 
     public Shooter(HardwareMap hardwareMap) {
-        outtake = hardwareMap.get(DcMotorEx.class, "outtake");
-        outtake.setVelocityPIDFCoefficients(575,0,0,70);
-        outtake.setDirection(DcMotorSimple.Direction.FORWARD);
+        outtake1 = hardwareMap.get(DcMotorEx.class, "outtake1");
+        outtake2 = hardwareMap.get(DcMotorEx.class, "outtake2");
+        outtake1.setVelocityPIDFCoefficients(575,0,0,70);
+        outtake2.setVelocityPIDFCoefficients(575,0,0,70);
+        outtake1.setDirection(DcMotorSimple.Direction.FORWARD);
 
         variableHood = hardwareMap.get(Servo.class, "variableHood");
-
-        //variableHood.setDirection(Servo.Direction.REVERSE);
     }
 
     public enum outtakeVels {
@@ -88,8 +89,10 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setVelocityPIDFCoefficients(575,0,0,70);
-            outtake.setVelocity(0);
+            outtake1.setVelocityPIDFCoefficients(575,0,0,70);
+            outtake2.setVelocityPIDFCoefficients(575,0,0,70);
+            outtake1.setVelocity(0);
+            outtake2.setVelocity(0);
             return false;
         }
     }
@@ -102,8 +105,10 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setVelocityPIDFCoefficients(575,0,0,70);
-            outtake.setVelocity(-1020);
+            outtake1.setVelocityPIDFCoefficients(575,0,0,70);
+            outtake2.setVelocityPIDFCoefficients(575,0,0,70);
+            outtake1.setVelocity(-1020);
+            outtake2.setVelocity(-1020);
             return false;
         }
     }
@@ -116,7 +121,7 @@ public class Shooter {
 
 
     public void setShooterVelocity(double velo) {
-        outtake.setVelocity(velo);
+        outtake1.setVelocity(velo);
     }
 
     public void setHoodAngle(double angle) {
@@ -132,11 +137,11 @@ public class Shooter {
     }
 
     public void shootFromBack() {
-        outtake.setVelocity(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
+        outtake1.setVelocity(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
     }
 
     public void shootFromFront() {
-        outtake.setVelocity(outtakeVels.HARDCODED_SHOOT_FRONT.getOuttakeVel());
+        outtake1.setVelocity(outtakeVels.HARDCODED_SHOOT_FRONT.getOuttakeVel());
     }
 
 }

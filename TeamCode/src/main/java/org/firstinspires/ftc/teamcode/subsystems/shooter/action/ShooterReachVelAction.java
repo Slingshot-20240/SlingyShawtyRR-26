@@ -9,12 +9,14 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 public class ShooterReachVelAction implements Action {
-    DcMotorEx outtake;
+    DcMotorEx outtake1;
+    DcMotorEx outtake2;
     Transfer transfer;
     double outtakeVel;
 
-    public ShooterReachVelAction(DcMotorEx outtake, Transfer transfer, double outtakeVel) {
-        this.outtake = outtake;
+    public ShooterReachVelAction(DcMotorEx outtake1, DcMotorEx outtake2, Transfer transfer, double outtakeVel) {
+        this.outtake1 = outtake1;
+        this.outtake2 = outtake2;
         this.outtakeVel = outtakeVel;
         this.transfer = transfer;
 
@@ -22,10 +24,12 @@ public class ShooterReachVelAction implements Action {
 
     @Override
     public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-        outtake.setVelocityPIDFCoefficients(0,0.44,0.011,0);
+        outtake1.setVelocityPIDFCoefficients(0,0.44,0.011,0);
+        outtake2.setVelocityPIDFCoefficients(0,0.44,0.011,0);
 
-        if (outtake.getVelocity() <= outtakeVel - 10 || outtake.getVelocity() >= outtakeVel + 10) {
-            outtake.setVelocity(outtakeVel);
+        if (outtake1.getVelocity() <= outtakeVel - 10 || outtake1.getVelocity() >= outtakeVel + 10) {
+            outtake1.setVelocity(outtakeVel);
+            outtake2.setVelocity(outtakeVel);
             return false;
         } else {
             transfer.hotDog();

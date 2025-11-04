@@ -97,7 +97,7 @@ public class LM2BlueFarAuton extends LinearOpMode {
                                         grabSet1,
                                         acl.intakeSet(),
                                         //start spinning up shooter
-                                        new ShooterAction(shooter.outtake, -1390)
+                                        new ShooterAction(shooter.outtake1, -1390)
                                 )
                         ),
 

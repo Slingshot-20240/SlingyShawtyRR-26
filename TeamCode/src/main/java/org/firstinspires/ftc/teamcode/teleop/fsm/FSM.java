@@ -53,10 +53,12 @@ public class FSM {
 
         switch (state) {
             case BASE_STATE:
+                // TODO: still keep always running depending on spin up time
                 shooter.shootFromFront();
 
                 intake.intakeOn();
 
+                // move to new state
                 if (gamepad.transfer.value()) {
                     transfer.transferOn();
                 } else {
@@ -68,22 +70,9 @@ public class FSM {
                     state = FSMStates.OUTTAKING;
                 }
 
-//                NOT FOR LM1
-//                if hardcoded control, set hood to back shooting position
-//                if (type.equals(ControlType.HARDCODED_CONTROL)) {
-//                    shooter.hoodToBackTriPos();
-//                }
-//                if (gamepad.intake.value()) {
-//                    intake.intakeOn();
-//                    transfer.backReverseFrontForward();
-//
-//                } else if (!gamepad.intake.value())
-//                    intake.intakeOff();
-//                    transfer.backReverseFrontForward();
-
-//                if (gamepad.pidShoot.value() || gamepad.shootFront.value() || gamepad.shootBack.value()) {
-//                    state = FSMStates.SHOOTING;
-//                }
+                if (gamepad.shootBack.value()) {
+                    state = FSMStates.SHOOT_BACK;
+                }
 
                 break;
             case OUTTAKING:
@@ -94,54 +83,53 @@ public class FSM {
                 }
                 break;
 
-//            case SHOOTING:
+            case SHOOT_BACK:
+                shooter.shootFromBack();
+
+                if (gamepad.transfer.locked()) {
+                    state = FSMStates.TRANSFER;
+                }
+
+                if (!gamepad.shootBack.value()) {
+                    state = FSMStates.BASE_STATE;
+                    gamepad.resetMultipleControls(gamepad.shootBack, gamepad.shootFront, gamepad.transfer);
+                }
+                break;
+            case SHOOT_FRONT:
+                shooter.shootFromFront();
+
+                if (gamepad.transfer.locked()) {
+                    state = FSMStates.TRANSFER;
+                }
+
+                if (!gamepad.shootFront.value()) {
+                    state = FSMStates.BASE_STATE;
+                    gamepad.resetMultipleControls(gamepad.shootBack, gamepad.shootFront, gamepad.transfer);
+                }
+                break;
+            case TRANSFER:
+                transfer.transferOn();
+
+                if (!gamepad.transfer.locked()) {
+                    state = FSMStates.BASE_STATE;
+                    transfer.hotDog();
+                    gamepad.resetMultipleControls(gamepad.shootBack, gamepad.shootFront, gamepad.transfer);
+                }
+                break;
+
+//            case TURRET:
                 // intake on
                 // TODO: FIX THIS FOR TURRET
                 //turret.setTurretPos(turret.calcTurretVal(pose.getX(), pose.getY(), pose.getX(), pose.getY(), pose.getHeading()), 1);
-
-//                if (type == ControlType.HARDCODED_CONTROL && gamepad.shootBack.value()) {
-//                    //shooter.hoodToBackTriPos();
-//                    shooter.shootFromBack();
-//
-//                    if (gamepad.transfer.value()) {
-//                        robot.transfer.transferOn();
-//                    } else {
-//                        robot.transfer.backReverseFrontForward();
-//                    }
-//                }
-
-                // Hardcoded control AND we're at the tip of the triangle of the front shooting zone
-//                else if (type == ControlType.HARDCODED_CONTROL && gamepad.shootFront.value()) {
-//                    //shooter.hoodToFrontTriPos();
-//                    shooter.shootFromFront();
-//
-//                    if (gamepad.transfer.value()) {
-//                        robot.transfer.transferOn();
-//                    } else {
-//                        robot.transfer.backReverseFrontForward();
-//                    }
-//                }
-
-                // PID control that adjusts depending on our distance - TO BE IMPLEMENTED
-//                else if (type == ControlType.PID_CONTROL && gamepad.pidShoot.value()) {
-//                   shooter.setShooterVelocity(shooter.calculateShooterVel());
-//                   shooter.setHoodAngle(shooter.calculateHoodAngle());
-//                }
-
-//                if (gamepad.pidShoot.changed() || gamepad.shootFront.changed() || gamepad.shootBack.changed()) {
-//                    state = FSMStates.BASE_STATE;
-//                    transfer.transferOff();
-//                    gamepad.resetMultipleControls(gamepad.pidShoot, gamepad.shootBack, gamepad.shootFront, gamepad.intake, gamepad.transfer);
-//                }
-//                break;
         }
     }
 
     public enum FSMStates {
         BASE_STATE,
-        SHOOTING,
-        PARK,
-        OUTTAKING
+        SHOOT_FRONT,
+        SHOOT_BACK,
+        OUTTAKING,
+        TRANSFER
     }
 
     public enum ControlType {

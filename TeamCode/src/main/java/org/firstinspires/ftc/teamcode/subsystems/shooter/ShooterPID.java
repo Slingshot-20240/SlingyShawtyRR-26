@@ -20,7 +20,8 @@ import org.firstinspires.ftc.teamcode.teleop.fsm.FSM;
 @TeleOp(name = "ShooterPID", group = "Testing")
 public class ShooterPID extends OpMode {
 
-    DcMotorEx flywheel;
+    DcMotorEx flywheel1;
+    DcMotorEx flywheel2;
     public static double p = 578, i = 0.0, d = 0.0, f = 70;
     public static int targetVel = -1095;
     private Telemetry dashboardTelemetry;
@@ -32,14 +33,16 @@ public class ShooterPID extends OpMode {
     public void init() {
         double time = 0;
         dashboardTelemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
-        flywheel = hardwareMap.get(DcMotorEx.class, "outtake");
+        flywheel1 = hardwareMap.get(DcMotorEx.class, "outtake1");
+        flywheel2 = hardwareMap.get(DcMotorEx.class, "outtake2");
 
         // Set PIDF (start with defaults, tune later)
-        flywheel.setVelocityPIDFCoefficients(578, 0, 0, 70);
+        flywheel1.setVelocityPIDFCoefficients(578, 0, 0, 70);
+        flywheel2.setVelocityPIDFCoefficients(578, 0, 0, 70);
         controls = new GamepadMapping(gamepad1, gamepad2);
         robot = new Robot(hardwareMap, controls);
 
-        flywheel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        flywheel1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         fsm = new FSM(hardwareMap, controls);
     }
@@ -71,11 +74,13 @@ public class ShooterPID extends OpMode {
         //double targetVel = 3500 + 1500 * Math.sin(2 * Math.PI * 0.5 * time);
 
       // Send target to REV Hub PID
-        flywheel.setVelocity(targetVel);
-        flywheel.setVelocityPIDFCoefficients(p, i, d, f);
+        flywheel1.setVelocity(targetVel);
+        flywheel2.setVelocity(targetVel);
+        flywheel1.setVelocityPIDFCoefficients(p, i, d, f);
+        flywheel2.setVelocityPIDFCoefficients(p, i, d, f);
 
         // Read actual velocity
-        double actualVel = flywheel.getVelocity();
+        double actualVel = flywheel1.getVelocity();
 
 
         // Telemetry
@@ -84,7 +89,8 @@ public class ShooterPID extends OpMode {
         dashboardTelemetry.addData("P:",p);
         dashboardTelemetry.addData("I:",i);
         dashboardTelemetry.addData("D:",d);
-        dashboardTelemetry.addData("Encoder:",flywheel.getCurrentPosition());
+        dashboardTelemetry.addData("Encoder:", flywheel1.getCurrentPosition());
+        dashboardTelemetry.addData("Encoder:", flywheel2.getCurrentPosition());
         dashboardTelemetry.update();
 
         // sleep(20);

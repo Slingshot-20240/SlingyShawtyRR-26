@@ -57,8 +57,8 @@ public class GamepadMapping {
         // intake.update(gamepad1.left_bumper);
 
         // SHOOTER
-        // shootBack.update(gamepad2.left_trigger >= 0.5);
-        // shootFront.update(gamepad2.left_bumper);
+        shootBack.update(gamepad1.left_trigger >= 0.5);
+        shootFront.update(gamepad1.left_bumper);
         //pidShoot.update(gamepad2.right_bumper);
 
         // failSafeReset.update(gamepad1.dpad_down);
