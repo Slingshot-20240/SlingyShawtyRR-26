@@ -1,29 +1,45 @@
-package org.firstinspires.ftc.teamcode.autonomous.LM1;
+package org.firstinspires.ftc.teamcode.autonomous.LM2;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.SleepAction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
-import org.firstinspires.ftc.teamcode.subsystems.shooter.HoodAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
-import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterAction;
+import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 
-public class AutonSequencesLM1 {
+public class LM2FarSequences {
 
     Intake intake;
     Transfer transfer;
     Shooter shooter;
-    HardwareSequences hws;
+    LM2HardwareSequences hws;
 
-    AutonSequencesLM1(HardwareMap hardwareMap) {
+    LM2FarSequences(HardwareMap hardwareMap) {
         intake = new Intake(hardwareMap);
         transfer = new Transfer(hardwareMap);
         shooter = new Shooter(hardwareMap);
-        hws = new HardwareSequences(hardwareMap);
+        hws = new LM2HardwareSequences(hardwareMap);
+    }
+
+
+
+    public Action scorePreloads() {
+        return new SequentialAction(
+
+                intake.in(),
+                new SequentialAction(
+                        //TODO - Tune the time the flywheel tune to get to good speed
+                        new SleepAction(2.5),
+                        hws.transferUpFor(4)
+
+                )
+
+        );
     }
 
 
@@ -36,16 +52,14 @@ public class AutonSequencesLM1 {
      * Hood is angled to shoot position
      */
     public Action scoreSet() {
-        return new ParallelAction(
-                //TODO - not done 🥀 rip lock tf in ishaan quit slacking
+        return new SequentialAction(
 
                 intake.in(),
                 new SequentialAction(
-                        new ShooterAction(shooter.outtake, 0.8),
-                        new ParallelAction(
-                                new HoodAction(shooter.variableHoodL, shooter.variableHoodR, 0.5),
-                                transfer.on()
-                        )
+                        //TODO - Tune the time the flywheel tune to get to good speed
+                        new SleepAction(1),
+                        hws.transferUpFor(4)
+
                 )
 
         );
@@ -58,21 +72,15 @@ public class AutonSequencesLM1 {
      * Intakes while transfer
      */
     public Action intakeSet() {
-        return new ParallelAction(
-                intake.in(),
-                hws.transferUpFor(3)
+        return new SequentialAction(
+                new ParallelAction(
+                        intake.in(),
+                        transfer.hotdog()
+                )
+
         );
     }
 
-    /**
-     * Intake in while transfer
-     */
-    public Action prepareForSet(long intakeTime, long transferTime) {
-        return new ParallelAction(
-                hws.intakeInFor(intakeTime),
-                hws.transferUpFor(transferTime)
-        );
-    }
 
 }
 

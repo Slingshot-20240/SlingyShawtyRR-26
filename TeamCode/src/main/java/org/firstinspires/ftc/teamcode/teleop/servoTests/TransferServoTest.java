@@ -1,15 +1,18 @@
 package org.firstinspires.ftc.teamcode.teleop.servoTests;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 
+@Config
 @TeleOp(group = "transfer servo tests")
 public class TransferServoTest extends OpMode {
     Robot robot;
-    public static double servoPos = 0;
+    public static double servoPosF = 0;
+    public static double servoPosB = 0;
     GamepadMapping controls;
 
     @Override
@@ -20,7 +23,7 @@ public class TransferServoTest extends OpMode {
 
     @Override
     public void loop() {
-        robot.transfer.transferL.setPower(-servoPos);
-        robot.transfer.transferR.setPower(servoPos);
+        robot.transfer.frontTransfer.setPower(servoPosF);
+        robot.transfer.backTransfer.setPower(servoPosB);
     }
 }

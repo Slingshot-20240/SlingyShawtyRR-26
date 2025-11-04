@@ -7,7 +7,7 @@ public class GamepadMapping {
     private final Gamepad gamepad1;
     private final Gamepad gamepad2;
 
-    // DRIVETRAIN
+    // DRIVETRAIN - LM1
     // --------------
     public static double drive = 0.0;
     public static double strafe = 0.0;
@@ -19,13 +19,12 @@ public class GamepadMapping {
     // SHOOTER
     public Toggle pidShoot;
     public Toggle shootBack;
-    public Toggle shootTriangle;
-
-    // PARK
-    public Toggle park;
+    public Toggle shootFront;
 
     // MISC
-    public Toggle failSafeReset;
+    // public Toggle failSafeReset;
+    public Toggle transfer; // LM1
+    public Toggle outtake; // LM1
 
     public GamepadMapping(Gamepad gamepad1, Gamepad gamepad2) {
         // GAMEPADS
@@ -36,16 +35,14 @@ public class GamepadMapping {
         intake = new Toggle(false);
 
         // SHOOTER
-        shootBack = new Toggle(false);
-        shootTriangle = new Toggle(false);
-        pidShoot = new Toggle(false);
-
-        // PARK
-        // TODO: Match to a button
-        park = new Toggle(false);
+        // shootBack = new Toggle(false);
+        // shootFront = new Toggle(false);
+        // pidShoot = new Toggle(false);
 
         // MISC
-        failSafeReset = new Toggle(false);
+        // failSafeReset = new Toggle(false);
+        transfer = new Toggle(false);
+        outtake = new Toggle(false);
     }
 
     public void joystickUpdate() {
@@ -57,14 +54,20 @@ public class GamepadMapping {
     public void update() {
         joystickUpdate();
         // INTAKE
-        intake.update(gamepad1.left_bumper);
+        // intake.update(gamepad1.left_bumper);
 
         // SHOOTER
-        shootBack.update(gamepad1.right_trigger >= 0.5);
-        shootTriangle.update(gamepad1.left_trigger >= 0.5);
-        pidShoot.update(gamepad1.right_bumper);
+        shootBack.update(gamepad1.left_trigger >= 0.5);
+        shootFront.update(gamepad1.left_bumper);
+        //pidShoot.update(gamepad2.right_bumper);
 
-        failSafeReset.update(gamepad2.dpad_down);
+        // failSafeReset.update(gamepad1.dpad_down);
+
+        // TRANSFER
+        transfer.update(gamepad1.dpad_up);
+
+        // OUTTAKE
+        outtake.update(gamepad1.right_bumper);
     }
 
     public void resetMultipleControls(Toggle... toggles) {

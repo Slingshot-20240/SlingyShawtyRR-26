@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.teleop.mechTests;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 
+@Config
 @TeleOp(group = "intake mech tests")
 public class IntakeTest extends OpMode {
     Robot robot;
@@ -20,6 +22,6 @@ public class IntakeTest extends OpMode {
 
     @Override
     public void loop() {
-        robot.intake.intake.setPower(power);
+        robot.intake.intakeOn();
     }
 }

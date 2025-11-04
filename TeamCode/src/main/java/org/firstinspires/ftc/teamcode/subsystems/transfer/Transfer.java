@@ -5,19 +5,17 @@ import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Transfer {
-    public final CRServo transferL;
-    public final CRServo transferR;
+    public final CRServo backTransfer;
+    public final CRServo frontTransfer;
 
 
     public Transfer(HardwareMap hardwareMap) {
-        transferL = hardwareMap.get(CRServo.class, "transferL");
-        transferR = hardwareMap.get(CRServo.class, "transferR");
+        backTransfer = hardwareMap.get(CRServo.class, "transferB");
+        frontTransfer = hardwareMap.get(CRServo.class, "transferF");
 
-        transferL.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     //----------------------------Up----------------------------------\\
@@ -25,8 +23,8 @@ public class Transfer {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            transferL.setPower(1.0);
-            transferR.setPower(1.0);
+            backTransfer.setPower(-1.0);
+            frontTransfer.setPower(1.0);
             return false;
         }
     }
@@ -39,8 +37,8 @@ public class Transfer {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            transferL.setPower(0);
-            transferR.setPower(0);
+            backTransfer.setPower(0);
+            frontTransfer.setPower(0);
             return false;
         }
     }
@@ -51,15 +49,48 @@ public class Transfer {
     //-----------------------------Down--------------------------------------\\
     public class TransferDown implements Action {
 
+        //Changed in git online lol, to not set power full when transfer down. 
+        //Most likely down will only be used for flow of balls etc. 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            transferL.setPower(-1.0);
-            transferR.setPower(-1.0);
+            backTransfer.setPower(0.4);
+            frontTransfer.setPower(-0.4);
             return false;
         }
     }
     public Action down() {
         return new TransferDown();
+    }
+
+    //-----------------------------Hotdog--------------------------------------\\
+    public class TransferHotdog implements Action {
+
+        //Changed in git online lol, to not set power full when transfer down.
+        //Most likely down will only be used for flow of balls etc.
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            backTransfer.setPower(-1);
+            frontTransfer.setPower(0.06);
+            return false;
+        }
+    }
+    public Action hotdog() {
+        return new TransferHotdog();
+    }
+
+    public void transferOn() {
+        backTransfer.setPower(-1.0);
+        frontTransfer.setPower(1.0);
+    }
+
+    public void transferOff() {
+        backTransfer.setPower(0);
+        frontTransfer.setPower(0);
+    }
+
+    public void hotDog() {
+        backTransfer.setPower(1);
+        frontTransfer.setPower(0.15);
     }
 
 }

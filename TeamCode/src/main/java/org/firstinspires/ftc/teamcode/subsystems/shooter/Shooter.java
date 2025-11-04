@@ -10,29 +10,26 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Shooter {
-    public final DcMotorEx outtake;
-    public final Servo variableHoodL;
-    public final Servo variableHoodR;
+    public final DcMotorEx outtake1;
+    public final DcMotorEx outtake2;
+    public final Servo variableHood;
 
     public Shooter(HardwareMap hardwareMap) {
-        outtake = hardwareMap.get(DcMotorEx.class, "outtake");
-        outtake.setDirection(DcMotorSimple.Direction.REVERSE);
+        outtake1 = hardwareMap.get(DcMotorEx.class, "outtake1");
+        outtake2 = hardwareMap.get(DcMotorEx.class, "outtake2");
+        outtake1.setVelocityPIDFCoefficients(575,0,0,70);
+        outtake2.setVelocityPIDFCoefficients(575,0,0,70);
+        outtake1.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        outtake.setVelocityPIDFCoefficients(0,0,0,0);
-
-        variableHoodR = hardwareMap.get(Servo.class, "variableHoodR");
-        variableHoodL = hardwareMap.get(Servo.class, "variableHoodL");
-
-        variableHoodL.setDirection(Servo.Direction.FORWARD);
-        variableHoodR.setDirection(Servo.Direction.REVERSE);
+        variableHood = hardwareMap.get(Servo.class, "variableHood");
     }
 
     public enum outtakeVels {
         PID_SHOOT(shootVel),
         // 5.059
-        HARDCODED_SHOOT_TRIANGLE(convertVelToRPM(Math.sqrt(H * g + g * Math.sqrt(Math.pow(front_dist, 2) + Math.pow(H, 2))))),
+        HARDCODED_SHOOT_FRONT(-1120),
         // 5.954
-        HARDCODED_SHOOT_BACK(convertVelToRPM(Math.sqrt(H * g + g * Math.sqrt(Math.pow(back_dist, 2) + Math.pow(H, 2))))),
+        HARDCODED_SHOOT_BACK(-1420),
         IDLE(0);
 
         private final double outtake_vels;
@@ -46,15 +43,14 @@ public class Shooter {
     }
 
     //-----------------Math-----------------\\
-    private static final double launchHeight = 0; // TODO update this with CAD
+    private static final double launchHeight = .280; // meters
     private static final double g = 9.81;
     private static final double H = .39 - launchHeight; // y distance, m distance from launch height to a little above hole on goal
     private static double shootVel;
     private static double R; // TODO: update R with April Tag value
 
     // Hardcoded distances from tip of triangle points to the middle of the goal (meters)
-    // TODO: ADJUST FOR ROBOT DIMENSIONS
-    static double front_dist = 2.1844;
+    static double front_dist = 2.1844 ;
     static double back_dist = 3.2004;
 
     public double calculateShooterVel() {
@@ -68,8 +64,8 @@ public class Shooter {
     }
 
     public static double convertVelToRPM(double vel) {
-        double newVel = (vel * 60) / 2 * .096 * Math.PI; // vel in RPM
-        return newVel/6000;
+        double newVel = (vel * 60) / .086 * Math.PI; // vel in RPM
+        return -newVel/6000;
     }
 
     // HOOD ANGLE CALCULATIONS - TODO: ASK RUPAL
@@ -80,7 +76,7 @@ public class Shooter {
         hoodAngle = Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * R)) / 2 * Math.PI;
         return hoodAngle;
     }
-    //Added by Ishaan idk if its right
+
     public static double getShootVel() {
         return shootVel;
     }
@@ -93,7 +89,10 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setPower(0);
+            outtake1.setVelocityPIDFCoefficients(575,0,0,70);
+            outtake2.setVelocityPIDFCoefficients(575,0,0,70);
+            outtake1.setVelocity(0);
+            outtake2.setVelocity(0);
             return false;
         }
     }
@@ -106,7 +105,10 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake.setPower(-1.0);
+            outtake1.setVelocityPIDFCoefficients(575,0,0,70);
+            outtake2.setVelocityPIDFCoefficients(575,0,0,70);
+            outtake1.setVelocity(-1020);
+            outtake2.setVelocity(-1020);
             return false;
         }
     }
@@ -115,31 +117,31 @@ public class Shooter {
     }
 //-------------------------------------------------------------------------------
 
-    public void setShooterPower(double power) {
-        outtake.setPower(power);
+
+
+
+    public void setShooterVelocity(double velo) {
+        outtake1.setVelocity(velo);
     }
 
     public void setHoodAngle(double angle) {
-        variableHoodL.setPosition(angle);
-        variableHoodR.setPosition(angle);
+        variableHood.setPosition(angle);
     }
 
     public void hoodToBackTriPos() {
-        variableHoodR.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * back_dist)) / 2 * Math.PI);
-        variableHoodL.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * back_dist)) / 2 * Math.PI);
+        variableHood.setPosition(.65);
     }
 
     public void hoodToFrontTriPos() {
-        variableHoodR.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * front_dist)) / 2 * Math.PI);
-        variableHoodL.setPosition(Math.atan(Math.pow(Shooter.getShootVel(), 2)/(g * front_dist)) / 2 * Math.PI);
+        variableHood.setPosition(.3);
     }
 
     public void shootFromBack() {
-        outtake.setPower(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
+        outtake1.setVelocity(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
     }
 
     public void shootFromFront() {
-        outtake.setPower(outtakeVels.HARDCODED_SHOOT_TRIANGLE.getOuttakeVel());
+        outtake1.setVelocity(outtakeVels.HARDCODED_SHOOT_FRONT.getOuttakeVel());
     }
 
 }

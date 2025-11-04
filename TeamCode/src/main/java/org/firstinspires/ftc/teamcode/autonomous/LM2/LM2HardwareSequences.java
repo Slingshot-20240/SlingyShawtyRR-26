@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autonomous.LM1;
+package org.firstinspires.ftc.teamcode.autonomous.LM2;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.SequentialAction;
@@ -11,13 +11,13 @@ import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 //TODO - GUYS TRY TYPING "HARDWARE SEQUENCES"
 // ISN'T IT SO COOL AND SATISFYING HOW YOUR LEFT HAND TYPES IT ALL WOW!! heh anyway back to coding rip
-public class HardwareSequences {
+public class LM2HardwareSequences {
 
     Intake intake;
     Transfer transfer;
     Shooter shooter;
 
-    HardwareSequences(HardwareMap hardwareMap) {
+    LM2HardwareSequences(HardwareMap hardwareMap) {
         intake = new Intake(hardwareMap);
         transfer = new Transfer(hardwareMap);
         shooter = new Shooter(hardwareMap);
@@ -34,7 +34,7 @@ public class HardwareSequences {
         );
     }
 
-    public Action transferUpFor(long time) {
+    public Action transferUpFor(double time) {
         return new SequentialAction(
                 transfer.on(),
                 new SleepAction(time),
