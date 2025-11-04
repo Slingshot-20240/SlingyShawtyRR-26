@@ -19,14 +19,14 @@ public class BlueFarAuton {
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(61.5, -14, Math.toRadians(180)))
                 .waitSeconds(2)
                 //score preloads
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(210))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201))
                 .waitSeconds(6.3)
 
                 //grab set 1
                 .splineTo(new Vector2d(36,-45),Math.toRadians(270))
                 .splineTo(new Vector2d(36,-62),Math.toRadians(270))
                 //score set 1
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(210))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201))
                 .waitSeconds(4.5)
 
                 //grab set 2
@@ -34,7 +34,7 @@ public class BlueFarAuton {
                 .strafeToLinearHeading(new Vector2d(12.3,-62),Math.toRadians(270))
 
                 //score set 1
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(210))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201))
                 .waitSeconds(4.5)
 
                 //park

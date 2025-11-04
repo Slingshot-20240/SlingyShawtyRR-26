@@ -27,23 +27,15 @@ public class LM2FarSequences {
     }
 
 
-    public Action preparePreloads() {
-        return new ParallelAction(
-                intake.in(),
-                //shooter.out()
-                new ShooterAction(shooter.outtake1, -1387)
 
-        );
-    }
     public Action scorePreloads() {
         return new SequentialAction(
 
                 intake.in(),
                 new SequentialAction(
                         //TODO - Tune the time the flywheel tune to get to good speed
-                        new SleepAction(6),
-                        hws.transferUpFor(7)
-                        //hws.transferUpFor(5)
+                        new SleepAction(2.5),
+                        hws.transferUpFor(4)
 
                 )
 
@@ -60,14 +52,13 @@ public class LM2FarSequences {
      * Hood is angled to shoot position
      */
     public Action scoreSet() {
-        return new ParallelAction(
+        return new SequentialAction(
 
                 intake.in(),
                 new SequentialAction(
                         //TODO - Tune the time the flywheel tune to get to good speed
                         new SleepAction(1),
-                        hws.transferUpFor(7),
-                        shooter.idle()
+                        hws.transferUpFor(4)
 
                 )
 
@@ -83,26 +74,13 @@ public class LM2FarSequences {
     public Action intakeSet() {
         return new SequentialAction(
                 new ParallelAction(
-                        transfer.hotdog(),
-                        intake.in()
-                        //TODO - Tune this transfer value to determine how high up the first ball goes
-                        // transfer.hotdog()
+                        intake.in(),
+                        transfer.hotdog()
                 )
-                //shooter.out()
 
         );
     }
 
-    /**
-     * Intake in while transfer
-     */
-    public Action prepareForSet() {
-        return new ParallelAction(
-                intake.in(),
-                transfer.hotdog(),
-                shooter.out()
-        );
-    }
 
 }
 
