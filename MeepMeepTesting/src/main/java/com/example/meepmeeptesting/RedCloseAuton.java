@@ -21,7 +21,7 @@ public class RedCloseAuton {
                 .waitSeconds(2)
                 //preload
                 .strafeToLinearHeading(new Vector2d(-24, 24), Math.toRadians(-225))
-                .waitSeconds(7)
+                .waitSeconds(6)
 
                 // Set 1
                 //grab set 1
@@ -35,15 +35,12 @@ public class RedCloseAuton {
                 // Set 2
                 //grab set 2
                 .strafeToLinearHeading(new Vector2d(12, 22), Math.toRadians(-270))
-                .strafeToLinearHeading(new Vector2d(12.3, 55), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(12.3, 60), Math.toRadians(-270))
                 .strafeToLinearHeading(new Vector2d(12.3, 49), Math.toRadians(-270))
 
                 //score set 2
-                .strafeToLinearHeading(new Vector2d(-24, 24), Math.toRadians(-225))
-                .waitSeconds(4.5)
+                .strafeToLinearHeading(new Vector2d(-44, 24), Math.toRadians(-245))
 
-                // Park
-                .strafeToLinearHeading(new Vector2d(-48, -24), Math.toRadians(180))
 
                 .build());
         meepMeep.setBackground(MeepMeep.Background.FIELD_DECODE_JUICE_DARK)
