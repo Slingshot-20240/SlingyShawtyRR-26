@@ -29,9 +29,7 @@ public class LM2CloseSequences {
 
     public Action preparePreloads() {
         return new ParallelAction(
-                intake.in(),
-                //shooter.out()
-                new ShooterAction(shooter.outtake1, -945)
+                intake.in()
 
         );
     }
