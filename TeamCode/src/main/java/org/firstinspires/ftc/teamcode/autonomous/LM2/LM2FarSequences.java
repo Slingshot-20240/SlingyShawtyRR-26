@@ -27,49 +27,30 @@ public class LM2FarSequences {
     }
 
 
-
-    public Action scorePreloads() {
+    public Action scoreSet(double speedUpTime, double transferTime) {
         return new SequentialAction(
 
                 intake.in(),
                 new SequentialAction(
-                        //TODO - Tune the time the flywheel tune to get to good speed
-                        new SleepAction(2.5),
-                        hws.transferUpFor(4)
-
-                )
-
-        );
-    }
-
-
-
-    public Action scoreSet() {
-        return new SequentialAction(
-
-                intake.in(),
-                new SequentialAction(
-                        //TODO - Tune the time the flywheel tune to get to good speed
-                        new SleepAction(0.5),
+                        //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
+                        new SleepAction(speedUpTime),
                         //TODO - Tune the transfer time to shoot 3 balls
-                        hws.transferUpFor(4)
+                        hws.transferUpFor(transferTime),
+
                 )
 
         );
     }
 
 
-    //TODO - for both intakeSet AND prepare for Set should we hardcode values here or keep parameters
-    // because then they would both be the same function, intaking while transferring
     /**
-     * Intakes while transfer
+     * Intakes while hotdogging
      */
-    public Action intakeSet() {
-        return new SequentialAction(
-                new ParallelAction(
-                        intake.in(),
-                        transfer.hotdog()
-                )
+    public Action intakeSet(int shooterPower) {
+        return new ParallelAction(
+                intake.in(),
+                transfer.hotdog(),
+                new ShooterAction(shooter.outtake1, shooter.outtake2, shooterPower)
 
         );
     }

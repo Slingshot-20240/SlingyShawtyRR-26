@@ -85,48 +85,52 @@ public class LM2BlueFarAuton extends LinearOpMode {
 
         Actions.runBlocking(
                 new SequentialAction(
-                        intake.in(),
 
-                    //--------Preloads--------\\
+                //--------Preloads--------\\
                         //Shoot Preloads
                         new ParallelAction(
                                 scorePreload,
                                 //SHOOTER FIRST SET SPEED
-                                new ShooterAction(shooter.outtake1, shooter.outtake2, -1387)
+                                acl.intakeSet(1387)
                         ),
-                        acl.scorePreloads(),
+                        //TODO - Tune the time the flywheel takes to get to good speed for preload
+                        acl.scoreSet(3,4),
 
 
 
-                    //--------Set 2--------\\
+                //--------Set 2--------\\
                         //Grab Set 2
                         new ParallelAction(
                                 grabSet2,
-                                acl.intakeSet(),
                                 //SHOOTER SECOND SET SPEED
-                                new ShooterAction(shooter.outtake1, shooter.outtake2, -1387)
-                        ),
-
-                        //Shoot Set 1
-                        new SequentialAction(
-                                scoreSet2,
-                                acl.scoreSet()
-                        ),
-
-                    //--------Set 3--------\\
-                        //Grab Set 3
-                        new ParallelAction(
-                                grabSet3,
-                                acl.intakeSet(),
-                                //SHOOTER 3RD SET SPEED
-                                new ShooterAction(shooter.outtake1, shooter.outtake2, -1387)
+                                acl.intakeSet(1387)
                         ),
 
                         //Shoot Set 2
                         new SequentialAction(
-                                scoreSet3,
-                                acl.scoreSet()
+                                scoreSet2,
+                                //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
+                                //****IF 0.3 WORKS TRY 0!!!
+                                acl.scoreSet(0.3,4)
                         ),
+
+                //--------Set 3--------\\
+                        //Grab Set 3
+                        new ParallelAction(
+                                grabSet3,
+                                //SHOOTER 3RD SET SPEED
+                                acl.intakeSet(1387)
+                        ),
+
+                        //Shoot Set 3
+                        new SequentialAction(
+                                scoreSet3,
+                                //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
+                                //****IF 0.3 WORKS TRY 0!!!
+                                acl.scoreSet(0.3,4)
+                        ),
+
+                //---------Park---------\\
                         park
 
 
