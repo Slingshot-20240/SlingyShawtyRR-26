@@ -40,10 +40,8 @@ public class LM2CloseSequences {
                 new SequentialAction(
                         //TODO - Tune the time the flywheel tune to get to good speed
                         new SleepAction(3.3),
-                        hws.transferUpFor(2),
-                        //new HoodAction(shooter.variableHood, 0.22),
-                        hws.transferUpFor(5)
-                        //shooter.idle()
+                        hws.transferUpFor(4)
+
 
                 )
 
@@ -66,8 +64,8 @@ public class LM2CloseSequences {
                 intake.in(),
                 new SequentialAction(
                         //TODO - Tune the time the flywheel tune to get to good speed
-                        new SleepAction(2),
-                        hws.transferUpFor(6.7),
+                        new SleepAction(0.5),
+                        hws.transferUpFor(4),
                         shooter.idle()
 
                 )
