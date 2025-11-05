@@ -26,7 +26,11 @@ public class LM2FarSequences {
         hws = new LM2HardwareSequences(hardwareMap);
     }
 
-
+     /**
+      * Runs the Intake
+      * Then waits for @speedUpTime
+      * Then transfers for @transferTime
+      */
     public Action scoreSet(double speedUpTime, double transferTime) {
         return new SequentialAction(
 
@@ -35,7 +39,7 @@ public class LM2FarSequences {
                         //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
                         new SleepAction(speedUpTime),
                         //TODO - Tune the transfer time to shoot 3 balls
-                        hws.transferUpFor(transferTime),
+                        hws.transferUpFor(transferTime)
 
                 )
 

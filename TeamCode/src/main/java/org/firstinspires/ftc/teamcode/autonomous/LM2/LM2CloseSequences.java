@@ -27,6 +27,11 @@ public class LM2CloseSequences {
     }
 
 
+     /**
+      * Runs the Intake
+      * Then waits for @speedUpTime
+      * Then transfers for @transferTime
+      */
     public Action scoreSet(double speedUpTime, double transferTime) {
         return new SequentialAction(
 
@@ -35,7 +40,7 @@ public class LM2CloseSequences {
                         //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
                         new SleepAction(speedUpTime),
                         //TODO - Tune the transfer time to shoot 3 balls
-                        hws.transferUpFor(transferTime),
+                        hws.transferUpFor(transferTime)
 
                 )
 
@@ -44,7 +49,7 @@ public class LM2CloseSequences {
 
 
     /**
-     * Intakes while hotdogging
+     * Runs the Intake while hotdogging
      */
     public Action intakeSet(int shooterPower) {
         return new ParallelAction(
