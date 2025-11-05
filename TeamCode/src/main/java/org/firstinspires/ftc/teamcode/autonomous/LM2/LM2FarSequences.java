@@ -43,23 +43,16 @@ public class LM2FarSequences {
     }
 
 
-    /**
-     * Code todo
-     * keep in mind to wait between each shot
-     * how do we figure out if a ball has been shot or not with CR servo
-     * Transfer only turns on once shooter power has been set
-     * Intake power runs constantly
-     * Hood is angled to shoot position
-     */
+
     public Action scoreSet() {
         return new SequentialAction(
 
                 intake.in(),
                 new SequentialAction(
                         //TODO - Tune the time the flywheel tune to get to good speed
-                        new SleepAction(1),
+                        new SleepAction(0.5),
+                        //TODO - Tune the transfer time to shoot 3 balls
                         hws.transferUpFor(4)
-
                 )
 
         );

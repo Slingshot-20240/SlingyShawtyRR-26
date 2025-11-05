@@ -104,7 +104,7 @@ public class LM2BlueFarAuton extends LinearOpMode {
                                 grabSet2,
                                 acl.intakeSet(),
                                 //SHOOTER SECOND SET SPEED
-                                new ShooterAction(shooter.outtake1, shooter.outtake2, -1390)
+                                new ShooterAction(shooter.outtake1, shooter.outtake2, -1387)
                         ),
 
                         //Shoot Set 1
@@ -119,7 +119,7 @@ public class LM2BlueFarAuton extends LinearOpMode {
                                 grabSet3,
                                 acl.intakeSet(),
                                 //SHOOTER 3RD SET SPEED
-                                new ShooterAction(shooter.outtake1, shooter.outtake2, -1390)
+                                new ShooterAction(shooter.outtake1, shooter.outtake2, -1387)
                         ),
 
                         //Shoot Set 2
