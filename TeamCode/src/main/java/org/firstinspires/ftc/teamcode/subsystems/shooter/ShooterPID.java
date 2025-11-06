@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -45,6 +46,8 @@ public class ShooterPID extends OpMode {
 
         flywheel1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         flywheel2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        flywheel2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         fsm = new FSM(hardwareMap, controls);
     }
@@ -88,8 +91,8 @@ public class ShooterPID extends OpMode {
         // Telemetry
         dashboardTelemetry.addData("Target (ticks/s): ", targetVel);
         dashboardTelemetry.addData("Actual (ticks/s): ", actualVel);
-        dashboardTelemetry.addData("Encoder:", flywheel1.getCurrentPosition());
-        dashboardTelemetry.addData("Encoder:", flywheel2.getCurrentPosition());
+        dashboardTelemetry.addData("Encoder1:", flywheel1.getCurrentPosition());
+        dashboardTelemetry.addData("Encoder2:", flywheel2.getCurrentPosition());
         dashboardTelemetry.update();
 
         // sleep(20);
