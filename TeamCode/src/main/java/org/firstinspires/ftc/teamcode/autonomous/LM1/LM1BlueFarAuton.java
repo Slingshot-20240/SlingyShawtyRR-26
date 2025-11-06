@@ -100,7 +100,7 @@ public class LM1BlueFarAuton extends LinearOpMode {
                                         grabSet1,
                                         acl.intakeSet(),
                                         //start spinning up shooter
-                                        new ShooterAction(shooter.outtake1, -1390)
+                                        new ShooterAction(shooter.outtake1, shooter.outtake2, -1390)
                                 )
                         ),
 
