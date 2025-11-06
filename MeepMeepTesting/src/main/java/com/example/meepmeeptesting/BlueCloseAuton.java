@@ -20,7 +20,7 @@ public class BlueCloseAuton {
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-55, -45, Math.toRadians(180-37)))
                 .waitSeconds(2)
                 //preload
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
                 .waitSeconds(6)
 
             // Set 1
@@ -29,7 +29,7 @@ public class BlueCloseAuton {
                 .strafeToLinearHeading(new Vector2d(-12, -53), Math.toRadians(270))
 
                 //score set 1
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
                 .waitSeconds(4.5)
 
             // Set 2

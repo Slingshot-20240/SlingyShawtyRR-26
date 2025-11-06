@@ -14,10 +14,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
+import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 @Config
-@Autonomous(name = "Blue CLOSE Auton", group = "Autonomous")
+@Autonomous(name = "9 Blue CLOSE Auton", group = "Autonomous")
 public class LM2BlueCloseAuton extends LinearOpMode {
 
 
@@ -36,23 +37,33 @@ public class LM2BlueCloseAuton extends LinearOpMode {
 //-----------------Pathing Actions-----------------\\
         // Score Preload
         Action scorePreload = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
-                .build();
-
-        // Set 1
-        Action prepareSet1 = drive.actionBuilder(new Pose2d(-25, -25, Math.toRadians(225))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270),
-                        new TranslationalVelConstraint(70)) // prepareSet1Pose
-                .build();
-
-        Action grabSet1 = drive.actionBuilder(new Pose2d(-11, -22, Math.toRadians(270))) // ends of prepareSet1
-                .strafeToLinearHeading(new Vector2d(-12, -51.5), Math.toRadians(270)) // grabSet1Pose
-                .build();
-
-        Action scoreSet1 = drive.actionBuilder(new Pose2d(-12, -51.5, Math.toRadians(270))) // ends of grabSet1
                 .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
                 .build();
 
+        // Set 1
+        Action grabSet2 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scorePreload
+                .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270),
+                        new TranslationalVelConstraint(70)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(-12, -52), Math.toRadians(270)) // grabSet1Pose
+                .build();
+
+
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(-12, -52, Math.toRadians(270))) // ends of grabSet1
+                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
+                .build();
+
+
+        // Set 2
+        Action grabSet3 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scorePreload
+                .strafeToLinearHeading(new Vector2d(12, -22), Math.toRadians(270),
+                        new TranslationalVelConstraint(70))
+                .strafeToLinearHeading(new Vector2d(12.3, -60), Math.toRadians(270))
+                .build();
+
+
+        Action scoreSet3 = drive.actionBuilder(new Pose2d(-12.3, -60, Math.toRadians(270))) // ends of grabSet1
+                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
+                .build();
 
 
         // Park
@@ -81,34 +92,52 @@ public class LM2BlueCloseAuton extends LinearOpMode {
 
                 //--------Preloads--------\\
                         //Shoot Preloads
-                         new ParallelAction(
+                        new ParallelAction(
                                 scorePreload,
-                                acl.preparePreloads()
+                                //SHOOTER FIRST SET SPEED
+                                acl.intakeSet(1020)
                         ),
-                        acl.scorePreloads(),
+                        //TODO - Tune the time the flywheel takes to get to good speed for preload
+                        acl.scoreSet(2,4),
 
 
 
-                //--------Set 1--------\\
-                        //Grab Set 1
+                //--------Set 2--------\\
+                        //Grab Set 2
+                        new ParallelAction(
+                                grabSet2,
+                                //SHOOTER SECOND SET SPEED
+                                acl.intakeSet(1020)
+                        ),
+
+                        //Shoot Set 2
                         new SequentialAction(
-                                prepareSet1,
-
-                                new ParallelAction(
-                                        //new HoodAction(shooter.variableHood,0.3),
-                                        grabSet1,
-                                        acl.intakeSet(),
-                                        //start spinning up shooter
-                                        shooter.out()
-                                )
+                                scoreSet2,
+                                //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
+                                //****IF 0.1 WORKS TRY 0!!!
+                                acl.scoreSet(0.1,4)
                         ),
 
-                        //Shoot Set 1
+                //--------Set 3--------\\
+                        //Grab Set 3
+                        new ParallelAction(
+                                grabSet3,
+                                //SHOOTER 3RD SET SPEED
+                                acl.intakeSet(1020)
+                        ),
+
+                        //Shoot Set 3
                         new SequentialAction(
-                                scoreSet1,
-                                acl.scoreSet()
+                                scoreSet3,
+                                //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
+                                //****IF 0.1 WORKS TRY 0!!!
+                                acl.scoreSet(0.1,4)
                         ),
+
+                //---------Park---------\\
                         park
+
+
                 )
         );
 
