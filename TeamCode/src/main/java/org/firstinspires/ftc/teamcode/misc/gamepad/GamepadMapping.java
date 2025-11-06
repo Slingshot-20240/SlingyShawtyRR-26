@@ -35,8 +35,8 @@ public class GamepadMapping {
         intake = new Toggle(false);
 
         // SHOOTER
-        // shootBack = new Toggle(false);
-        // shootFront = new Toggle(false);
+         shootBack = new Toggle(false);
+         shootFront = new Toggle(false);
         // pidShoot = new Toggle(false);
 
         // MISC
