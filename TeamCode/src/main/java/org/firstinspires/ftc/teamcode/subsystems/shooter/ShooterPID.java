@@ -91,8 +91,8 @@ public class ShooterPID extends OpMode {
         // Telemetry
         dashboardTelemetry.addData("Target (ticks/s): ", targetVel);
         dashboardTelemetry.addData("Actual (ticks/s): ", actualVel);
-        dashboardTelemetry.addData("Encoder:", flywheel1.getCurrentPosition());
-        dashboardTelemetry.addData("Encoder:", flywheel2.getCurrentPosition());
+        dashboardTelemetry.addData("Encoder1:", flywheel1.getCurrentPosition());
+        dashboardTelemetry.addData("Encoder2:", flywheel2.getCurrentPosition());
         dashboardTelemetry.update();
 
         // sleep(20);
