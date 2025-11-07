@@ -24,7 +24,7 @@ public class Transfer {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             backTransfer.setPower(-1.0);
-            frontTransfer.setPower(1.0);
+            frontTransfer.setPower(-1.0);
             return false;
         }
     }
@@ -54,7 +54,7 @@ public class Transfer {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             backTransfer.setPower(0.4);
-            frontTransfer.setPower(-0.4);
+            frontTransfer.setPower(0.4);
             return false;
         }
     }
@@ -70,7 +70,7 @@ public class Transfer {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             backTransfer.setPower(-1);
-            frontTransfer.setPower(0.06);
+            frontTransfer.setPower(-0.06);
             return false;
         }
     }
