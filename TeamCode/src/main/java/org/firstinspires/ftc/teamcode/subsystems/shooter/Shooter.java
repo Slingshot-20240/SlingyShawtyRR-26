@@ -17,8 +17,8 @@ public class Shooter {
     public Shooter(HardwareMap hardwareMap) {
         outtake1 = hardwareMap.get(DcMotorEx.class, "outtake1");
         outtake2 = hardwareMap.get(DcMotorEx.class, "outtake2");
-        outtake1.setVelocityPIDFCoefficients(575,0,0,70);
-        outtake2.setVelocityPIDFCoefficients(575,0,0,70);
+        outtake1.setVelocityPIDFCoefficients(600,0,0,40);
+        outtake2.setVelocityPIDFCoefficients(600,0,0,40);
         outtake1.setDirection(DcMotorSimple.Direction.FORWARD);
 
         variableHood = hardwareMap.get(Servo.class, "variableHood");
@@ -29,7 +29,7 @@ public class Shooter {
         // 5.059
         HARDCODED_SHOOT_FRONT(-1120),
         // 5.954
-        HARDCODED_SHOOT_BACK(-1420),
+        HARDCODED_SHOOT_BACK(-1400),
         IDLE(0);
 
         private final double outtake_vels;
@@ -105,8 +105,8 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake1.setVelocityPIDFCoefficients(575,0,0,70);
-            outtake2.setVelocityPIDFCoefficients(575,0,0,70);
+            outtake1.setVelocityPIDFCoefficients(600,0,0,40);
+            outtake2.setVelocityPIDFCoefficients(600,0,0,40);
             outtake1.setVelocity(-1020);
             outtake2.setVelocity(-1020);
             return false;

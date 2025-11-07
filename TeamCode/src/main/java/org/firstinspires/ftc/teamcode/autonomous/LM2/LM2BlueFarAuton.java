@@ -15,7 +15,6 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
-import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 
 @Config
 @Autonomous(name = "9 Blue FAR Auton", group = "Autonomous")

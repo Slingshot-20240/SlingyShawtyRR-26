@@ -19,8 +19,8 @@ public class ShooterAction implements Action {
 
     @Override
     public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-        outtake1.setVelocityPIDFCoefficients(575,0,0,70);
-        outtake2.setVelocityPIDFCoefficients(575,0,0,70);
+        outtake1.setVelocityPIDFCoefficients(600,0,0,40);
+        outtake2.setVelocityPIDFCoefficients(600,0,0,40);
         outtake1.setVelocity(-outtakeVel);
         outtake2.setVelocity(-outtakeVel);
         return false;

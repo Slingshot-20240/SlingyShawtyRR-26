@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.subsystems.shooter;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -23,8 +24,8 @@ public class ShooterPID extends OpMode {
 //test
     DcMotorEx flywheel1;
     DcMotorEx flywheel2;
-    public static double p1 = 578, i1 = 0.0, d1 = 0.0, f1 = 70;
-    public static double p2 = 578, i2 = 0.0, d2 = 0.0, f2 = 70;
+    public static double p1 = 600, i1 = 0.0, d1 = 0.0, f1 = 40;
+    //public static double p2 = 578, i2 = 0.0, d2 = 0.0, f2 = 70;
     public static int targetVel = -1095;
     private Telemetry dashboardTelemetry;
     Robot robot;
@@ -39,8 +40,8 @@ public class ShooterPID extends OpMode {
         flywheel2 = hardwareMap.get(DcMotorEx.class, "outtake2");
  
         // Set PIDF (start with defaults, tune later)
-        flywheel1.setVelocityPIDFCoefficients(578, 0, 0, 70);
-        flywheel2.setVelocityPIDFCoefficients(578, 0, 0, 70);
+        flywheel1.setVelocityPIDFCoefficients(600, 0, 0, 40);
+        flywheel2.setVelocityPIDFCoefficients(600, 0, 0, 40);
         controls = new GamepadMapping(gamepad1, gamepad2);
         robot = new Robot(hardwareMap, controls);
 
@@ -63,13 +64,11 @@ public class ShooterPID extends OpMode {
 
         //robot.intake.intakeOn();
 
-//        if (controls.transfer.locked()) {
-//            robot.transfer.transferOn();
-//        } else {
-//            robot.transfer.hotDog();
-//        }
-
-        robot.transfer.transferOn();
+        if (controls.transfer.locked()) {
+            robot.transfer.transferOn();
+        } else {
+            robot.transfer.hotDog();
+        }
 
         if (controls.outtake.locked()) {
             robot.intake.intakeReverse();
@@ -84,15 +83,17 @@ public class ShooterPID extends OpMode {
         flywheel1.setVelocity(targetVel);
         flywheel2.setVelocity(targetVel);
         flywheel1.setVelocityPIDFCoefficients(p1, i1, d1, f1);
-        flywheel2.setVelocityPIDFCoefficients(p2, i2, d2, f2);
+        flywheel2.setVelocityPIDFCoefficients(p1, i1, d1, f1);
 
         // Read actual velocity
-        double actualVel = flywheel1.getVelocity();
+        double actualVel1 = flywheel1.getVelocity();
+        double actualVel2 = flywheel2.getVelocity();
 
 
         // Telemetry
         dashboardTelemetry.addData("Target (ticks/s): ", targetVel);
-        dashboardTelemetry.addData("Actual (ticks/s): ", actualVel);
+        dashboardTelemetry.addData("Actual1 (ticks/s): ", actualVel1);
+        dashboardTelemetry.addData("Actual2 (ticks/s): ", actualVel2);
         dashboardTelemetry.addData("Encoder1:", flywheel1.getCurrentPosition());
         dashboardTelemetry.addData("Encoder2:", flywheel2.getCurrentPosition());
         dashboardTelemetry.update();

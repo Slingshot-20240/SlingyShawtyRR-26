@@ -59,7 +59,7 @@ public class FSM {
                 intake.intakeOn();
 
                 // move to new state
-                if (gamepad.transfer.value()) {
+                if (gamepad.transfer.locked()) {
                     transfer.transferOn();
                 } else {
                     // Hotdog the ball!
