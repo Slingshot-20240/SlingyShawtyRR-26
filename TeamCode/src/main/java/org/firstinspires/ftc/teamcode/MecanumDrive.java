@@ -44,7 +44,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.Roadrunner.Drawing;
 import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
 import org.firstinspires.ftc.teamcode.Roadrunner.PinpointLocalizer;
-import org.firstinspires.ftc.teamcode.Roadrunner.TwoDeadWheelLocalizer;
 import org.firstinspires.ftc.teamcode.Roadrunner.messages.DriveCommandMessage;
 import org.firstinspires.ftc.teamcode.Roadrunner.messages.MecanumCommandMessage;
 import org.firstinspires.ftc.teamcode.Roadrunner.messages.MecanumLocalizerInputsMessage;
@@ -78,8 +77,8 @@ public final class MecanumDrive {
 
 
         // path profile parameters (in inches)
-        public double maxWheelVel = 75;
-        public double minProfileAccel = -30;
+        public double maxWheelVel = 80;
+        public double minProfileAccel = -50;
         public double maxProfileAccel = 60;
 
         // turn profile parameters (in radians)
