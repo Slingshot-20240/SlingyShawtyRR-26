@@ -63,11 +63,13 @@ public class ShooterPID extends OpMode {
 
         //robot.intake.intakeOn();
 
-        if (controls.transfer.locked()) {
-            robot.transfer.transferOn();
-        } else {
-            robot.transfer.hotDog();
-        }
+//        if (controls.transfer.locked()) {
+//            robot.transfer.transferOn();
+//        } else {
+//            robot.transfer.hotDog();
+//        }
+
+        robot.transfer.transferOn();
 
         if (controls.outtake.locked()) {
             robot.intake.intakeReverse();
