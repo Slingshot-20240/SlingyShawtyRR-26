@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
 import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
-import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
+//import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
@@ -26,7 +26,7 @@ public class FSM {
     //private Turret turret;
     private final Transfer transfer;
     private final Shooter shooter;
-    private final Drivetrain drivetrain;
+    //private final Drivetrain drivetrain;
 
 
     public FSM(HardwareMap hardwareMap, GamepadMapping gamepad) {
@@ -38,12 +38,15 @@ public class FSM {
         transfer = robot.transfer;
         shooter = robot.shooter;
 
-        drivetrain = robot.drivetrain;
+        //drivetrain = robot.drivetrain;
     }
 
     public void update() {
         // Updates driver controls here as well
-        drivetrain.update();
+
+        //ISHAAN TOOK THIS OUT FOR NO REVERSING MOTOR CONFLICT WITH RR
+        //drivetrain.update();
+
         // Updates all other controls
         gamepad.update();
 
