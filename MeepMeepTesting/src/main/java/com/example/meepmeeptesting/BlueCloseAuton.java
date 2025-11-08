@@ -12,7 +12,7 @@ public class BlueCloseAuton {
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 14.8)
+                .setConstraints(80, 70, Math.toRadians(180), Math.toRadians(180), 14.8)
                 .build();
 
         //90 - 53 = 47. 47 + 180 will get you the red starting pos.
@@ -21,7 +21,7 @@ public class BlueCloseAuton {
                 .waitSeconds(2)
                 //preload
                 .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
-                .waitSeconds(6)
+                .waitSeconds(4)
 
             // Set 1
                 //grab set 1
@@ -30,7 +30,7 @@ public class BlueCloseAuton {
 
                 //score set 1
                 .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
-                .waitSeconds(4.5)
+                .waitSeconds(4)
 
             // Set 2
                 //grab set 2

@@ -134,6 +134,22 @@ public class LM2BlueCloseAuton extends LinearOpMode {
                                 acl.scoreSet(0.1,4)
                         ),
 
+                //--------Set 4--------\\
+                        //Grab Set 4
+                        new ParallelAction(
+                                grabSet4,
+                                //SHOOTER 3RD SET SPEED
+                                acl.intakeSet(1020)
+                        ),
+
+                        //Shoot Set 3
+                        new SequentialAction(
+                                scoreSet4,
+                                //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
+                                //****IF 0.1 WORKS TRY 0!!!
+                                acl.scoreSet(0.1,4)
+                        ),
+
                 //---------Park---------\\
                         park
 
