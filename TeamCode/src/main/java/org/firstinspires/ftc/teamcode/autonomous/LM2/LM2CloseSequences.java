@@ -55,7 +55,7 @@ public class LM2CloseSequences {
         return new ParallelAction(
                 intake.in(),
                 transfer.hotdog(),
-                new ShooterAction(shooter.outtake1, shooter.outtake2,shooterPower)
+                new ShooterAction(shooter.outtake1, shooter.outtake2, shooterPower)
 
         );
     }
