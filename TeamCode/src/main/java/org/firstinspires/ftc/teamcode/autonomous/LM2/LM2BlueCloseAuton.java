@@ -12,26 +12,20 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
-import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
-import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
-import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
+
 
 @Config
-@Autonomous(name = "9 Blue CLOSE Auton", group = "Autonomous")
+@Autonomous(name = "9 Blue CLOSE Auton new", group = "Autonomous")
 public class LM2BlueCloseAuton extends LinearOpMode {
 
 
     @Override
     public void runOpMode() {
         Pose2d initialPose = new Pose2d(-55, -45, Math.toRadians(143));
-
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
-        LM2CloseSequences acl = new LM2CloseSequences(hardwareMap);
-        LM2HardwareSequences hws = new LM2HardwareSequences(hardwareMap);
 
-        Intake intake = new Intake(hardwareMap);
-        Transfer transfer = new Transfer(hardwareMap);
-        Shooter shooter = new Shooter(hardwareMap);
+        LM2CloseSequences acl = new LM2CloseSequences(hardwareMap);
+
 
 //-----------------Pathing Actions-----------------\\
         // Score Preload
