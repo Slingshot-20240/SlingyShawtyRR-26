@@ -62,7 +62,7 @@ public class LM2BlueFarAuton extends LinearOpMode {
     // Set 3
         Action grabSet3 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201.04)))
                 .strafeToLinearHeading(new Vector2d(12,-22),Math.toRadians(270),
-                        new TranslationalVelConstraint(73))
+                        new TranslationalVelConstraint(70))
                 .strafeToLinearHeading(new Vector2d(12.3,-62),Math.toRadians(270))
                 .build();
 
