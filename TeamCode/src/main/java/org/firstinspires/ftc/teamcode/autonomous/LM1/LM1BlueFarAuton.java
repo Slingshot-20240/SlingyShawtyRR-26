@@ -20,7 +20,6 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
-@Disabled
 @Config
 @Autonomous(name = "6 Blue FAR Auton", group = "Autonomous")
 public class LM1BlueFarAuton extends LinearOpMode {

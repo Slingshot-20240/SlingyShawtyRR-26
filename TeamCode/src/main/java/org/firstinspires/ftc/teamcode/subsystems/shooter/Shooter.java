@@ -135,7 +135,7 @@ public class Shooter {
     }
 
     public void hoodToFront() {
-        variableHood.setPosition(.6);
+        variableHood.setPosition(.5);
     }
 
     public void shootFromBack() {
