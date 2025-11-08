@@ -1,6 +1,7 @@
 package com.example.meepmeeptesting;
 
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
@@ -18,7 +19,6 @@ public class BlueCloseAuton {
         //90 - 53 = 47. 47 + 180 will get you the red starting pos.
         //53 + 90 will get you the blue starting pos.
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-55, -45, Math.toRadians(180-37)))
-                .waitSeconds(2)
                 //preload
                 .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
                 .waitSeconds(4)
@@ -30,16 +30,36 @@ public class BlueCloseAuton {
 
                 //score set 1
                 .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
-                .waitSeconds(4)
+                .waitSeconds(3)
 
             // Set 2
                 //grab set 2
-                .strafeToLinearHeading(new Vector2d(12, -22), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(12.3, -60), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(12.3, -49), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(12.4, -22), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(13, -60), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(13, -49), Math.toRadians(270))
 
                 //score set 2
-                .strafeToLinearHeading(new Vector2d(-44, -24), Math.toRadians(245))
+                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
+                .waitSeconds(3)
+
+
+                // Set 3
+                //go to set 3
+                //grab balls
+                .strafeToLinearHeading(new Vector2d(36, -24), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(35.6, -43), Math.toRadians(270))
+
+                //score balls
+                .splineToLinearHeading(new Pose2d(-44,-24, Math.toRadians(245)), Math.toRadians(167))
+
+
+
+                //score set 3
+//                .strafeToLinearHeading(new Vector2d(-44, -24), Math.toRadians(245),
+//                        new TranslationalVelConstraint(40))
+                .waitSeconds(3)
+
+
 
 
                 .build());

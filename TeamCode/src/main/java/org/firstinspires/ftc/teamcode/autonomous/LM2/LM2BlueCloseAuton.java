@@ -65,9 +65,20 @@ public class LM2BlueCloseAuton extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
                 .build();
 
+        // Set 3
+        Action grabSet4 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scorePreload
+                .strafeToLinearHeading(new Vector2d(35, -22), Math.toRadians(270),
+                        new TranslationalVelConstraint(70))
+                .strafeToLinearHeading(new Vector2d(35, -60), Math.toRadians(270))
+                .build();
+
+        Action scoreSet4 = drive.actionBuilder(new Pose2d(35, -60, Math.toRadians(270))) // ends of grabSet1
+                .strafeToLinearHeading(new Vector2d(-44, -24), Math.toRadians(245))
+                .build();
+
 
         // Park
-        Action park = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scoreSet3
+        Action park = drive.actionBuilder(new Pose2d(-44, -24, Math.toRadians(245))) // ends of scoreSet3
                 .strafeToLinearHeading(new Vector2d(-48, -24), Math.toRadians(180),
                         new TranslationalVelConstraint(80)) // parkPose
                 .build();
@@ -98,7 +109,7 @@ public class LM2BlueCloseAuton extends LinearOpMode {
                                 acl.intakeSet(1020)
                         ),
                         //TODO - Tune the time the flywheel takes to get to good speed for preload
-                        acl.scoreSet(2,4),
+                        acl.scoreSet(1,3),
 
 
 
@@ -115,7 +126,7 @@ public class LM2BlueCloseAuton extends LinearOpMode {
                                 scoreSet2,
                                 //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
                                 //****IF 0.1 WORKS TRY 0!!!
-                                acl.scoreSet(0.1,4)
+                                acl.scoreSet(0,3)
                         ),
 
                 //--------Set 3--------\\
@@ -131,7 +142,7 @@ public class LM2BlueCloseAuton extends LinearOpMode {
                                 scoreSet3,
                                 //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
                                 //****IF 0.1 WORKS TRY 0!!!
-                                acl.scoreSet(0.1,4)
+                                acl.scoreSet(0,3)
                         ),
 
                 //--------Set 4--------\\
@@ -139,7 +150,7 @@ public class LM2BlueCloseAuton extends LinearOpMode {
                         new ParallelAction(
                                 grabSet4,
                                 //SHOOTER 3RD SET SPEED
-                                acl.intakeSet(1020)
+                                acl.intakeSet(970)
                         ),
 
                         //Shoot Set 3
@@ -147,7 +158,7 @@ public class LM2BlueCloseAuton extends LinearOpMode {
                                 scoreSet4,
                                 //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
                                 //****IF 0.1 WORKS TRY 0!!!
-                                acl.scoreSet(0.1,4)
+                                acl.scoreSet(0,3)
                         ),
 
                 //---------Park---------\\
