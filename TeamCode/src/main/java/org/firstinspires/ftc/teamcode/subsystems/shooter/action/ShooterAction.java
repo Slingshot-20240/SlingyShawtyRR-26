@@ -22,7 +22,7 @@ public class ShooterAction implements Action {
         outtake1.setVelocityPIDFCoefficients(600,0,0,40);
         outtake2.setVelocityPIDFCoefficients(600,0,0,40);
         outtake1.setVelocity(-outtakeVel);
-        outtake2.setVelocity(outtakeVel);
+        outtake2.setVelocity(-outtakeVel);
         return false;
     }
 }

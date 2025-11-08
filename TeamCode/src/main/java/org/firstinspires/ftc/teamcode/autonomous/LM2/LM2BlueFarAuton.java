@@ -48,27 +48,27 @@ public class LM2BlueFarAuton extends LinearOpMode {
 
     // Set 2
         Action grabSet2 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201.04))) // ends of prepareSet1
-                .splineTo(new Vector2d(36,-45),Math.toRadians(270))
-                .splineTo(new Vector2d(36,-62),Math.toRadians(270))
+                .splineTo(new Vector2d(33,-45),Math.toRadians(270))
+                .splineTo(new Vector2d(33,-62),Math.toRadians(270))
                 .build();
 
         //THE POSES HERE ARE MEANT TO NOT MATCH UP!!!.
         //By making the robot go to -62 very slightly past the wall, we ensure the y axis, and set it to -61.5
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(36, -61.5, Math.toRadians(270))) // ends of grabSet2
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(33, -61.5, Math.toRadians(270))) // ends of grabSet2
                 .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201.04))
                 .build();
 
 
     // Set 3
         Action grabSet3 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201.04)))
-                .strafeToLinearHeading(new Vector2d(12,-22),Math.toRadians(270),
+                .strafeToLinearHeading(new Vector2d(9,-22),Math.toRadians(270),
                         new TranslationalVelConstraint(70))
-                .strafeToLinearHeading(new Vector2d(12.3,-62),Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(9,-62),Math.toRadians(270))
                 .build();
 
         //THE POSES HERE ARE MEANT TO NOT MATCH UP!!!.
         //By making the robot go to -62 very slightly past the wall, we ensure the y axis, and set it to -61.5
-        Action scoreSet3 = drive.actionBuilder(new Pose2d(12.3, -61.5, Math.toRadians(270)))
+        Action scoreSet3 = drive.actionBuilder(new Pose2d(9, -61.5, Math.toRadians(270)))
                 .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201.04))
                 .build();
 
