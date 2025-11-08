@@ -14,6 +14,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
+import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
 import org.firstinspires.ftc.teamcode.teleop.fsm.FSM;
 
@@ -28,9 +29,11 @@ public class ShooterPID extends OpMode {
     //public static double p2 = 578, i2 = 0.0, d2 = 0.0, f2 = 70;
     public static int targetVel = -1095;
     private Telemetry dashboardTelemetry;
+    public static double hoodPos = 0.1;
     Robot robot;
     GamepadMapping controls;
     FSM fsm;
+    Drivetrain drivetrain;
 
     @Override
     public void init() {
@@ -51,6 +54,8 @@ public class ShooterPID extends OpMode {
         flywheel2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         fsm = new FSM(hardwareMap, controls);
+
+        drivetrain = new Drivetrain(hardwareMap, robot.imu, controls);
     }
 
     @Override
@@ -58,7 +63,7 @@ public class ShooterPID extends OpMode {
         //time += 0.02; // ~50 Hz loop
 
         // Updates driver controls here as well
-        robot.drivetrain.update();
+        drivetrain.update();
         // Updates all other controls
         controls.update();
 
@@ -84,6 +89,8 @@ public class ShooterPID extends OpMode {
         flywheel2.setVelocity(targetVel);
         flywheel1.setVelocityPIDFCoefficients(p1, i1, d1, f1);
         flywheel2.setVelocityPIDFCoefficients(p1, i1, d1, f1);
+
+        robot.shooter.variableHood.setPosition(hoodPos);
 
         // Read actual velocity
         double actualVel1 = flywheel1.getVelocity();

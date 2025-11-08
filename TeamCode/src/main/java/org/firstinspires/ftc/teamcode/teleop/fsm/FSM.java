@@ -58,6 +58,7 @@ public class FSM {
             case BASE_STATE:
                 // TODO: still keep always running depending on spin up time
                 shooter.shootFromFront();
+                shooter.hoodToFront();
 
                 intake.intakeOn();
 
@@ -77,6 +78,10 @@ public class FSM {
                     state = FSMStates.SHOOT_BACK;
                 }
 
+                if (gamepad.shootFront.value()) {
+                    state = FSMStates.SHOOT_FRONT;
+                }
+
                 break;
             case OUTTAKING:
                 intake.intakeReverse();
@@ -88,6 +93,7 @@ public class FSM {
 
             case SHOOT_BACK:
                 shooter.shootFromBack();
+                shooter.hoodToBack();
 
                 if (gamepad.transfer.locked()) {
                     state = FSMStates.TRANSFER;

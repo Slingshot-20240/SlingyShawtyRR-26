@@ -24,7 +24,7 @@ public class Robot {
     // intake control hub port 3
 
     // MECHANISMS
-    private final IMU imu;
+    public final IMU imu;
     public Intake intake;
     public Transfer transfer;
     public Shooter shooter;
@@ -52,7 +52,7 @@ public class Robot {
 
     public void hardwareSoftReset() {
         transfer.transferOff();
-        shooter.hoodToBackTriPos();
+        shooter.hoodToBack();
         intake.intakeOff();
         shooter.setShooterVelocity(0);
     }
