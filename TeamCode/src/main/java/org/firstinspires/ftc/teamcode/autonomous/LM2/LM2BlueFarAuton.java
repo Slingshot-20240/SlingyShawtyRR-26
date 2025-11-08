@@ -36,6 +36,16 @@ public class LM2BlueFarAuton extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201.04))
                 .build();
 
+//USE THIS IF THE SPLINE DOESN'T WORK!! - Strafe Method
+        /*
+        Action grabSet2 = drive.actionBuilder(new Pose2d(34, -27, Math.toRadians(270))) // ends of prepareSet1
+                .strafeToLinearHeading(new Vector2d(34, -27), Math.toRadians(270)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(34, -61.5), Math.toRadians(270),
+                        new TranslationalVelConstraint(78))
+                .build();
+
+         */
+
     // Set 2
         Action grabSet2 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201.04))) // ends of prepareSet1
                 .splineTo(new Vector2d(36,-45),Math.toRadians(270))
