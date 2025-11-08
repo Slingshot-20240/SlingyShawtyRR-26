@@ -14,7 +14,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
-import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
 @Config
@@ -37,11 +36,11 @@ public class LM2BlueCloseAuton extends LinearOpMode {
 //-----------------Pathing Actions-----------------\\
         // Score Preload
         Action scorePreload = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
                 .build();
 
         // Set 1
-        Action grabSet2 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scorePreload
+        Action grabSet2 = drive.actionBuilder(new Pose2d(-25, -25, Math.toRadians(225))) // ends of scorePreload
                 .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270),
                         new TranslationalVelConstraint(70)) // prepareSet1Pose
                 .strafeToLinearHeading(new Vector2d(-12, -52), Math.toRadians(270)) // grabSet1Pose
@@ -49,39 +48,44 @@ public class LM2BlueCloseAuton extends LinearOpMode {
 
 
         Action scoreSet2 = drive.actionBuilder(new Pose2d(-12, -52, Math.toRadians(270))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
                 .build();
 
 
         // Set 2
-        Action grabSet3 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(12, -22), Math.toRadians(270),
-                        new TranslationalVelConstraint(70))
-                .strafeToLinearHeading(new Vector2d(12.3, -60), Math.toRadians(270))
+        Action grabSet3 = drive.actionBuilder(new Pose2d(-25, -25, Math.toRadians(225))) // ends of scorePreload
+                .strafeToLinearHeading(new Vector2d(12.4, -22), Math.toRadians(270),
+                        new TranslationalVelConstraint(85))
+                .strafeToLinearHeading(new Vector2d(13, -60), Math.toRadians(270))
                 .build();
 
 
-        Action scoreSet3 = drive.actionBuilder(new Pose2d(-12.3, -60, Math.toRadians(270))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
+        Action scoreSet3 = drive.actionBuilder(new Pose2d(13, -60, Math.toRadians(270))) // ends of grabSet1
+                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
                 .build();
 
         // Set 3
-        Action grabSet4 = drive.actionBuilder(new Pose2d(-24, -24, Math.toRadians(225))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(35, -22), Math.toRadians(270),
-                        new TranslationalVelConstraint(70))
-                .strafeToLinearHeading(new Vector2d(35, -60), Math.toRadians(270))
+        Action grabSet4 = drive.actionBuilder(new Pose2d(-25, -25, Math.toRadians(225))) // ends of scorePreload
+                .strafeToLinearHeading(new Vector2d(36, -25), Math.toRadians(270),
+                        new TranslationalVelConstraint(85))
+
+                //Spline Method
+                .strafeToLinearHeading(new Vector2d(35.6, -43), Math.toRadians(270))
+
+                //Strafe Method
+                //.strafeToLinearHeading(new Vector2d(35.6, -60), Math.toRadians(270))
+
                 .build();
 
-        Action scoreSet4 = drive.actionBuilder(new Pose2d(35, -60, Math.toRadians(270))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(-44, -24), Math.toRadians(245))
+        //If you change to the strafe method then make sure to change the pose down below
+        Action scoreSet4 = drive.actionBuilder(new Pose2d(35.6, -43, Math.toRadians(270))) // ends of grabSet1
+                //Spline Method
+                .splineToLinearHeading(new Pose2d(-44,-25, Math.toRadians(245)), Math.toRadians(167))
+
+                //Strafe Method
+                //.strafeToLinearHeading(new Vector2d(-44, -25), Math.toRadians(245))
                 .build();
 
-
-        // Park
-        Action park = drive.actionBuilder(new Pose2d(-44, -24, Math.toRadians(245))) // ends of scoreSet3
-                .strafeToLinearHeading(new Vector2d(-48, -24), Math.toRadians(180),
-                        new TranslationalVelConstraint(80)) // parkPose
-                .build();
 
 
 //-----------------Initialization-----------------\\
@@ -112,7 +116,6 @@ public class LM2BlueCloseAuton extends LinearOpMode {
                         acl.scoreSet(1,3),
 
 
-
                 //--------Set 2--------\\
                         //Grab Set 2
                         new ParallelAction(
@@ -140,7 +143,6 @@ public class LM2BlueCloseAuton extends LinearOpMode {
                         //Shoot Set 3
                         new SequentialAction(
                                 scoreSet3,
-                                //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
                                 //****IF 0.1 WORKS TRY 0!!!
                                 acl.scoreSet(0,3)
                         ),
@@ -149,20 +151,20 @@ public class LM2BlueCloseAuton extends LinearOpMode {
                         //Grab Set 4
                         new ParallelAction(
                                 grabSet4,
-                                //SHOOTER 3RD SET SPEED
+                                //SHOOTER 4TH SET SPEED
+                                //THIS IS A DIFF position(closer) so the speed should be less than the other ones
+
                                 acl.intakeSet(970)
                         ),
 
                         //Shoot Set 3
                         new SequentialAction(
                                 scoreSet4,
-                                //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
                                 //****IF 0.1 WORKS TRY 0!!!
                                 acl.scoreSet(0,3)
-                        ),
+                        )
 
-                //---------Park---------\\
-                        park
+
 
 
                 )

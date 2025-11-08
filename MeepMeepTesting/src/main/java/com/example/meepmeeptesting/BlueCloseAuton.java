@@ -26,7 +26,8 @@ public class BlueCloseAuton {
             // Set 1
                 //grab set 1
                 .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(-12, -53), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(-12, -52), Math.toRadians(270))
+
 
                 //score set 1
                 .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
@@ -43,23 +44,27 @@ public class BlueCloseAuton {
                 .waitSeconds(3)
 
 
-                // Set 3
+            // Set 3
                 //go to set 3
-                //grab balls
                 .strafeToLinearHeading(new Vector2d(36, -24), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(35.6, -43), Math.toRadians(270))
 
-                //score balls
-                .splineToLinearHeading(new Pose2d(-44,-24, Math.toRadians(245)), Math.toRadians(167))
+
+                //Pickup and Score with Spline
+//                .strafeToLinearHeading(new Vector2d(35.6, -43), Math.toRadians(270))
+//                .splineToLinearHeading(new Pose2d(-44,-24, Math.toRadians(245)), Math.toRadians(167))
+
+                //Pickup and Score with Strafe
+                .strafeToLinearHeading(new Vector2d(35.6, -60), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(-44, -25), Math.toRadians(245))
+
 
 
 
                 //score set 3
 //                .strafeToLinearHeading(new Vector2d(-44, -24), Math.toRadians(245),
 //                        new TranslationalVelConstraint(40))
+
                 .waitSeconds(3)
-
-
 
 
                 .build());

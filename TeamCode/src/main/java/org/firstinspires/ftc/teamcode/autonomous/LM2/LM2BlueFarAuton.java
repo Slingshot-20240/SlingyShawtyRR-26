@@ -45,13 +45,12 @@ public class LM2BlueFarAuton extends LinearOpMode {
         //THE POSES HERE ARE MEANT TO NOT MATCH UP!!!.
         //By making the robot go to -62 very slightly past the wall, we ensure the y axis, and set it to -61.5
         Action scoreSet2 = drive.actionBuilder(new Pose2d(36, -61.5, Math.toRadians(270))) // ends of grabSet2
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(204.04))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201.04))
                 .build();
 
 
     // Set 3
-
-        Action grabSet3 = drive.actionBuilder(new Pose2d(12, -22, Math.toRadians(270)))
+        Action grabSet3 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201.04)))
                 .strafeToLinearHeading(new Vector2d(12,-22),Math.toRadians(270),
                         new TranslationalVelConstraint(73))
                 .strafeToLinearHeading(new Vector2d(12.3,-62),Math.toRadians(270))
@@ -59,12 +58,24 @@ public class LM2BlueFarAuton extends LinearOpMode {
 
         //THE POSES HERE ARE MEANT TO NOT MATCH UP!!!.
         //By making the robot go to -62 very slightly past the wall, we ensure the y axis, and set it to -61.5
-        Action scoreSet3 = drive.actionBuilder(new Pose2d(-12.3, -61.5, Math.toRadians(270)))
+        Action scoreSet3 = drive.actionBuilder(new Pose2d(12.3, -61.5, Math.toRadians(270)))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201.04))
+                .build();
+
+    // Set 4
+        Action grabSet4 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201.04))) // ends of scorePreload
+                .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270),
+                        new TranslationalVelConstraint(70)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(-12, -52), Math.toRadians(270)) // grabSet1Pose
+                .build();
+
+
+        Action scoreSet4 = drive.actionBuilder(new Pose2d(-12, -52, Math.toRadians(270))) // ends of grabSet1
                 .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201.04))
                 .build();
 
         // Park
-        Action park = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(204.04)))
+        Action park = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201.04)))
                 .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(180))
                 .build();
 
@@ -93,7 +104,7 @@ public class LM2BlueFarAuton extends LinearOpMode {
                                 acl.intakeSet(1387)
                         ),
                         //TODO - Tune the time the flywheel takes to get to good speed for preload
-                        acl.scoreSet(3,4),
+                        acl.scoreSet(2,3),
 
 
 
@@ -108,9 +119,8 @@ public class LM2BlueFarAuton extends LinearOpMode {
                         //Shoot Set 2
                         new SequentialAction(
                                 scoreSet2,
-                                //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
                                 //****IF 0.3 WORKS TRY 0!!!
-                                acl.scoreSet(0.3,4)
+                                acl.scoreSet(0,3)
                         ),
 
                 //--------Set 3--------\\
@@ -124,9 +134,22 @@ public class LM2BlueFarAuton extends LinearOpMode {
                         //Shoot Set 3
                         new SequentialAction(
                                 scoreSet3,
-                                //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
                                 //****IF 0.3 WORKS TRY 0!!!
-                                acl.scoreSet(0.3,4)
+                                acl.scoreSet(0,3)
+                        ),
+                //--------Set 4--------\\
+                        //Grab Set 4
+                        new ParallelAction(
+                                grabSet4,
+                                //SHOOTER 3RD SET SPEED
+                                acl.intakeSet(1387)
+                        ),
+
+                        //Shoot Set 4
+                        new SequentialAction(
+                                scoreSet4,
+                                //****IF 0.3 WORKS TRY 0!!!
+                                acl.scoreSet(0,3)
                         ),
 
                 //---------Park---------\\
