@@ -67,8 +67,8 @@ public class LM2BlueCloseAuton extends LinearOpMode {
 
         // Set 3
         Action grabSet4 = drive.actionBuilder(new Pose2d(-25, -25, Math.toRadians(225))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(36, -25), Math.toRadians(270),
-                        new TranslationalVelConstraint(85))
+                .strafeToLinearHeading(new Vector2d(35.5, -25), Math.toRadians(270),
+                        new TranslationalVelConstraint(78))
 
                 //Spline Method
                 //.strafeToLinearHeading(new Vector2d(35.6, -41), Math.toRadians(270))
