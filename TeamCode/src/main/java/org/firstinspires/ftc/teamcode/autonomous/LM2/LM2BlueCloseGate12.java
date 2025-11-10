@@ -69,13 +69,13 @@ public class LM2BlueCloseGate12 extends LinearOpMode {
 
 
         Action scoreSet3 = drive.actionBuilder(new Pose2d(12.4, -55, Math.toRadians(270))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(229))
+                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(230.04))
                 .build();
 
         // Set 3
-        Action grabSet4 = drive.actionBuilder(new Pose2d(-25, -25, Math.toRadians(229))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(36, -25), Math.toRadians(270),
-                        new TranslationalVelConstraint(85))
+        Action grabSet4 = drive.actionBuilder(new Pose2d(-25, -25, Math.toRadians(230.04))) // ends of scorePreload
+                .strafeToLinearHeading(new Vector2d(35.5, -25), Math.toRadians(270),
+                        new TranslationalVelConstraint(77))
 
                 //Spline Method
                 //.strafeToLinearHeading(new Vector2d(35.6, -41), Math.toRadians(270))
