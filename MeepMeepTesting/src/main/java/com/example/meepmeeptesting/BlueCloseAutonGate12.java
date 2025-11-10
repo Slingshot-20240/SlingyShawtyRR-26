@@ -21,52 +21,34 @@ public class BlueCloseAutonGate12 {
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-46.7, -51, Math.toRadians(143+90)))
                 //preload
                 .waitSeconds(2)
+
+
                 .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
-                .waitSeconds(4)
-
-                // Set 1
-                //grab set 1
-                .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(-12, -56), Math.toRadians(270))
-
-                //gate
+                .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270),
+                        new TranslationalVelConstraint(70)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(-12, -56), Math.toRadians(270)) // grabSet1Pose
                 .strafeToLinearHeading(new Vector2d(3, -52), Math.toRadians(180),
-                        new TranslationalVelConstraint(70))
-
-                //score set 1
+                        new TranslationalVelConstraint(80))
+                .waitSeconds(1)
                 .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
-                .waitSeconds(3)
+                .strafeToLinearHeading(new Vector2d(12.4, -22), Math.toRadians(270),
+                        new TranslationalVelConstraint(85))
+                .strafeToLinearHeading(new Vector2d(12.4, -66), Math.toRadians(270),
+                        new TranslationalVelConstraint(85))
+                .strafeToLinearHeading(new Vector2d(12.4, -55), Math.toRadians(270),
+                        new TranslationalVelConstraint(85))
+                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(230.04))
+                .strafeToLinearHeading(new Vector2d(35.5, -25), Math.toRadians(270),
+                        new TranslationalVelConstraint(77))
 
-                // Set 2
-                //grab set 2
-                .strafeToLinearHeading(new Vector2d(12.4, -22), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(13, -60), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(13, -49), Math.toRadians(270))
+                //Spline Method
+                //.strafeToLinearHeading(new Vector2d(35.6, -41), Math.toRadians(270))
 
-                //score set 2
-                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
-                .waitSeconds(3)
+                //Strafe Method
+                .strafeToLinearHeading(new Vector2d(36, -66), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(36, -56), Math.toRadians(270))
 
-
-                // Set 3
-                //go to set 3
-                .strafeToLinearHeading(new Vector2d(36, -24), Math.toRadians(270))
-
-
-                //Pickup and Score with Spline
-//                .strafeToLinearHeading(new Vector2d(35.6, -43), Math.toRadians(270))
-//                .splineToLinearHeading(new Pose2d(-44,-24, Math.toRadians(245)), Math.toRadians(167))
-
-                //Pickup and Score with Strafe
-                .strafeToLinearHeading(new Vector2d(35.6, -60), Math.toRadians(270))
                 .strafeToLinearHeading(new Vector2d(-44, -25), Math.toRadians(245))
-
-
-
-
-                //score set 3
-//                .strafeToLinearHeading(new Vector2d(-44, -24), Math.toRadians(245),
-//                        new TranslationalVelConstraint(40))
 
                 .waitSeconds(3)
 

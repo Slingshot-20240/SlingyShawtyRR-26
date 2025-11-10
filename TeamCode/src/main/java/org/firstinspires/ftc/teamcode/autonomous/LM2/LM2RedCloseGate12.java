@@ -67,7 +67,7 @@ public class LM2RedCloseGate12 extends LinearOpMode {
                         new TranslationalVelConstraint(85))
                 .strafeToLinearHeading(new Vector2d(12.7, 66), Math.toRadians(-270),
                         new TranslationalVelConstraint(85))
-                .strafeToLinearHeading(new Vector2d(12.7, 55), Math.toRadians(-270),
+                .strafeToLinearHeading(new Vector2d(12.7, 48), Math.toRadians(-270),
                         new TranslationalVelConstraint(85))
                 .build();
 

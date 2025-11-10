@@ -34,7 +34,8 @@ public class LM2BlueFarAuton extends LinearOpMode {
 //-----------------Pathing Actions-----------------\\
         // Score Preloads
         Action scorePreload = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201),
+                        new TranslationalVelConstraint(65))
                 .build();
 
 //USE THIS IF THE SPLINE DOESN'T WORK!! - Strafe Method
@@ -79,21 +80,21 @@ public class LM2BlueFarAuton extends LinearOpMode {
                         new TranslationalVelConstraint(65))
                 .build();
 
-        // Set 4
-        Action grabSet4 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(202))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(-18.3, -22), Math.toRadians(270)) // prepareSet1Pose
-                .strafeToLinearHeading(new Vector2d(-18.3, -60), Math.toRadians(270),
-                        new TranslationalVelConstraint(80), new ProfileAccelConstraint(-60,60)) // grabSet1Pose
-
-                .strafeToLinearHeading(new Vector2d(-18.3, -40), Math.toRadians(270),
-                        new TranslationalVelConstraint(65), new ProfileAccelConstraint(-70,70)) // prepareSet1Pose
-
-                .build();
-
-
-        Action scoreSet4 = drive.actionBuilder(new Pose2d(-18.3, -40, Math.toRadians(270))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(200))
-                .build();
+//        // Set 4
+//        Action grabSet4 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(202))) // ends of scorePreload
+//                .strafeToLinearHeading(new Vector2d(-18.3, -22), Math.toRadians(270)) // prepareSet1Pose
+//                .strafeToLinearHeading(new Vector2d(-18.3, -60), Math.toRadians(270),
+//                        new TranslationalVelConstraint(80), new ProfileAccelConstraint(-60,60)) // grabSet1Pose
+//
+//                .strafeToLinearHeading(new Vector2d(-18.3, -40), Math.toRadians(270),
+//                        new TranslationalVelConstraint(65), new ProfileAccelConstraint(-70,70)) // prepareSet1Pose
+//
+//                .build();
+//
+//
+//        Action scoreSet4 = drive.actionBuilder(new Pose2d(-18.3, -40, Math.toRadians(270))) // ends of grabSet1
+//                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(200))
+//                .build();
 
         // Park
         Action park = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201)))
