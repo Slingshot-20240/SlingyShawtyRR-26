@@ -18,8 +18,8 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
 
 @Config
-@Autonomous(name = "9 Blue FAR Auton", group = "Autonomous")
-public class LM2BlueFarAuton extends LinearOpMode {
+@Autonomous(name = "9 Red FAR Auton", group = "Autonomous")
+public class LM2RedFarAuton extends LinearOpMode {
 
 
     @Override
@@ -34,7 +34,7 @@ public class LM2BlueFarAuton extends LinearOpMode {
 //-----------------Pathing Actions-----------------\\
         // Score Preloads
         Action scorePreload = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201),
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-201),
                         new TranslationalVelConstraint(65))
                 .build();
 
@@ -50,33 +50,33 @@ public class LM2BlueFarAuton extends LinearOpMode {
 
         //Set 2
 
-        Action grabSet2 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201))) // ends of prepareSet1
-                .splineTo(new Vector2d(27,-45),Math.toRadians(270))
-                .splineTo(new Vector2d(27,-66),Math.toRadians(270))
+        Action grabSet2 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-201))) // ends of prepareSet1
+                .splineTo(new Vector2d(27,45),Math.toRadians(-270))
+                .splineTo(new Vector2d(27,66),Math.toRadians(-270))
                 .build();
 
 
 
         //THE POSES HERE ARE MEANT TO NOT MATCH UP!!!.
         //By making the robot go to -62 very slightly past the wall, we ensure the y axis, and set it to -61.5
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(27, -66, Math.toRadians(270))) // ends of grabSet2
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(200),
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(27, 66, Math.toRadians(-270))) // ends of grabSet2
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-200),
                         new TranslationalVelConstraint(65))
                 .build();
 
 
         // Set 3
-        Action grabSet3 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(200)))
-                .strafeToLinearHeading(new Vector2d(4.5,-22),Math.toRadians(270),
+        Action grabSet3 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-200)))
+                .strafeToLinearHeading(new Vector2d(4.5,22),Math.toRadians(-270),
                         new TranslationalVelConstraint(65))
-                .strafeToLinearHeading(new Vector2d(4.5,-67), Math.toRadians(270),
+                .strafeToLinearHeading(new Vector2d(4.5,67), Math.toRadians(-270),
                         new TranslationalVelConstraint(80))
                 .build();
 
         //THE POSES HERE ARE MEANT TO NOT MATCH UP!!!.
         //By making the robot go to -62 very slightly past the wall, we ensure the y axis, and set it to -61.5
-        Action scoreSet3 = drive.actionBuilder(new Pose2d(4.5, -67, Math.toRadians(270)))
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201),
+        Action scoreSet3 = drive.actionBuilder(new Pose2d(4.5, 67, Math.toRadians(-270)))
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-201),
                         new TranslationalVelConstraint(65))
                 .build();
 
@@ -97,8 +97,8 @@ public class LM2BlueFarAuton extends LinearOpMode {
 //                .build();
 
         // Park
-        Action park = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201)))
-                .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(180))
+        Action park = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-201)))
+                .strafeToLinearHeading(new Vector2d(35, 20), Math.toRadians(180))
                 .build();
 
 

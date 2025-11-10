@@ -18,27 +18,19 @@ public class RedFarAuton {
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(61.5, 14, Math.toRadians(180)))
                 .waitSeconds(2)
-                //score preloads
-                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-210))
-                .waitSeconds(6.3)
-
-                //grab set 1
-                .splineTo(new Vector2d(36,45),Math.toRadians(-270))
-                .splineTo(new Vector2d(36,62),Math.toRadians(-270))
-                //score set 1
-                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-210))
-                .waitSeconds(4.5)
-
-                //grab set 2
-                .strafeToLinearHeading(new Vector2d(12,22),Math.toRadians(-270))
-                .strafeToLinearHeading(new Vector2d(12.3,62),Math.toRadians(-270))
-
-                //score set 1
-                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-210))
-                .waitSeconds(4.5)
-
-                //park
-                .strafeToLinearHeading(new Vector2d(35, 20), Math.toRadians(-180))
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-201),
+                        new TranslationalVelConstraint(65))
+                .splineTo(new Vector2d(27,45),Math.toRadians(-270))
+                .splineTo(new Vector2d(27,66),Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-200),
+                        new TranslationalVelConstraint(65))
+                .strafeToLinearHeading(new Vector2d(4.5,22),Math.toRadians(-270),
+                        new TranslationalVelConstraint(65))
+                .strafeToLinearHeading(new Vector2d(4.5,67), Math.toRadians(-270),
+                        new TranslationalVelConstraint(80))
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-201),
+                        new TranslationalVelConstraint(65))
+                .strafeToLinearHeading(new Vector2d(35, 20), Math.toRadians(180))
 
                 .build());
 
