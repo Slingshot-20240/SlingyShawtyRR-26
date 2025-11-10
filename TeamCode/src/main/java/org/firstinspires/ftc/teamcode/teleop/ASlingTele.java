@@ -33,7 +33,6 @@ public class ASlingTele extends OpMode {
         fsm = new FSM(hardwareMap, controls);
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
-        //THIS IS THE LINE THAT SCREWS UP ALL DRIVE CONTROLS, (unless the drivetrain is commented out)
         drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, Math.toRadians(90)));
 
 
@@ -73,14 +72,20 @@ public class ASlingTele extends OpMode {
         FtcDashboard.getInstance().sendTelemetryPacket(packet);
 
 
-        //ADDED BY ISHAAN
-        Action park = drive.actionBuilder(pose)
-                .strafeToLinearHeading(new Vector2d(-5,10), Math.toRadians(180))
-                .build();
+//        //ADDED BY ISHAAN
+//        Action park = drive.actionBuilder(pose)
+//                .strafeToLinearHeading(new Vector2d(38,-32), Math.toRadians(180))
+//                .build();
 
-        if (gamepad1.a) {
-            Actions.runBlocking(park);
-        }
+
+//        if (gamepad1.a) {
+//            Actions.runBlocking(park);
+//        }
+//        if (gamepad1.start) {
+//            drive.localizer.setPose(new Pose2d(61.5, -61.5, Math.toRadians(270)));
+//            drive = new MecanumDrive(hardwareMap, new Pose2d(61.5, -61.5, Math.toRadians(270)));
+//        }
+
 
 
     }

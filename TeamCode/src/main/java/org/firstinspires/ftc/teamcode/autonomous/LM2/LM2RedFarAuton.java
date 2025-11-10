@@ -18,13 +18,13 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
 
 @Config
-@Autonomous(name = "9 Blue FAR Auton", group = "Autonomous")
-public class LM2BlueFarAuton extends LinearOpMode {
+@Autonomous(name = "9 Red FAR Auton", group = "Autonomous")
+public class LM2RedFarAuton extends LinearOpMode {
 
 
     @Override
     public void runOpMode() {
-        Pose2d initialPose = new Pose2d(61.5, -14, Math.toRadians(180));
+        Pose2d initialPose = new Pose2d(61.5, 14, Math.toRadians(180));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
         LM2FarSequences acl = new LM2FarSequences(hardwareMap);
 
@@ -34,7 +34,7 @@ public class LM2BlueFarAuton extends LinearOpMode {
 //-----------------Pathing Actions-----------------\\
         // Score Preloads
         Action scorePreload = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201))
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-201))
                 .build();
 
 //USE THIS IF THE SPLINE DOESN'T WORK!! - Strafe Method
@@ -49,55 +49,55 @@ public class LM2BlueFarAuton extends LinearOpMode {
 
         //Set 2
 
-        Action grabSet2 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201))) // ends of prepareSet1
-                .splineTo(new Vector2d(27,-45),Math.toRadians(270))
-                .splineTo(new Vector2d(27,-66),Math.toRadians(270))
+        Action grabSet2 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-201))) // ends of prepareSet1
+                .splineTo(new Vector2d(27,-45),Math.toRadians(-270))
+                .splineTo(new Vector2d(27,-66),Math.toRadians(-270))
                 .build();
 
 
 
         //THE POSES HERE ARE MEANT TO NOT MATCH UP!!!.
         //By making the robot go to -62 very slightly past the wall, we ensure the y axis, and set it to -61.5
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(27, -66, Math.toRadians(270))) // ends of grabSet2
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(200),
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(27, 66, Math.toRadians(-270))) // ends of grabSet2
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-200),
                         new TranslationalVelConstraint(65))
                 .build();
 
 
         // Set 3
-        Action grabSet3 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(200)))
-                .strafeToLinearHeading(new Vector2d(4.5,-22),Math.toRadians(270),
+        Action grabSet3 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-200)))
+                .strafeToLinearHeading(new Vector2d(4.5,22),Math.toRadians(-270),
                         new TranslationalVelConstraint(65))
-                .strafeToLinearHeading(new Vector2d(4.5,-67), Math.toRadians(270),
+                .strafeToLinearHeading(new Vector2d(4.5,67), Math.toRadians(-270),
                         new TranslationalVelConstraint(80))
                 .build();
 
         //THE POSES HERE ARE MEANT TO NOT MATCH UP!!!.
         //By making the robot go to -62 very slightly past the wall, we ensure the y axis, and set it to -61.5
-        Action scoreSet3 = drive.actionBuilder(new Pose2d(4.5, -67, Math.toRadians(270)))
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201),
+        Action scoreSet3 = drive.actionBuilder(new Pose2d(4.5, 67, Math.toRadians(-270)))
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-201),
                         new TranslationalVelConstraint(65))
                 .build();
 
         // Set 4
-        Action grabSet4 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(202))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(-18.3, -22), Math.toRadians(270)) // prepareSet1Pose
-                .strafeToLinearHeading(new Vector2d(-18.3, -60), Math.toRadians(270),
+        Action grabSet4 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-202))) // ends of scorePreload
+                .strafeToLinearHeading(new Vector2d(-18.3, 22), Math.toRadians(-270)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(-18.3, -60), Math.toRadians(-270),
                         new TranslationalVelConstraint(80), new ProfileAccelConstraint(-60,60)) // grabSet1Pose
 
-                .strafeToLinearHeading(new Vector2d(-18.3, -40), Math.toRadians(270),
+                .strafeToLinearHeading(new Vector2d(-18.3, 40), Math.toRadians(-270),
                         new TranslationalVelConstraint(65), new ProfileAccelConstraint(-70,70)) // prepareSet1Pose
 
                 .build();
 
 
-        Action scoreSet4 = drive.actionBuilder(new Pose2d(-18.3, -40, Math.toRadians(270))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(200))
+        Action scoreSet4 = drive.actionBuilder(new Pose2d(-18.3, 40, Math.toRadians(-270))) // ends of grabSet1
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-200))
                 .build();
 
         // Park
-        Action park = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(201)))
-                .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(180))
+        Action park = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-201)))
+                .strafeToLinearHeading(new Vector2d(35, 20), Math.toRadians(-180))
                 .build();
 
 
@@ -141,7 +141,7 @@ public class LM2BlueFarAuton extends LinearOpMode {
                         new SequentialAction(
                                 scoreSet2,
                                 //****IF 0.3 WORKS TRY 0!!!
-                                acl.scoreSet(2,3)
+                                acl.scoreSet(2.4,3)
                         ),
 
                         //--------Set 3--------\\
@@ -156,7 +156,7 @@ public class LM2BlueFarAuton extends LinearOpMode {
                         new SequentialAction(
                                 scoreSet3,
                                 //****IF 0.3 WORKS TRY 0!!!
-                                acl.scoreSet(2,3)
+                                acl.scoreSet(2.4,3)
                         ),
 //                        //--------Set 4--------\\
 //                        //Grab Set 4
