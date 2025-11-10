@@ -52,9 +52,10 @@ public class LM2BlueCloseGate12 extends LinearOpMode {
                 .build();
 
 
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(-8, -35, Math.toRadians(270))) // ends of grabSet1
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(3, -52, Math.toRadians(270))) // ends of grabSet1
                 .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
                 .build();
+        //-8,-35
 
 
         // Set 2

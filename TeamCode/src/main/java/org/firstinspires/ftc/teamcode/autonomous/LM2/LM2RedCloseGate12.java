@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
 
 
 @Config
-@Autonomous(name = "12 Red close gate", group = "Autonomous")
+@Autonomous(name = "12 red close gate", group = "Autonomous")
 public class LM2RedCloseGate12 extends LinearOpMode {
 
 
@@ -45,25 +45,21 @@ public class LM2RedCloseGate12 extends LinearOpMode {
                 .build();
 
         Action gate = drive.actionBuilder(new Pose2d(-12, 56, Math.toRadians(-270))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(3, -52), Math.toRadians(-180),
+                .strafeToLinearHeading(new Vector2d(3, 60), Math.toRadians(-180),
                         new TranslationalVelConstraint(80))
                 .waitSeconds(1)
 
                 .build();
 
 
-        //OLD CHOPPED VERSION
-//        Action scoreSet2 = drive.actionBuilder(new Pose2d(-8, 35, Math.toRadians(-270))) // ends of grabSet1
-//                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(-225))
-//                .build();
-        //NEW VERSION
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(3, -52, Math.toRadians(-180))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(-225))
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(3, 60, Math.toRadians(-270))) // ends of grabSet1
+                .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(180))
                 .build();
+        //-8,-35
 
 
         // Set 2
-        Action grabSet3 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-225))) // ends of scorePreload
+        Action grabSet3 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(180))) // ends of scorePreload
                 .strafeToLinearHeading(new Vector2d(12.4, 22), Math.toRadians(-270),
                         new TranslationalVelConstraint(85))
                 .strafeToLinearHeading(new Vector2d(12.4, 66), Math.toRadians(-270),
@@ -74,7 +70,7 @@ public class LM2RedCloseGate12 extends LinearOpMode {
 
 
         Action scoreSet3 = drive.actionBuilder(new Pose2d(12.4, 55, Math.toRadians(-270))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(-230.04))
+                .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-230.04))
                 .build();
 
         // Set 3
