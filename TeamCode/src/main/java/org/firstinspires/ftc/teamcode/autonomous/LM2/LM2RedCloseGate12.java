@@ -52,13 +52,17 @@ public class LM2RedCloseGate12 extends LinearOpMode {
                 .build();
 
 
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(-8, 35, Math.toRadians(-270))) // ends of grabSet1
+        // Action scoreSet2 = drive.actionBuilder(new Pose2d(-8, 35, Math.toRadians(-270))) // ends of grabSet1
+        //         .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-225))
+        //         .build();
+
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(3.5, 56, Math.toRadians(180))) // ends gate
                 .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-225))
                 .build();
 
 
         // Set 2
-        Action grabSet3 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-225))) // ends of scorePreload
+        Action grabSet3 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-225))) // ends of score set 2
                 .strafeToLinearHeading(new Vector2d(12.7, 22), Math.toRadians(-270),
                         new TranslationalVelConstraint(85))
                 .strafeToLinearHeading(new Vector2d(12.7, 66), Math.toRadians(-270),
@@ -73,7 +77,7 @@ public class LM2RedCloseGate12 extends LinearOpMode {
                 .build();
 
         // Set 3
-        Action grabSet4 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-227))) // ends of scorePreload
+        Action grabSet4 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-227))) // ends of scpre set 3
                 .strafeToLinearHeading(new Vector2d(35.5, 25), Math.toRadians(-270),
                         new TranslationalVelConstraint(77))
 
