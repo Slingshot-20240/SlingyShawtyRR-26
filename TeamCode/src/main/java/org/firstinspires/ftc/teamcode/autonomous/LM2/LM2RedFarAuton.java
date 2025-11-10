@@ -24,7 +24,7 @@ public class LM2RedFarAuton extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        Pose2d initialPose = new Pose2d(61.5, -14, Math.toRadians(180));
+        Pose2d initialPose = new Pose2d(61.5, 14, Math.toRadians(180));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
         LM2FarSequences acl = new LM2FarSequences(hardwareMap);
 
@@ -40,26 +40,26 @@ public class LM2RedFarAuton extends LinearOpMode {
 
 //USE THIS IF THE SPLINE DOESN'T WORK!! - Strafe Method
 
-//        Action grabSet2 = drive.actionBuilder(new Pose2d(34, -27, Math.toRadians(270))) // ends of prepareSet1
-//                .strafeToLinearHeading(new Vector2d(29, -22), Math.toRadians(270)) // prepareSet1Pose
-//                .strafeToLinearHeading(new Vector2d(29, -64.4), Math.toRadians(270),
-//                        new TranslationalVelConstraint(30))
-//                .build();
-
-
-
-        //Set 2
-
         Action grabSet2 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-201))) // ends of prepareSet1
-                .splineTo(new Vector2d(27,45),Math.toRadians(-270))
-                .splineTo(new Vector2d(27,66),Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(32, 22), Math.toRadians(-270)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(32,  66), Math.toRadians(-270),
+                        new TranslationalVelConstraint(30))
                 .build();
+
+
+
+//        //Set 2
+//
+//        Action grabSet2 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-201))) // ends of prepareSet1
+//                .splineTo(new Vector2d(27,45),Math.toRadians(-270))
+//                .splineTo(new Vector2d(27,66),Math.toRadians(-270))
+//                .build();
 
 
 
         //THE POSES HERE ARE MEANT TO NOT MATCH UP!!!.
         //By making the robot go to -62 very slightly past the wall, we ensure the y axis, and set it to -61.5
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(27, 66, Math.toRadians(-270))) // ends of grabSet2
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(32, 66, Math.toRadians(-270))) // ends of grabSet2
                 .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-200),
                         new TranslationalVelConstraint(65))
                 .build();
