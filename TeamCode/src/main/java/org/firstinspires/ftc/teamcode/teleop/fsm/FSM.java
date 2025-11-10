@@ -61,24 +61,17 @@ public class FSM {
                 shooter.hoodToFront();
 
                 intake.intakeOn();
-
-                // move to new state
-                if (gamepad.transfer.locked()) {
-                    transfer.transferOn();
-                } else {
-                    // Hotdog the ball!
-                    transfer.hotDog();
-                }
+                transfer.hotDog();
 
                 if (gamepad.outtake.locked()) {
                     state = FSMStates.OUTTAKING;
                 }
 
-                if (gamepad.shootBack.value()) {
+                if (gamepad.shootBack.locked()) {
                     state = FSMStates.SHOOT_BACK;
                 }
 
-                if (gamepad.shootFront.value()) {
+                if (gamepad.shootFront.locked()) {
                     state = FSMStates.SHOOT_FRONT;
                 }
 
@@ -95,11 +88,11 @@ public class FSM {
                 shooter.shootFromBack();
                 shooter.hoodToBack();
 
-                if (gamepad.transfer.locked()) {
-                    state = FSMStates.TRANSFER;
+                if (shooter.outtake1.getVelocity() <= Shooter.outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel() + 50) {
+                    transfer.transferOn();
                 }
 
-                if (!gamepad.shootBack.value()) {
+                if (!gamepad.shootBack.locked()) {
                     state = FSMStates.BASE_STATE;
                     gamepad.resetMultipleControls(gamepad.shootBack, gamepad.shootFront, gamepad.transfer);
                 }
@@ -107,21 +100,10 @@ public class FSM {
             case SHOOT_FRONT:
                 shooter.shootFromFront();
 
-                if (gamepad.transfer.locked()) {
-                    state = FSMStates.TRANSFER;
-                }
-
-                if (!gamepad.shootFront.value()) {
-                    state = FSMStates.BASE_STATE;
-                    gamepad.resetMultipleControls(gamepad.shootBack, gamepad.shootFront, gamepad.transfer);
-                }
-                break;
-            case TRANSFER:
                 transfer.transferOn();
 
-                if (!gamepad.transfer.locked()) {
+                if (!gamepad.shootFront.locked()) {
                     state = FSMStates.BASE_STATE;
-                    transfer.hotDog();
                     gamepad.resetMultipleControls(gamepad.shootBack, gamepad.shootFront, gamepad.transfer);
                 }
                 break;
