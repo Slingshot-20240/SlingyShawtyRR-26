@@ -19,17 +19,25 @@ public class BlueFarAuton {
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(61.5, -14, Math.toRadians(180)))
                 .waitSeconds(2)
 
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201),
-                        new TranslationalVelConstraint(65))
-                .splineTo(new Vector2d(27,-45),Math.toRadians(270))
-                .splineTo(new Vector2d(27,-66),Math.toRadians(270))  .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(200),
-                        new TranslationalVelConstraint(65))
-                .strafeToLinearHeading(new Vector2d(4.5,-22),Math.toRadians(270),
-                        new TranslationalVelConstraint(65))
-                .strafeToLinearHeading(new Vector2d(4.5,-67), Math.toRadians(270),
-                        new TranslationalVelConstraint(80))
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201),
-                        new TranslationalVelConstraint(65))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
+
+                //SAME AS CLOSE SIDE 4th SET VALUES!!!!!!!!!!!!!!!!!!!!!!!!!
+                .strafeToLinearHeading(new Vector2d(36, -22), Math.toRadians(270)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(36, -61.5), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
+
+
+                //SAME AS CLOSE SIDE 3rd SET VALUES!!!!!!!!!!!!!!!!!!!!!!!!!
+                .strafeToLinearHeading(new Vector2d(12.4,-22),Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(12.4,-61.5), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
+
+                //set 4?
+                .strafeToLinearHeading(new Vector2d(40, -61.5), Math.toRadians(0))
+                .strafeToLinearHeading(new Vector2d(61.5, -61.5), Math.toRadians(0),
+                        new TranslationalVelConstraint(90))
+
+                //park
                 .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(180))
 
 

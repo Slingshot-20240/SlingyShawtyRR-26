@@ -4,7 +4,6 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.ProfileAccelConstraint;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -24,7 +23,7 @@ public class LM2RedFarAuton extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        Pose2d initialPose = new Pose2d(61.5, 14, Math.toRadians(180));
+        Pose2d initialPose = new Pose2d(61.5, -14, Math.toRadians(180));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
         LM2FarSequences acl = new LM2FarSequences(hardwareMap);
 
@@ -34,70 +33,40 @@ public class LM2RedFarAuton extends LinearOpMode {
 //-----------------Pathing Actions-----------------\\
         // Score Preloads
         Action scorePreload = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-201),
-                        new TranslationalVelConstraint(65))
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-203))
                 .build();
 
-//USE THIS IF THE SPLINE DOESN'T WORK!! - Strafe Method
-
-        Action grabSet2 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-201))) // ends of prepareSet1
-                .strafeToLinearHeading(new Vector2d(32, 22), Math.toRadians(-270)) // prepareSet1Pose
-                .strafeToLinearHeading(new Vector2d(32,  66), Math.toRadians(-270),
-                        new TranslationalVelConstraint(30))
+        // Set 2
+        Action grabSet2 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-203)))
+                .strafeToLinearHeading(new Vector2d(36, 22), Math.toRadians(-270)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(36, 64), Math.toRadians(-270))
                 .build();
 
-
-
-//        //Set 2
-//
-//        Action grabSet2 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-201))) // ends of prepareSet1
-//                .splineTo(new Vector2d(27,45),Math.toRadians(-270))
-//                .splineTo(new Vector2d(27,66),Math.toRadians(-270))
-//                .build();
-
-
-
-        //THE POSES HERE ARE MEANT TO NOT MATCH UP!!!.
-        //By making the robot go to -62 very slightly past the wall, we ensure the y axis, and set it to -61.5
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(32, 66, Math.toRadians(-270))) // ends of grabSet2
-                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-200),
-                        new TranslationalVelConstraint(65))
+        //WALL !!!!!!!!!!!!!!!!
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(36, 61.5, Math.toRadians(-270))) // ends of grabSet2
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-203))
                 .build();
 
 
         // Set 3
-        Action grabSet3 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-200)))
-                .strafeToLinearHeading(new Vector2d(4.5,22),Math.toRadians(-270),
-                        new TranslationalVelConstraint(65))
-                .strafeToLinearHeading(new Vector2d(4.5,67), Math.toRadians(-270),
-                        new TranslationalVelConstraint(80))
+        Action grabSet3 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-203)))
+                .strafeToLinearHeading(new Vector2d(12.4,22),Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(12.4,64), Math.toRadians(-270))
                 .build();
 
-        //THE POSES HERE ARE MEANT TO NOT MATCH UP!!!.
-        //By making the robot go to -62 very slightly past the wall, we ensure the y axis, and set it to -61.5
-        Action scoreSet3 = drive.actionBuilder(new Pose2d(4.5, 67, Math.toRadians(-270)))
-                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-201),
-                        new TranslationalVelConstraint(65))
+        //WALL !!!!!!!!!!!!!!!!
+        Action scoreSet3 = drive.actionBuilder(new Pose2d(12.4, 61.5, Math.toRadians(-270)))
+                .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-203))
                 .build();
 
-//        // Set 4
-//        Action grabSet4 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(202))) // ends of scorePreload
-//                .strafeToLinearHeading(new Vector2d(-18.3, -22), Math.toRadians(270)) // prepareSet1Pose
-//                .strafeToLinearHeading(new Vector2d(-18.3, -60), Math.toRadians(270),
-//                        new TranslationalVelConstraint(80), new ProfileAccelConstraint(-60,60)) // grabSet1Pose
-//
-//                .strafeToLinearHeading(new Vector2d(-18.3, -40), Math.toRadians(270),
-//                        new TranslationalVelConstraint(65), new ProfileAccelConstraint(-70,70)) // prepareSet1Pose
-//
-//                .build();
-//
-//
-//        Action scoreSet4 = drive.actionBuilder(new Pose2d(-18.3, -40, Math.toRadians(270))) // ends of grabSet1
-//                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(200))
-//                .build();
+        Action grabSet4hp = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-203)))
+                .strafeToLinearHeading(new Vector2d(40, 62), Math.toRadians(0))
+                .strafeToLinearHeading(new Vector2d(62, 63), Math.toRadians(0),
+                        new TranslationalVelConstraint(90))
+                .build();
 
-        // Park
-        Action park = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-201)))
+        // Park                                                         WALL !!!!!!!!
+        Action park = drive.actionBuilder(new Pose2d(61.5, -1.5, Math.toRadians(0)))
                 .strafeToLinearHeading(new Vector2d(35, 20), Math.toRadians(180))
                 .build();
 
@@ -126,7 +95,7 @@ public class LM2RedFarAuton extends LinearOpMode {
                                 acl.intakeSet(1530)
                         ),
                         //TODO - Tune the time the flywheel takes to get to good speed for preload
-                        acl.scoreSet(4,3),
+                        acl.scoreSet(2,2.8),
 
 
 
@@ -142,7 +111,7 @@ public class LM2RedFarAuton extends LinearOpMode {
                         new SequentialAction(
                                 scoreSet2,
                                 //****IF 0.3 WORKS TRY 0!!!
-                                acl.scoreSet(2,3)
+                                acl.scoreSet(0,2.8)
                         ),
 
                         //--------Set 3--------\\
@@ -157,22 +126,17 @@ public class LM2RedFarAuton extends LinearOpMode {
                         new SequentialAction(
                                 scoreSet3,
                                 //****IF 0.3 WORKS TRY 0!!!
-                                acl.scoreSet(2,3)
+                                acl.scoreSet(0,2.8)
                         ),
-//                        //--------Set 4--------\\
-//                        //Grab Set 4
-//                        new ParallelAction(
-//                                grabSet4,
-//                                //SHOOTER 3RD SET SPEED
-//                                acl.intakeSet(1480)
-//                        ),
-//
-//                        //Shoot Set 4
-//                        new SequentialAction(
-//                                scoreSet4,
-//                                //****IF 0.3 WORKS TRY 0!!!
-//                                acl.scoreSet(0,2.86)
-//                        ),
+                        //--------Set 4--------\\
+                        //Grab Set 4
+                        new ParallelAction(
+                                grabSet4hp,
+                                //SHOOTER 3RD SET SPEED
+                                acl.intakeSet(0)
+                        ),
+
+                        //TODO - IF TIME ALLOWS, then shoot the last set
 
                         //---------Park---------\\
                         park
