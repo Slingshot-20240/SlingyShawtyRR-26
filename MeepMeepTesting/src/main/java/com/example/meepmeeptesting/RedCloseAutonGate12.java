@@ -1,6 +1,7 @@
 package com.example.meepmeeptesting;
 
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.ProfileAccelConstraint;
 import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
@@ -13,7 +14,7 @@ public class RedCloseAutonGate12 {
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(80, 70, Math.toRadians(180), Math.toRadians(180), 14.8)
+                .setConstraints(70, 70, Math.toRadians(180), Math.toRadians(180), 14.8)
                 .build();
 
         //90 - 53 = 37. 37 + 180 will get you the red starting pos.
@@ -22,28 +23,36 @@ public class RedCloseAutonGate12 {
                 //preload
                 .waitSeconds(2)
                 .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-225))
-                .strafeToLinearHeading(new Vector2d(-11, 22), Math.toRadians(90),
+                .strafeToLinearHeading(new Vector2d(-11, 21), Math.toRadians(90),
                         new TranslationalVelConstraint(70)) // prepareSet1Pose
-                .strafeToLinearHeading(new Vector2d(-12, 56), Math.toRadians(90)) // grabSet1Pose
-                .strafeToLinearHeading(new Vector2d(3.5, 56), Math.toRadians(180),
-                        new TranslationalVelConstraint(80))
+                .strafeToLinearHeading(new Vector2d(-12, 55), Math.toRadians(90)) // grabSet2Pose
+
+                //gate jawns
+                .strafeToLinearHeading(new Vector2d(-3,46),Math.toRadians(180))
+                .strafeTo(new Vector2d(0,55))
+                .waitSeconds(1)
+
+
+                //score set 2
+                .strafeToLinearHeading(new Vector2d( -25, 25), Math.toRadians(-225))
+
+                .strafeToLinearHeading(new Vector2d(13.2, 21), Math.toRadians(-270),
+                        new TranslationalVelConstraint(85))
+                .strafeToLinearHeading(new Vector2d(13.2, 61.5), Math.toRadians(-270),
+                        new TranslationalVelConstraint(85))
+                .strafeToLinearHeading(new Vector2d(13.2, 40), Math.toRadians(-270),
+                        new TranslationalVelConstraint(85))
+
                 .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-225))
-                .strafeToLinearHeading(new Vector2d(12.7, 22), Math.toRadians(-270),
-                        new TranslationalVelConstraint(85))
-                .strafeToLinearHeading(new Vector2d(12.7, 66), Math.toRadians(-270),
-                        new TranslationalVelConstraint(85))
-                .strafeToLinearHeading(new Vector2d(12.7, 55), Math.toRadians(-270),
-                        new TranslationalVelConstraint(85))
-                .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-227))
-                .strafeToLinearHeading(new Vector2d(35.5, 25), Math.toRadians(-270),
+
+                .strafeToLinearHeading(new Vector2d(35.5, 21), Math.toRadians(-270),
                         new TranslationalVelConstraint(77))
 
-                //Spline Method
-                //.strafeToLinearHeading(new Vector2d(35.6, 41), Math.toRadians(-270))
 
                 //Strafe Method
-                .strafeToLinearHeading(new Vector2d(36, 66), Math.toRadians(-270))
-                .strafeToLinearHeading(new Vector2d(36, 56), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(36, 61.5), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(36, 40), Math.toRadians(-270))
+
                 .strafeToLinearHeading(new Vector2d(-44, 25), Math.toRadians(-245))
 
                 .waitSeconds(3)

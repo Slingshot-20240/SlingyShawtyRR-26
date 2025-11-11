@@ -4,7 +4,6 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.ProfileAccelConstraint;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -39,63 +38,54 @@ public class LM2RedCloseGate12 extends LinearOpMode {
 
         // Set 1
         Action grabSet2 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-225))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(-11, 22), Math.toRadians(90),
-                        new TranslationalVelConstraint(70)) // prepareSet1Pose
-                .strafeToLinearHeading(new Vector2d(-12, 56), Math.toRadians(90)) // grabSet1Pose
+                .strafeToLinearHeading(new Vector2d(-11, 22), Math.toRadians(-270)) // prepare set 2
+                .strafeToLinearHeading(new Vector2d(-12, 55), Math.toRadians(-270))
                 .build();
 
-//        Action gate = drive.actionBuilder(new Pose2d(-12, 56, Math.toRadians(90))) // ends of scorePreload
-//                .strafeToLinearHeading(new Vector2d(0.5, 53.5), Math.toRadians(180),
-//                        new TranslationalVelConstraint(80))
-//                .waitSeconds(1)
-//
-//                .build();
+                                                                         //WALL
+        Action gate = drive.actionBuilder(new Pose2d(-12, 55, Math.toRadians(-270))) // ends of scorePreload
+                .strafeToLinearHeading(new Vector2d(-3,46),Math.toRadians(180))
+                .strafeTo(new Vector2d(0,55))
+                .waitSeconds(1)
+                .build();
 
 
-        // Action scoreSet2 = drive.actionBuilder(new Pose2d(-8, 35, Math.toRadians(-270))) // ends of grabSet1
-        //         .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-225))
-        //         .build();
-
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(-12, 56, Math.toRadians(90))) // ends gate
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(0, 55, Math.toRadians(180))) // ends gate
                 .strafeToLinearHeading(new Vector2d( -25, 25), Math.toRadians(-225))
                 .build();
 
 
         // Set 2
         Action grabSet3 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-225))) // ends of score set 2
-                .strafeToLinearHeading(new Vector2d(13.2, 22), Math.toRadians(-270),
-                        new TranslationalVelConstraint(85))
-                .strafeToLinearHeading(new Vector2d(13.2, 66), Math.toRadians(-270),
-                        new TranslationalVelConstraint(85))
-                .strafeToLinearHeading(new Vector2d(13.2, 40), Math.toRadians(-270),
+                .strafeToLinearHeading(new Vector2d(13.2, 22), Math.toRadians(-270), //prepare set 3
+                        new TranslationalVelConstraint(80))
+                .strafeToLinearHeading(new Vector2d(13.2, 63), Math.toRadians(-270), //pickup set 3
+                        new TranslationalVelConstraint(80))
+                .build();
+
+                                                                            //WALL !!!!!!!
+        Action drawBackSet3 = drive.actionBuilder(new Pose2d(13.2, 61.5, Math.toRadians(-270))) // end of grab set 3
+                .strafeToLinearHeading(new Vector2d(13.2, 40), Math.toRadians(-270), //draw back set 3
                         new TranslationalVelConstraint(85))
                 .build();
 
 
-        Action scoreSet3 = drive.actionBuilder(new Pose2d(13.2, 40, Math.toRadians(-270))) // ends of grabSet1
-                .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-227))
+        Action scoreSet3 = drive.actionBuilder(new Pose2d(13.2, 40, Math.toRadians(-270))) // end of draw back set 3
+                .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-225))
                 .build();
 
         // Set 3
-        Action grabSet4 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-227))) // ends of scpre set 3
-                .strafeToLinearHeading(new Vector2d(35.5, 21), Math.toRadians(-270),
-                        new TranslationalVelConstraint(77))
-
-                //Spline Method
-                //.strafeToLinearHeading(new Vector2d(35.6, 41), Math.toRadians(-270))
-
-                //Strafe Method
-                .strafeToLinearHeading(new Vector2d(36, 66), Math.toRadians(-270))
-                .strafeToLinearHeading(new Vector2d(36, 40), Math.toRadians(-270))
-
-
+        Action grabSet4 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-225))) // end of score set 3
+                .strafeToLinearHeading(new Vector2d(35.5, 21), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(36, 64), Math.toRadians(-270))
                 .build();
 
-        Action scoreSet4 = drive.actionBuilder(new Pose2d(36, 40, Math.toRadians(-270))) // ends of grabSet1
-                //Spline Method
-                //.splineToLinearHeading(new Pose2d(-44,25, Math.toRadians(245)), Math.toRadians(167))
+                                                                          //WALL !!!!!!!
+        Action drawBackSet4 = drive.actionBuilder(new Pose2d(36, 61.5, Math.toRadians(-270))) // end of grab set 4
+                .strafeToLinearHeading(new Vector2d(36, 40), Math.toRadians(-270)) //draw back set 3
+                .build();
 
-                //Strafe Method
+        Action scoreSet4 = drive.actionBuilder(new Pose2d(36, 40, Math.toRadians(-270))) // end of draw back set 4
                 .strafeToLinearHeading(new Vector2d(-44, 25), Math.toRadians(-245))
                 .build();
 
@@ -126,14 +116,15 @@ public class LM2RedCloseGate12 extends LinearOpMode {
                                 acl.intakeSet(1080)
                         ),
                         //TODO - Tune the time the flywheel takes to get to good speed for preload
-                        acl.scoreSet(0.5,2.3),
+                        acl.scoreSet(0.5,2.4),
 
 
                         //--------Set 2--------\\
                         //Grab Set 2
                         new ParallelAction(
                                 new SequentialAction(
-                                        grabSet2
+                                        grabSet2,
+                                        gate
                                 ),
                                 //SHOOTER SECOND SET SPEED
                                 acl.intakeSet(1080)
@@ -143,14 +134,16 @@ public class LM2RedCloseGate12 extends LinearOpMode {
                         new SequentialAction(
                                 scoreSet2,
                                 //TODO - Flywheel is already near speed, tune the time it takes to adjust. should be very low
-                                //****IF 0.1 WORKS TRY 0!!!
                                 acl.scoreSet(0,2.6)
                         ),
 
                         //--------Set 3--------\\
                         //Grab Set 3
                         new ParallelAction(
-                                grabSet3,
+                                new SequentialAction(
+                                        grabSet3,
+                                        drawBackSet3
+                                ),
                                 //SHOOTER 3RD SET SPEED
                                 acl.intakeSet(1080)
                         ),
@@ -158,17 +151,17 @@ public class LM2RedCloseGate12 extends LinearOpMode {
                         //Shoot Set 3
                         new SequentialAction(
                                 scoreSet3,
-                                //****IF 0.1 WORKS TRY 0!!!
                                 acl.scoreSet(0,2.6)
                         ),
 
                         //--------Set 4--------\\
                         //Grab Set 4
                         new ParallelAction(
-                                grabSet4,
+                                new SequentialAction(
+                                        grabSet4,
+                                        drawBackSet4
+                                ),
                                 //SHOOTER 4TH SET SPEED
-                                //THIS IS A DIFF position(closer) so the speed should be less than the other ones
-
                                 acl.intakeSet(990)
                         ),
 
@@ -178,7 +171,6 @@ public class LM2RedCloseGate12 extends LinearOpMode {
                                         scoreSet4,
                                         new HoodAction(shooter.variableHood, 0.52)
                                 ),
-                                //****IF 0.1 WORKS TRY 0!!!
                                 acl.scoreSet(0,4)
                         )
 
