@@ -19,8 +19,9 @@ public class BlueCloseAuton {
         //90 - 53 = 47. 47 + 180 will get you the red starting pos.
         //53 + 90 will get you the blue starting pos.
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-46.7, -51, Math.toRadians(143+90)))
+                .waitSeconds(2)
+
                 //preload
-                .waitSeconds(200)
                 .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
                 .waitSeconds(4)
 

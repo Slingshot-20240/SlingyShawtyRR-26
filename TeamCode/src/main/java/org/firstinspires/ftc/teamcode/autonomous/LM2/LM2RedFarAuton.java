@@ -50,12 +50,12 @@ public class LM2RedFarAuton extends LinearOpMode {
 
         // Set 3
         Action grabSet3 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-203)))
-                .strafeToLinearHeading(new Vector2d(12.4,22),Math.toRadians(-270))
-                .strafeToLinearHeading(new Vector2d(12.4,64), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(13,22),Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(13,64), Math.toRadians(-270))
                 .build();
 
         //WALL !!!!!!!!!!!!!!!!
-        Action scoreSet3 = drive.actionBuilder(new Pose2d(12.4, 61.5, Math.toRadians(-270)))
+        Action scoreSet3 = drive.actionBuilder(new Pose2d(13, 61.5, Math.toRadians(-270)))
                 .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-203))
                 .build();
 
