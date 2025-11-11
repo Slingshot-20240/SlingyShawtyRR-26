@@ -60,35 +60,35 @@ public class LM2BlueCloseGate12 extends LinearOpMode {
 
         // Set 2
         Action grabSet3 = drive.actionBuilder(new Pose2d(-25, -25, Math.toRadians(225))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(13, -22), Math.toRadians(270),
+                .strafeToLinearHeading(new Vector2d(12, -22), Math.toRadians(270),
                         new TranslationalVelConstraint(85))
-                .strafeToLinearHeading(new Vector2d(13, -66), Math.toRadians(270),
+                .strafeToLinearHeading(new Vector2d(12, -66), Math.toRadians(270),
                         new TranslationalVelConstraint(85))
-                .strafeToLinearHeading(new Vector2d(13, -55), Math.toRadians(270),
+                .strafeToLinearHeading(new Vector2d(12, -55), Math.toRadians(270),
                         new TranslationalVelConstraint(85))
                 .build();
 
 
-        Action scoreSet3 = drive.actionBuilder(new Pose2d(13, -55, Math.toRadians(270))) // ends of grabSet1
+        Action scoreSet3 = drive.actionBuilder(new Pose2d(12, -55, Math.toRadians(270))) // ends of grabSet1
                 .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(230.04))
                 .build();
 
         // Set 3
         Action grabSet4 = drive.actionBuilder(new Pose2d(-25, -25, Math.toRadians(230.04))) // ends of scorePreload
-                .strafeToLinearHeading(new Vector2d(35.5, -25), Math.toRadians(270),
+                .strafeToLinearHeading(new Vector2d(35.5, -22), Math.toRadians(270),
                         new TranslationalVelConstraint(77))
 
                 //Spline Method
                 //.strafeToLinearHeading(new Vector2d(35.6, -41), Math.toRadians(270))
 
                 //Strafe Method
-                .strafeToLinearHeading(new Vector2d(37, -66), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(37, -56), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(36, -66), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(36, -56), Math.toRadians(270))
 
 
                 .build();
 
-        Action scoreSet4 = drive.actionBuilder(new Pose2d(37, -56, Math.toRadians(270))) // ends of grabSet1
+        Action scoreSet4 = drive.actionBuilder(new Pose2d(36, -56, Math.toRadians(270))) // ends of grabSet1
                 //Spline Method
                 //.splineToLinearHeading(new Pose2d(-44,-25, Math.toRadians(245)), Math.toRadians(167))
 
@@ -101,7 +101,7 @@ public class LM2BlueCloseGate12 extends LinearOpMode {
 //-----------------Initialization-----------------\\
         Actions.runBlocking(
                 new ParallelAction(
-                        new HoodAction(shooter.variableHood, 0.4)
+                        new HoodAction(shooter.variableHood, 0.41)
 
                 )
         );
