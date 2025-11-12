@@ -16,7 +16,14 @@ import java.util.stream.*;
 
 public class PythonLimelight {
     /*
-    FORMAT:
+    ACUTAL FORMAL:
+    [
+        most recent obelisk ID,
+        most recent nav ID,
+        angle from change yes (if the marker is on the right, then -, if on left, +)
+    ]
+
+    IDEAL FORMAT:
     [
         most recent obelisk ID,
         most recent nav ID,
@@ -29,18 +36,27 @@ public class PythonLimelight {
     ]
     */
     Limelight3A limelight;
-    boolean isBlue;
 
-    public PythonLimelight(HardwareMap hw, boolean isBlue) {
+    public PythonLimelight(HardwareMap hw) {
         limelight = hw.get(Limelight3A.class, "limelight");
         limelight.pipelineSwitch(2);
         limelight.start();
-        this.isBlue = isBlue;
     }
     public ObeliskLocation getObelisk(){
         return ObeliskLocation.fromInt((int) limelight.getLatestResult().getPythonOutput()[0]);
     }
 
+    //neg for turn right (clockwise), pos for turn left (counter clockwise)
+    public double getAngle(){
+        double[] llr = limelight.getLatestResult().getPythonOutput();
+
+        double angle = llr[2];
+        if(angle == -1)
+            return -1.0;
+
+        return angle;
+    }
+    /*
     public Pose3D getPose() {
         double[] llResults = limelight.getLatestResult().getPythonOutput();
         return new Pose3D(new Position(DistanceUnit.INCH, //TODO: figure this out LOL
@@ -55,6 +71,7 @@ public class PythonLimelight {
                                                  llResults[7],
                                                  System.nanoTime()));
     }
+    */
     public enum ObeliskLocation //measured by the location of the green
     {
         LEFT("GPP", 21), CENTER("PGP", 22), RIGHT("PPG", 23);

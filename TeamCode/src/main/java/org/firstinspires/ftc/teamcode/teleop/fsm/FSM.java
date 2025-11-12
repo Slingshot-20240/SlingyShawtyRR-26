@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
+import org.firstinspires.ftc.teamcode.subsystems.vision.PythonLimelight;
 
 public class FSM {
     // GENERAL ROBOT STATES + CLASSES
@@ -27,7 +28,7 @@ public class FSM {
     private final Transfer transfer;
     private final Shooter shooter;
     private final Drivetrain drivetrain;
-
+    private final PythonLimelight limelight;
 
     public FSM(HardwareMap hardwareMap, GamepadMapping gamepad) {
         robot = new Robot(hardwareMap, gamepad);
@@ -39,6 +40,7 @@ public class FSM {
         shooter = robot.shooter;
 
         drivetrain = robot.drivetrain;
+        limelight = robot.limelight;
     }
 
     public void update() {

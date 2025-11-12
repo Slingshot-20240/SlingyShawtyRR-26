@@ -20,6 +20,7 @@ public class GamepadMapping {
     public Toggle pidShoot;
     public Toggle shootBack;
     public Toggle shootFront;
+    public Toggle apriltagLock;
 
     // MISC
     // public Toggle failSafeReset;
@@ -38,6 +39,7 @@ public class GamepadMapping {
          shootBack = new Toggle(false);
          shootFront = new Toggle(false);
         // pidShoot = new Toggle(false);
+        apriltagLock = new Toggle(false);
 
         // MISC
         // failSafeReset = new Toggle(false);
@@ -60,6 +62,7 @@ public class GamepadMapping {
         shootBack.update(gamepad1.left_trigger >= 0.5);
         shootFront.update(gamepad1.left_bumper);
         //pidShoot.update(gamepad2.right_bumper);
+        apriltagLock.update(gamepad1.start);
 
         // failSafeReset.update(gamepad1.dpad_down);
 

@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
+import org.firstinspires.ftc.teamcode.subsystems.vision.PythonLimelight;
 
 public class Robot {
     // CONFIG
@@ -32,6 +33,8 @@ public class Robot {
 
     public GamepadMapping controls;
 
+    public PythonLimelight limelight;
+
     public Robot(HardwareMap hardwareMap, GamepadMapping controls) {
         this.controls = controls;
 
@@ -45,7 +48,7 @@ public class Robot {
         transfer = new Transfer(hardwareMap);
         shooter = new Shooter(hardwareMap);
         drivetrain = new Drivetrain(hardwareMap, imu, controls);
-
+        limelight = new PythonLimelight(hardwareMap);
     }
 
     public void hardwareSoftReset() {
