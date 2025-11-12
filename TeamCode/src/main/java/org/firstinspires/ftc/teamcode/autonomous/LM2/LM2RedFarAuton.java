@@ -5,7 +5,6 @@ import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
-import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -17,13 +16,13 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
 
 @Config
-@Autonomous(name = "9 Red FAR Auton", group = "Autonomous")
+@Autonomous(name = "12 Red FAR Auton", group = "Autonomous")
 public class LM2RedFarAuton extends LinearOpMode {
 
 
     @Override
     public void runOpMode() {
-        Pose2d initialPose = new Pose2d(61.5, -14, Math.toRadians(180));
+        Pose2d initialPose = new Pose2d(61.5, 14, Math.toRadians(180));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
         LM2FarSequences acl = new LM2FarSequences(hardwareMap);
 
@@ -38,35 +37,34 @@ public class LM2RedFarAuton extends LinearOpMode {
 
         // Set 2
         Action grabSet2 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-203)))
-                .strafeToLinearHeading(new Vector2d(36, 22), Math.toRadians(-270)) // prepareSet1Pose
-                .strafeToLinearHeading(new Vector2d(36, 64), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(40, 22), Math.toRadians(-270)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(40, 64), Math.toRadians(-270))
                 .build();
 
         //WALL !!!!!!!!!!!!!!!!
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(36, 61.5, Math.toRadians(-270))) // ends of grabSet2
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(40, 61.5, Math.toRadians(-270))) // ends of grabSet2
                 .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-203))
                 .build();
 
 
         // Set 3
         Action grabSet3 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-203)))
-                .strafeToLinearHeading(new Vector2d(13,22),Math.toRadians(-270))
-                .strafeToLinearHeading(new Vector2d(13,64), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(16,22),Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(16,64), Math.toRadians(-270))
                 .build();
 
         //WALL !!!!!!!!!!!!!!!!
-        Action scoreSet3 = drive.actionBuilder(new Pose2d(13, 61.5, Math.toRadians(-270)))
+        Action scoreSet3 = drive.actionBuilder(new Pose2d(16, 61.5, Math.toRadians(-270)))
                 .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-203))
                 .build();
 
         Action grabSet4hp = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-203)))
-                .strafeToLinearHeading(new Vector2d(40, 62), Math.toRadians(0))
-                .strafeToLinearHeading(new Vector2d(62, 63), Math.toRadians(0),
-                        new TranslationalVelConstraint(90))
+                .strafeToLinearHeading(new Vector2d(40, 50), Math.toRadians(0))
+                .strafeToLinearHeading(new Vector2d(62, 50), Math.toRadians(0))
                 .build();
 
         // Park                                                         WALL !!!!!!!!
-        Action park = drive.actionBuilder(new Pose2d(61.5, -1.5, Math.toRadians(0)))
+        Action park = drive.actionBuilder(new Pose2d(61.5, 61.5, Math.toRadians(0)))
                 .strafeToLinearHeading(new Vector2d(35, 20), Math.toRadians(180))
                 .build();
 
