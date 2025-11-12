@@ -27,18 +27,18 @@ public class BlueFarAuton {
                 .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
 
 
-                //SAME AS CLOSE SIDE 3rd SET VALUES!!!!!!!!!!!!!!!!!!!!!!!!!
-                .strafeToLinearHeading(new Vector2d(12.4,-22),Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(12.4,-61.5), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
+//                //SAME AS CLOSE SIDE 3rd SET VALUES!!!!!!!!!!!!!!!!!!!!!!!!!
+//                .strafeToLinearHeading(new Vector2d(12.4,-22),Math.toRadians(270))
+//                .strafeToLinearHeading(new Vector2d(12.4,-61.5), Math.toRadians(270))
+//                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
 
-                //set 4?
+                //set 3?
                 .strafeToLinearHeading(new Vector2d(40, -61.5), Math.toRadians(0))
                 .strafeToLinearHeading(new Vector2d(61.5, -61.5), Math.toRadians(0),
                         new TranslationalVelConstraint(90))
 
                 //park
-                .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(180))
+                .strafeTo(new Vector2d(38, -32))
 
 
                 .build());

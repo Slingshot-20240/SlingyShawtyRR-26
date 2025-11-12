@@ -48,18 +48,18 @@ public class LM2BlueFarAuton extends LinearOpMode {
                 .build();
 
 
-        // Set 3
-        Action grabSet3 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(203)))
-                .strafeToLinearHeading(new Vector2d(13,-22),Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(13,-64), Math.toRadians(270))
-                .build();
+//        // Set 3
+//        Action grabSet3 = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(203)))
+//                .strafeToLinearHeading(new Vector2d(13,-22),Math.toRadians(270))
+//                .strafeToLinearHeading(new Vector2d(13,-64), Math.toRadians(270))
+//                .build();
+//
+//                                                                        //WALL !!!!!!!!!!!!!!!!
+//        Action scoreSet3 = drive.actionBuilder(new Pose2d(13, -61.5, Math.toRadians(270)))
+//                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
+//                .build();
 
-                                                                        //WALL !!!!!!!!!!!!!!!!
-        Action scoreSet3 = drive.actionBuilder(new Pose2d(13, -61.5, Math.toRadians(270)))
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
-                .build();
-
-        Action grabSet4hp = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(203)))
+        Action grabSet3hp = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(203)))
                 .strafeToLinearHeading(new Vector2d(40, -62), Math.toRadians(0))
                 .strafeToLinearHeading(new Vector2d(62, -63), Math.toRadians(0),
                         new TranslationalVelConstraint(90))
@@ -114,24 +114,24 @@ public class LM2BlueFarAuton extends LinearOpMode {
                                 acl.scoreSet(0,2.8)
                         ),
 
-                        //--------Set 3--------\\
-                        //Grab Set 3
-                        new ParallelAction(
-                                grabSet3,
-                                //SHOOTER 3RD SET SPEED
-                                acl.intakeSet(1480)
-                        ),
-
-                        //Shoot Set 3
-                        new SequentialAction(
-                                scoreSet3,
-                                //****IF 0.3 WORKS TRY 0!!!
-                                acl.scoreSet(0,2.8)
-                        ),
+//                        //--------Set 3--------\\
+//                        //Grab Set 3
+//                        new ParallelAction(
+//                                grabSet3,
+//                                //SHOOTER 3RD SET SPEED
+//                                acl.intakeSet(1480)
+//                        ),
+//
+//                        //Shoot Set 3
+//                        new SequentialAction(
+//                                scoreSet3,
+//                                //****IF 0.3 WORKS TRY 0!!!
+//                                acl.scoreSet(0,2.8)
+//                        ),
                         //--------Set 4--------\\
                         //Grab Set 4
                         new ParallelAction(
-                                grabSet4hp,
+                                grabSet3hp,
                                 //SHOOTER 3RD SET SPEED
                                 acl.intakeSet(0)
                         ),
