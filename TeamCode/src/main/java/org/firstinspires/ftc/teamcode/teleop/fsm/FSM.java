@@ -78,6 +78,8 @@ public class FSM {
                     state = FSMStates.SHOOT_FRONT;
                 }
 
+
+
                 break;
             case OUTTAKING:
                 intake.intakeReverse();
