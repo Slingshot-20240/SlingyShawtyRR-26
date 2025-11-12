@@ -38,6 +38,7 @@ public class FSM {
         intake = robot.intake;
         //turret = robot.turret;
         transfer = robot.transfer;
+
         shooter = robot.shooter;
 
 //        drivetrain = robot.drivetrain;
