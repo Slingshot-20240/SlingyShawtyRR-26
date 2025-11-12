@@ -46,7 +46,7 @@ public class PythonLimelight {
         return ObeliskLocation.fromInt((int) limelight.getLatestResult().getPythonOutput()[0]);
     }
 
-    //neg for turn right (clockwise), pos for turn left (counter clockwise)
+    //neg for turn right (clockwise), pos for turn left (counter clockwise) [radians]
     public double getAngle(){
         double[] llr = limelight.getLatestResult().getPythonOutput();
 
