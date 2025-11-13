@@ -48,7 +48,7 @@ public class LM2RedCloseGate12 extends LinearOpMode {
         Action gate = drive.actionBuilder(new Pose2d(-11.5, 55, Math.toRadians(-270))) // ends of scorePreload
                 .strafeToLinearHeading(new Vector2d(-4.5,50),Math.toRadians(180), null,
                         new ProfileAccelConstraint(-80,80))
-                .strafeTo(new Vector2d(-4.5,59), null,
+                .strafeTo(new Vector2d(-4.5,61), null,
                         new ProfileAccelConstraint(-80,80))
                 .waitSeconds(1)
                 .build();

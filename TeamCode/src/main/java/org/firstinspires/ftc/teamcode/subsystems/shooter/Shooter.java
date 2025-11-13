@@ -131,7 +131,7 @@ public class Shooter {
     // fully down is .6
     // fully up is .1
     public void hoodToBack() {
-        variableHood.setPosition(.1);
+        variableHood.setPosition(.175);
     }
 
     public void hoodToFront() {
