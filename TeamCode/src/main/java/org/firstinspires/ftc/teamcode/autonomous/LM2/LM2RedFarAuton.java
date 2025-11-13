@@ -48,7 +48,7 @@ public class LM2RedFarAuton extends LinearOpMode {
         // Set 2
         Action grabSet2 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-203)))
                 .strafeToLinearHeading(new Vector2d(40, 22), Math.toRadians(-270)) // prepareSet1Pose
-                .strafeToLinearHeading(new Vector2d(40, 57), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(40, 54), Math.toRadians(-270))
                 .build();
 
         //WALL !!!!!!!!!!!!!!!!
@@ -62,7 +62,7 @@ public class LM2RedFarAuton extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(40, 45), Math.toRadians(0),
                         new TranslationalVelConstraint(70), new ProfileAccelConstraint(-30,50))
                 .strafeToLinearHeading(new Vector2d(59, 45), Math.toRadians(15),
-                        new TranslationalVelConstraint(8), new ProfileAccelConstraint(-20,40))
+                        new TranslationalVelConstraint(12), new ProfileAccelConstraint(-20,40))
                 .strafeTo(new Vector2d(60,30))
                 .build();
 
