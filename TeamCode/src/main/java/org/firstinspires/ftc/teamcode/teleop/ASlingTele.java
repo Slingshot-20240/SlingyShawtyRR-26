@@ -64,12 +64,15 @@ public class ASlingTele extends OpMode {
         telemetry.addData("x", pose.position.x);
         telemetry.addData("y", pose.position.y);
         telemetry.addData("heading (deg)", Math.toDegrees(pose.heading.toDouble()));
+        telemetry.addData("limelight number", Math.toDegrees(robot.limelight.getAngle()));
+
         telemetry.update();
 
         TelemetryPacket packet = new TelemetryPacket();
         packet.fieldOverlay().setStroke("#3F51B5");
         Drawing.drawRobot(packet.fieldOverlay(), pose);
         FtcDashboard.getInstance().sendTelemetryPacket(packet);
+
 
         Action turnToAprilTag = drive.actionBuilder(pose)
                 .turn(robot.limelight.getAngle())

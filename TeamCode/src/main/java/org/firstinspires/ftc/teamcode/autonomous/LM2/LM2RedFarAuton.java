@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
 
 
 @Config
-@Autonomous(name = "12 Red FAR Auton", group = "Autonomous")
+@Autonomous(name = "9 Red FAR Auton hp", group = "Autonomous")
 public class LM2RedFarAuton extends LinearOpMode {
 
 
@@ -48,11 +48,11 @@ public class LM2RedFarAuton extends LinearOpMode {
         // Set 2
         Action grabSet2 = drive.actionBuilder(new Pose2d(55, 12, Math.toRadians(-203)))
                 .strafeToLinearHeading(new Vector2d(40, 22), Math.toRadians(-270)) // prepareSet1Pose
-                .strafeToLinearHeading(new Vector2d(40, 61.5), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(40, 57), Math.toRadians(-270))
                 .build();
 
         //WALL !!!!!!!!!!!!!!!!
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(40, 61.5, Math.toRadians(-270))) // ends of grabSet2
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(40, 60, Math.toRadians(-270))) // ends of grabSet2
                 .strafeToLinearHeading(new Vector2d(55, 12), Math.toRadians(-203),
                         new TranslationalVelConstraint(50), new ProfileAccelConstraint(-30,50))
                 .build();
@@ -80,7 +80,7 @@ public class LM2RedFarAuton extends LinearOpMode {
 //-----------------Initialization-----------------\\
         Actions.runBlocking(
                 new ParallelAction(
-                        new HoodAction(shooter.variableHood, 0.31)
+                        new HoodAction(shooter.variableHood, 0.3)
                 )
         );
 
@@ -132,7 +132,7 @@ public class LM2RedFarAuton extends LinearOpMode {
                         new SequentialAction(
                                 scoreSet4,
                                 //****IF 0.3 WORKS TRY 0!!!
-                                acl.scoreSet(0.3,3.4)
+                                acl.scoreSet(0.3,4)
                         ),
 
 
