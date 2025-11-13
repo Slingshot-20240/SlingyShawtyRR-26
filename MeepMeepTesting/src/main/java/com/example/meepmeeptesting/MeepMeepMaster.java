@@ -1,6 +1,7 @@
 package com.example.meepmeeptesting;
 
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeBlueDark;
@@ -21,27 +22,27 @@ public class MeepMeepMaster {
 
         blueFront.runAction(blueFront.getDrive().actionBuilder(new Pose2d(-55, -45, Math.toRadians(180-37)))
                 .waitSeconds(2)
-                //preload
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
-                .waitSeconds(6)
 
-                // Set 1
-                //grab set 1
-                .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(-12, -53), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(-11, -21), Math.toRadians(270)) // prepare set 2
+                .strafeToLinearHeading(new Vector2d(-12, -55), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(-3,-46),Math.toRadians(180))
+                .strafeTo(new Vector2d(0,-55))
+                .waitSeconds(1)
+                .strafeToLinearHeading(new Vector2d( -25, -25), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(13, -21), Math.toRadians(270), //prepare set 3
+                        new TranslationalVelConstraint(80))
+                .strafeToLinearHeading(new Vector2d(13, -63), Math.toRadians(270), //pickup set 3
+                        new TranslationalVelConstraint(80))
+                .strafeToLinearHeading(new Vector2d(13, -40), Math.toRadians(270), //draw back set 3
+                        new TranslationalVelConstraint(85))
+                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(35.5, -21), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(36, -64), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(36, -40), Math.toRadians(270)) //draw back set 3
+                .strafeToLinearHeading(new Vector2d(-44, -25), Math.toRadians(245))
+                .waitSeconds(2)
 
-                //score set 1
-                .strafeToLinearHeading(new Vector2d(-24, -24), Math.toRadians(225))
-                .waitSeconds(4.5)
-
-                // Set 2
-                //grab set 2
-                .strafeToLinearHeading(new Vector2d(12, -22), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(12.3, -60), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(12.3, -49), Math.toRadians(270))
-
-                //score set 2
-                .strafeToLinearHeading(new Vector2d(-44, -24), Math.toRadians(245))
                 .build());
 
 
@@ -55,24 +56,24 @@ public class MeepMeepMaster {
 
         blueBack.runAction(blueBack.getDrive().actionBuilder(new Pose2d(61.5, -14, Math.toRadians(180)))
                 .waitSeconds(2)
-                //score preloads
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(210))
-                .waitSeconds(7)
 
-                //grab set 1
-                .splineTo(new Vector2d(36,-45),Math.toRadians(270))
-                .splineTo(new Vector2d(36,-62),Math.toRadians(270))
-                //score set 1
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(210))
-                .waitSeconds(4.5)
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
 
-                //grab set 2
-                .strafeToLinearHeading(new Vector2d(12,-22),Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(12.3,-62),Math.toRadians(270))
+                //SAME AS CLOSE SIDE 4th SET VALUES!!!!!!!!!!!!!!!!!!!!!!!!!
+                .strafeToLinearHeading(new Vector2d(36, -22), Math.toRadians(270)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(36, -61.5), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
 
-                //score set 1
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(210))
-                .waitSeconds(4.5)
+
+                //SAME AS CLOSE SIDE 3rd SET VALUES!!!!!!!!!!!!!!!!!!!!!!!!!
+                .strafeToLinearHeading(new Vector2d(13,-22),Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(13,-61.5), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
+
+                //set 4?
+                .strafeToLinearHeading(new Vector2d(40, -61.5), Math.toRadians(0))
+                .strafeToLinearHeading(new Vector2d(61.5, -61.5), Math.toRadians(0),
+                        new TranslationalVelConstraint(90))
 
                 //park
                 .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(180))

@@ -18,7 +18,6 @@ import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
-@Disabled
 @Config
 @Autonomous(name = "6 Blue CLOSE Auton", group = "Autonomous")
 public class LM1BlueCloseAuton extends LinearOpMode {
@@ -39,11 +38,11 @@ public class LM1BlueCloseAuton extends LinearOpMode {
 //-----------------Pathing Actions-----------------\\
         // Score Preload
         Action scorePreload = drive.actionBuilder(initialPose)
-                .strafeToLinearHeading(new Vector2d(-25, -25), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(-35, -15), Math.toRadians(225))
                 .build();
 
         // Set 1
-        Action prepareSet1 = drive.actionBuilder(new Pose2d(-25, -25, Math.toRadians(225))) // ends of scorePreload
+        Action prepareSet1 = drive.actionBuilder(new Pose2d(-35, -15, Math.toRadians(225))) // ends of scorePreload
                 .strafeToLinearHeading(new Vector2d(-11, -22), Math.toRadians(270),
                         new TranslationalVelConstraint(70)) // prepareSet1Pose
                 .build();

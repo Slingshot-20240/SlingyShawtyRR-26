@@ -17,9 +17,9 @@ public class Shooter {
     public Shooter(HardwareMap hardwareMap) {
         outtake1 = hardwareMap.get(DcMotorEx.class, "outtake1");
         outtake2 = hardwareMap.get(DcMotorEx.class, "outtake2");
-        outtake1.setVelocityPIDFCoefficients(575,0,0,70);
-        outtake2.setVelocityPIDFCoefficients(575,0,0,70);
-        outtake1.setDirection(DcMotorSimple.Direction.FORWARD);
+        outtake1.setVelocityPIDFCoefficients(600,0,0,40);
+        outtake2.setVelocityPIDFCoefficients(600,0,0,40);
+        outtake2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         variableHood = hardwareMap.get(Servo.class, "variableHood");
     }
@@ -29,7 +29,7 @@ public class Shooter {
         // 5.059
         HARDCODED_SHOOT_FRONT(-1120),
         // 5.954
-        HARDCODED_SHOOT_BACK(-1420),
+        HARDCODED_SHOOT_BACK(-1400),
         IDLE(0);
 
         private final double outtake_vels;
@@ -89,8 +89,8 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake1.setVelocityPIDFCoefficients(575,0,0,70);
-            outtake2.setVelocityPIDFCoefficients(575,0,0,70);
+            outtake1.setVelocityPIDFCoefficients(600,0,0,40);
+            outtake2.setVelocityPIDFCoefficients(600,0,0,40);
             outtake1.setVelocity(0);
             outtake2.setVelocity(0);
             return false;
@@ -105,8 +105,8 @@ public class Shooter {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            outtake1.setVelocityPIDFCoefficients(575,0,0,70);
-            outtake2.setVelocityPIDFCoefficients(575,0,0,70);
+            outtake1.setVelocityPIDFCoefficients(600,0,0,40);
+            outtake2.setVelocityPIDFCoefficients(600,0,0,40);
             outtake1.setVelocity(-1020);
             outtake2.setVelocity(-1020);
             return false;
@@ -122,26 +122,30 @@ public class Shooter {
 
     public void setShooterVelocity(double velo) {
         outtake1.setVelocity(velo);
+        outtake2.setVelocity(velo);
     }
 
     public void setHoodAngle(double angle) {
         variableHood.setPosition(angle);
     }
-
-    public void hoodToBackTriPos() {
-        variableHood.setPosition(.65);
+    // fully down is .6
+    // fully up is .1
+    public void hoodToBack() {
+        variableHood.setPosition(.175);
     }
 
-    public void hoodToFrontTriPos() {
-        variableHood.setPosition(.3);
+    public void hoodToFront() {
+        variableHood.setPosition(.5);
     }
 
     public void shootFromBack() {
         outtake1.setVelocity(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
+        outtake2.setVelocity(outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel());
     }
 
     public void shootFromFront() {
         outtake1.setVelocity(outtakeVels.HARDCODED_SHOOT_FRONT.getOuttakeVel());
+        outtake2.setVelocity(outtakeVels.HARDCODED_SHOOT_FRONT.getOuttakeVel());
     }
 
 }

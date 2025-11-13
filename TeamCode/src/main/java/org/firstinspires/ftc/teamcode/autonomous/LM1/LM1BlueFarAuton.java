@@ -20,7 +20,6 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.action.HoodAction;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.action.ShooterAction;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
 
-@Disabled
 @Config
 @Autonomous(name = "6 Blue FAR Auton", group = "Autonomous")
 public class LM1BlueFarAuton extends LinearOpMode {
@@ -100,7 +99,7 @@ public class LM1BlueFarAuton extends LinearOpMode {
                                         grabSet1,
                                         acl.intakeSet(),
                                         //start spinning up shooter
-                                        new ShooterAction(shooter.outtake1, -1390)
+                                        new ShooterAction(shooter.outtake1, shooter.outtake2, -1390)
                                 )
                         ),
 

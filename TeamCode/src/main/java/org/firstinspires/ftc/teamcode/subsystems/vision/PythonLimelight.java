@@ -1,22 +1,11 @@
 package org.firstinspires.ftc.teamcode.subsystems.vision;
 
-import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
-import org.firstinspires.ftc.robotcore.external.navigation.Position;
-import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
-
-import java.util.Objects;
-import java.util.stream.*;
-
-
 public class PythonLimelight {
     /*
-    ACUTAL FORMAL:
+    ACUTAL FORMAT:
     [
         most recent obelisk ID,
         most recent nav ID,

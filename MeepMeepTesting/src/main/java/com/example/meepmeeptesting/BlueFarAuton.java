@@ -18,27 +18,28 @@ public class BlueFarAuton {
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(61.5, -14, Math.toRadians(180)))
                 .waitSeconds(2)
-                //score preloads
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201))
-                .waitSeconds(6.3)
 
-                //grab set 1
-                .splineTo(new Vector2d(36,-45),Math.toRadians(270))
-                .splineTo(new Vector2d(36,-62),Math.toRadians(270))
-                //score set 1
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201))
-                .waitSeconds(4.5)
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
 
-                //grab set 2
-                .strafeToLinearHeading(new Vector2d(12,-22),Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(12.3,-62),Math.toRadians(270))
+                //SAME AS CLOSE SIDE 4th SET VALUES!!!!!!!!!!!!!!!!!!!!!!!!!
+                .strafeToLinearHeading(new Vector2d(36, -22), Math.toRadians(270)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(36, -61.5), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
 
-                //score set 1
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(201))
-                .waitSeconds(4.5)
+
+//                //SAME AS CLOSE SIDE 3rd SET VALUES!!!!!!!!!!!!!!!!!!!!!!!!!
+//                .strafeToLinearHeading(new Vector2d(12.4,-22),Math.toRadians(270))
+//                .strafeToLinearHeading(new Vector2d(12.4,-61.5), Math.toRadians(270))
+//                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203))
+
+                //set 3?
+                .strafeToLinearHeading(new Vector2d(40, -61.5), Math.toRadians(0))
+                .strafeToLinearHeading(new Vector2d(61.5, -61.5), Math.toRadians(0),
+                        new TranslationalVelConstraint(90))
 
                 //park
-                .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(180))
+                .strafeTo(new Vector2d(38, -32))
+
 
                 .build());
         meepMeep.setBackground(MeepMeep.Background.FIELD_DECODE_JUICE_DARK)

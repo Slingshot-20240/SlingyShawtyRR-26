@@ -25,7 +25,7 @@ public class Robot {
     // intake control hub port 3
 
     // MECHANISMS
-    private final IMU imu;
+    public final IMU imu;
     public Intake intake;
     public Transfer transfer;
     public Shooter shooter;
@@ -40,20 +40,23 @@ public class Robot {
 
         imu = hardwareMap.get(IMU.class, "imu");
         imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
+                RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
                 RevHubOrientationOnRobot.UsbFacingDirection.UP)));
         imu.resetYaw();
 
         intake = new Intake(hardwareMap);
         transfer = new Transfer(hardwareMap);
         shooter = new Shooter(hardwareMap);
-        drivetrain = new Drivetrain(hardwareMap, imu, controls);
+
+        //ISHAAN TOOK THIS OUT SO THE REVERSING MOTORS DOES NOT CLASH WITH THE RR MOTORS
+        //drivetrain = new Drivetrain(hardwareMap, imu, controls);
+
         limelight = new PythonLimelight(hardwareMap);
     }
 
     public void hardwareSoftReset() {
         transfer.transferOff();
-        shooter.hoodToBackTriPos();
+        shooter.hoodToBack();
         intake.intakeOff();
         shooter.setShooterVelocity(0);
     }

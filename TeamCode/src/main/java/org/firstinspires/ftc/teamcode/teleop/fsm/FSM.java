@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
 import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
-import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
+//import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Transfer;
@@ -27,7 +27,8 @@ public class FSM {
     //private Turret turret;
     private final Transfer transfer;
     private final Shooter shooter;
-    private final Drivetrain drivetrain;
+    //private final Drivetrain drivetrain;
+
     private final PythonLimelight limelight;
 
     public FSM(HardwareMap hardwareMap, GamepadMapping gamepad) {
@@ -37,15 +38,19 @@ public class FSM {
         intake = robot.intake;
         //turret = robot.turret;
         transfer = robot.transfer;
+
         shooter = robot.shooter;
 
-        drivetrain = robot.drivetrain;
+//        drivetrain = robot.drivetrain;
         limelight = robot.limelight;
     }
 
     public void update() {
         // Updates driver controls here as well
-        drivetrain.update();
+
+        //ISHAAN TOOK THIS OUT FOR NO REVERSING MOTOR CONFLICT WITH RR
+        //drivetrain.update();
+
         // Updates all other controls
         gamepad.update();
 
@@ -57,24 +62,24 @@ public class FSM {
             case BASE_STATE:
                 // TODO: still keep always running depending on spin up time
                 shooter.shootFromFront();
+                shooter.hoodToFront();
 
                 intake.intakeOn();
-
-                // move to new state
-                if (gamepad.transfer.value()) {
-                    transfer.transferOn();
-                } else {
-                    // Hotdog the ball!
-                    transfer.hotDog();
-                }
+                transfer.hotDog();
 
                 if (gamepad.outtake.locked()) {
                     state = FSMStates.OUTTAKING;
                 }
 
-                if (gamepad.shootBack.value()) {
+                if (gamepad.shootBack.locked()) {
                     state = FSMStates.SHOOT_BACK;
                 }
+
+                if (gamepad.shootFront.locked()) {
+                    state = FSMStates.SHOOT_FRONT;
+                }
+
+
 
                 break;
             case OUTTAKING:
@@ -87,12 +92,13 @@ public class FSM {
 
             case SHOOT_BACK:
                 shooter.shootFromBack();
+                shooter.hoodToBack();
 
-                if (gamepad.transfer.locked()) {
-                    state = FSMStates.TRANSFER;
+                if (shooter.outtake1.getVelocity() <= Shooter.outtakeVels.HARDCODED_SHOOT_BACK.getOuttakeVel() + 50) {
+                    transfer.transferOn();
                 }
 
-                if (!gamepad.shootBack.value()) {
+                if (!gamepad.shootBack.locked()) {
                     state = FSMStates.BASE_STATE;
                     gamepad.resetMultipleControls(gamepad.shootBack, gamepad.shootFront, gamepad.transfer);
                 }
@@ -100,21 +106,10 @@ public class FSM {
             case SHOOT_FRONT:
                 shooter.shootFromFront();
 
-                if (gamepad.transfer.locked()) {
-                    state = FSMStates.TRANSFER;
-                }
-
-                if (!gamepad.shootFront.value()) {
-                    state = FSMStates.BASE_STATE;
-                    gamepad.resetMultipleControls(gamepad.shootBack, gamepad.shootFront, gamepad.transfer);
-                }
-                break;
-            case TRANSFER:
                 transfer.transferOn();
 
-                if (!gamepad.transfer.locked()) {
+                if (!gamepad.shootFront.locked()) {
                     state = FSMStates.BASE_STATE;
-                    transfer.hotDog();
                     gamepad.resetMultipleControls(gamepad.shootBack, gamepad.shootFront, gamepad.transfer);
                 }
                 break;

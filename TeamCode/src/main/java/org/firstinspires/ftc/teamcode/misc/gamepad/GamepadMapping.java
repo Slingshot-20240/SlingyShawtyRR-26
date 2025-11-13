@@ -26,6 +26,7 @@ public class GamepadMapping {
     // public Toggle failSafeReset;
     public Toggle transfer; // LM1
     public Toggle outtake; // LM1
+    public Toggle farLock;
 
     public GamepadMapping(Gamepad gamepad1, Gamepad gamepad2) {
         // GAMEPADS
@@ -45,6 +46,7 @@ public class GamepadMapping {
         // failSafeReset = new Toggle(false);
         transfer = new Toggle(false);
         outtake = new Toggle(false);
+        farLock = new Toggle(false);
     }
 
     public void joystickUpdate() {
@@ -71,6 +73,8 @@ public class GamepadMapping {
 
         // OUTTAKE
         outtake.update(gamepad1.right_bumper);
+
+        farLock.update(gamepad1.dpad_down);
     }
 
     public void resetMultipleControls(Toggle... toggles) {

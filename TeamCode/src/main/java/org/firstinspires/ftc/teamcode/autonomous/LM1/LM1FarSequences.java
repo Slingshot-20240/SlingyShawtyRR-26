@@ -31,7 +31,7 @@ public class LM1FarSequences {
         return new ParallelAction(
                 intake.in(),
                 //shooter.out()
-                new ShooterAction(shooter.outtake1, shooter.outtake2, -1387)
+                new ShooterAction(shooter.outtake1,shooter.outtake2, -1387)
 
         );
     }
