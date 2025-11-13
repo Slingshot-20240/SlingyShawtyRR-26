@@ -39,7 +39,7 @@ public class PythonLimelight {
 
     public PythonLimelight(HardwareMap hw) {
         limelight = hw.get(Limelight3A.class, "limelight");
-        limelight.pipelineSwitch(2);
+        limelight.pipelineSwitch(1);
         limelight.start();
     }
     public ObeliskLocation getObelisk(){
