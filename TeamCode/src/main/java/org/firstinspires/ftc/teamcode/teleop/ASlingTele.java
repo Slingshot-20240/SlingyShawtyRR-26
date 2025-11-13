@@ -71,16 +71,14 @@ public class ASlingTele extends OpMode {
         Drawing.drawRobot(packet.fieldOverlay(), pose);
         FtcDashboard.getInstance().sendTelemetryPacket(packet);
 
-
-        //ADDED BY ISHAAN
-        Action alignBack = drive.actionBuilder(pose)
-                .turnTo(Math.toRadians(-201))
+        Action turnToAprilTag = drive.actionBuilder(pose)
+                .turn(robot.limelight.getAngle())
                 .build();
 
-
-        if (gamepad1.start) {
-            Actions.runBlocking(alignBack);
+        if (controls.farLock.value()) {
+            Actions.runBlocking(turnToAprilTag);
         }
+
         //TODO - make for other side too
 //        if (gamepad1.start) {
 //            drive.localizer.setPose(new Pose2d(61.5, -61.5, Math.toRadians(270)));
