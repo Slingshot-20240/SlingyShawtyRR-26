@@ -9,7 +9,7 @@ public class PythonLimelight {
     [
         most recent obelisk ID,
         most recent nav ID,
-        angle from change yes (if the marker is on the right, then -, if on left, +)
+        angle from change yes (if the marker is on the right, then +, if on left, -)
     ]
 
     IDEAL FORMAT:
@@ -35,15 +35,13 @@ public class PythonLimelight {
         return ObeliskLocation.fromInt((int) limelight.getLatestResult().getPythonOutput()[0]);
     }
 
-    //neg for turn right (clockwise), pos for turn left (counter clockwise) [radians]
+    //pos for turn right (clockwise), neg for turn left (counter clockwise) [radians]
     public double getAngle(){
         double[] llr = limelight.getLatestResult().getPythonOutput();
-
-        double angle = llr[2];
-        if(angle == -1)
+        if (llr == null || llr.length < 2)
             return -1.0;
 
-        return angle;
+        return llr[2];
     }
     /*
     public Pose3D getPose() {
