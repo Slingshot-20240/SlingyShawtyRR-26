@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.Roadrunner.Drawing;
 import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
+import org.firstinspires.ftc.teamcode.teleop.IshaanStuff.ShooterController;
 import org.firstinspires.ftc.teamcode.teleop.fsm.FSM;
 
 @TeleOp
@@ -25,6 +26,7 @@ public class ASlingTele extends OpMode {
     private Robot robot;
 
     private MecanumDrive drive;
+    private ShooterController shooter;
 
     @Override
     public void init() {
@@ -34,6 +36,7 @@ public class ASlingTele extends OpMode {
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, Math.toRadians(-270)));
+        shooter = new ShooterController(hardwareMap);
 
 
     }
@@ -88,6 +91,12 @@ public class ASlingTele extends OpMode {
 //            drive = new MecanumDrive(hardwareMap, new Pose2d(61.5, -61.5, Math.toRadians(270)));
 //        }
 
+
+        //SHOOTER STUFF ADDED BY ISHAAN PROLLY WONT WORK
+        double x = pose.position.x;
+        double y = pose.position.y;
+
+        shooter.updateShooter(x, y);
 
 
     }
