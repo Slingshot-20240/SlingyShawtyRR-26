@@ -67,7 +67,9 @@ public class ASlingTele extends OpMode {
         telemetry.addData("x", pose.position.x);
         telemetry.addData("y", pose.position.y);
         telemetry.addData("heading (deg)", Math.toDegrees(pose.heading.toDouble()));
-        telemetry.addData("limelight number", Math.toDegrees(robot.limelight.getAngle()));
+        telemetry.addData("limelight angle", Math.toDegrees(robot.limelight.getAngle()));
+        telemetry.addData("limelight nav", (robot.limelight.getLastNav()));
+        telemetry.addData("limelight obelisk", (robot.limelight.getObelisk().order));
 
         telemetry.update();
 
@@ -76,14 +78,14 @@ public class ASlingTele extends OpMode {
         Drawing.drawRobot(packet.fieldOverlay(), pose);
         FtcDashboard.getInstance().sendTelemetryPacket(packet);
 
-
-        Action turnToAprilTag = drive.actionBuilder(pose)
-                .turn(robot.limelight.getAngle())
-                .build();
-
-        if (controls.farLock.value()) {
-            Actions.runBlocking(turnToAprilTag);
-        }
+//
+//        Action turnToAprilTag = drive.actionBuilder(pose)
+//                .turn(robot.limelight.getAngle())
+//                .build();
+//
+//        if (controls.farLock.value()) {
+//            Actions.runBlocking(turnToAprilTag);
+//        }
 
         //TODO - make for other side too
 //        if (gamepad1.start) {

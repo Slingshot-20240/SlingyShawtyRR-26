@@ -3,13 +3,15 @@ package org.firstinspires.ftc.teamcode.subsystems.vision;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class PythonLimelight {
     /*
     ACUTAL FORMAT:
     [
         most recent obelisk ID,
         most recent nav ID,
-        angle from change yes (if the marker is on the right, then -, if on left, +)
+        angle from change yes (if the marker is on the right, then +, if on left, -)
     ]
 
     IDEAL FORMAT:
@@ -28,22 +30,28 @@ public class PythonLimelight {
 
     public PythonLimelight(HardwareMap hw) {
         limelight = hw.get(Limelight3A.class, "limelight");
-        limelight.pipelineSwitch(2);
+        limelight.pipelineSwitch(1);
         limelight.start();
     }
     public ObeliskLocation getObelisk(){
         return ObeliskLocation.fromInt((int) limelight.getLatestResult().getPythonOutput()[0]);
     }
 
-    //neg for turn right (clockwise), pos for turn left (counter clockwise) [radians]
+    //pos for turn right (clockwise), neg for turn left (counter clockwise) [radians]
     public double getAngle(){
         double[] llr = limelight.getLatestResult().getPythonOutput();
+        if (llr == null || llr.length < 2)
+            return 0;
 
-        double angle = llr[2];
-        if(angle == -1)
-            return -1.0;
+        return llr[2];
+    }
 
-        return angle;
+    public double getLastNav(){
+        double[] llr = limelight.getLatestResult().getPythonOutput();
+        if (llr == null || llr.length < 1)
+            return 0;
+        return llr[1];
+
     }
     /*
     public Pose3D getPose() {
@@ -63,7 +71,7 @@ public class PythonLimelight {
     */
     public enum ObeliskLocation //measured by the location of the green
     {
-        LEFT("GPP", 21), CENTER("PGP", 22), RIGHT("PPG", 23);
+        LEFT("GPP", 21), CENTER("PGP", 22), RIGHT("PPG", 23), NONE("none", -1);
 
         public final String order;
         public final int ATnumber;
@@ -73,6 +81,8 @@ public class PythonLimelight {
         }
 
         public static ObeliskLocation fromInt(int i){
+            if(i == 0)
+                return NONE;
             for(ObeliskLocation ol : ObeliskLocation.values()){
                 if (ol.ATnumber == i)
                     return ol;
