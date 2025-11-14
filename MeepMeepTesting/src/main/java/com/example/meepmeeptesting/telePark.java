@@ -17,13 +17,18 @@ public class telePark {
                 .build();
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(61.5, -61.5, Math.toRadians(270)))
+                //park red pos
+                //.strafeToLinearHeading(new Vector2d(38, -32.2), Math.toRadians(0))
+
+                //park blue pos
+                .strafeToLinearHeading(new Vector2d(38, 32.2), Math.toRadians(0))
+
                 .waitSeconds(200)
 
                 //reset pos
                 .strafeToLinearHeading(new Vector2d(61.5,-61.5),Math.toRadians(270))
 
-                //park blue pos
-                .strafeToLinearHeading(new Vector2d(38, -32), Math.toRadians(0))
+
 
                 .build());
 

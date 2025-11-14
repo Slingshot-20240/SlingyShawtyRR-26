@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.subsystems.robot;
 
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.teamcode.Roadrunner.PinpointLocalizer;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Intake;
@@ -30,6 +32,7 @@ public class Robot {
     public Transfer transfer;
     public Shooter shooter;
     public Drivetrain drivetrain;
+    public GoBildaPinpointDriver driver;
 
     public GamepadMapping controls;
 
@@ -43,6 +46,9 @@ public class Robot {
                 RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
                 RevHubOrientationOnRobot.UsbFacingDirection.UP)));
         imu.resetYaw();
+
+        driver = hardwareMap.get(GoBildaPinpointDriver.class, "pinpoint");
+
 
         intake = new Intake(hardwareMap);
         transfer = new Transfer(hardwareMap);

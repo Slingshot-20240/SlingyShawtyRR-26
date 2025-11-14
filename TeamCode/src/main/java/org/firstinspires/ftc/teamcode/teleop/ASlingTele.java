@@ -7,11 +7,15 @@ import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Roadrunner.Drawing;
 import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
@@ -28,6 +32,7 @@ public class ASlingTele extends OpMode {
 
     private MecanumDrive drive;
     private ShooterController shooter;
+    String allianceColor = "red";
 
     @Override
     public void init() {
@@ -40,6 +45,29 @@ public class ASlingTele extends OpMode {
         //shooterController = new ShooterController(hardwareMap);
 
 
+
+    }
+    //ISHAAN ADDED THIS INIT_LOOP FOR ALLIANCE COLOR SELECTION
+    //TRY ALSO KEEPING THIS IN THE MAIN INIT LOOP
+    @Override
+    public void init_loop() {
+        telemetry.addLine("> Red Alliance");
+        telemetry.addLine("Blue Alliance");
+
+        if (gamepad1.dpad_up) {
+            telemetry.clear();
+            telemetry.addLine("> Red Alliance");
+            telemetry.addLine("Blue Alliance");
+
+            allianceColor = "red";
+
+        } else if (gamepad1.dpad_down) {
+            telemetry.clear();
+            telemetry.addLine("Red (a) Alliance");
+            telemetry.addLine("> Blue (b) Alliance");
+
+            allianceColor = "blue";
+        }
     }
 
     @Override
@@ -53,7 +81,6 @@ public class ASlingTele extends OpMode {
         fsm.update();
 
 
-        //Localization and Parks Jawns
         drive.setDrivePowers(new PoseVelocity2d(
                 new Vector2d(
                         -gamepad1.left_stick_y,
@@ -64,10 +91,19 @@ public class ASlingTele extends OpMode {
 
         drive.updatePoseEstimate();
 
+        Pose2D pinpointPose = robot.driver.getPosition();
+        telemetry.addData("Pinpoint x: ", pinpointPose.getX(DistanceUnit.INCH));
+        telemetry.addData("Pinpoint y: ", pinpointPose.getY(DistanceUnit.INCH));
+        telemetry.addData("Pinpoint heading (deg): ", pinpointPose.getHeading(AngleUnit.DEGREES));
+
+
         Pose2d pose = drive.localizer.getPose();
         telemetry.addData("x", pose.position.x);
         telemetry.addData("y", pose.position.y);
         telemetry.addData("heading (deg)", Math.toDegrees(pose.heading.toDouble()));
+
+        telemetry.addData("-----------------------","");
+
         telemetry.addData("limelight angle", Math.toDegrees(robot.limelight.getAngle()));
         telemetry.addData("limelight nav", (robot.limelight.getLastNav()));
         telemetry.addData("limelight obelisk", (robot.limelight.getObelisk().order));
@@ -78,9 +114,46 @@ public class ASlingTele extends OpMode {
         packet.fieldOverlay().setStroke("#3F51B5");
         Drawing.drawRobot(packet.fieldOverlay(), pose);
         FtcDashboard.getInstance().sendTelemetryPacket(packet);
-//
-//
-//        Action turnToAprilTag = drive.actionBuilder(pose)
+
+
+//----------------------------Auto Park----------------------------\\
+        Action redPark = drive.actionBuilder(pose)
+                .strafeToLinearHeading(new Vector2d(38, -32.3), Math.toRadians(180))
+                .build();
+
+        Action bluePark = drive.actionBuilder(pose)
+                .strafeToLinearHeading(new Vector2d(38, 32.2), Math.toRadians(180))
+                .build();
+
+        if (allianceColor == "red") {
+            Actions.runBlocking(redPark);
+        } else if (allianceColor == "blue") {
+            Actions.runBlocking(bluePark);
+        }
+
+//----------------------------Auto Align----------------------------\\
+        Action goalAlignRed = drive.actionBuilder(pose)
+                .strafeToLinearHeading(new Vector2d(59,4),Math.toRadians(-203),
+                        new TranslationalVelConstraint(20))
+                .build();
+
+        Action goalAlignBlue = drive.actionBuilder(pose)
+                .strafeToLinearHeading(new Vector2d(59,-4),Math.toRadians(203),
+                        new TranslationalVelConstraint(20))
+                .build();
+
+        if (gamepad1.start) {
+            drive.localizer.setPose(new Pose2d(61.5, 0, Math.toRadians(180)));
+            //idk if this line is needed
+            //drive = new MecanumDrive(hardwareMap, new Pose2d(61.5, 0, Math.toRadians(180)));
+            if (allianceColor == "red") {
+                Actions.runBlocking(goalAlignRed);
+            } else if (allianceColor == "blue") {
+                Actions.runBlocking(goalAlignBlue);
+            }
+        }
+
+//                Action turnToAprilTag = drive.actionBuilder(pose)
 //                .turn(robot.limelight.getAngle())
 //                .build();
 //
@@ -89,18 +162,6 @@ public class ASlingTele extends OpMode {
 //        }
 
 
-
-        Action goalAlignRed = drive.actionBuilder(pose)
-                .strafeToLinearHeading(new Vector2d(59,4),Math.toRadians(-203))
-                .build();
-
-        //TODO - make for other side too
-        if (gamepad1.start) {
-            drive.localizer.setPose(new Pose2d(61.5, 0, Math.toRadians(180)));
-            //idk if this line is needed
-            drive = new MecanumDrive(hardwareMap, new Pose2d(61.5, 0, Math.toRadians(180)));
-            Actions.runBlocking(goalAlignRed);
-        }
 
 
 //        //SHOOTER STUFF ADDED BY ISHAAN PROLLY WONT WORK
