@@ -55,7 +55,7 @@ public class LM2RedCloseGate12 extends LinearOpMode {
 
 
         Action scoreSet2 = drive.actionBuilder(new Pose2d(-4.5, 55, Math.toRadians(180))) // ends gate
-                .strafeToLinearHeading(new Vector2d( -25, 25), Math.toRadians(-225))
+                .strafeToLinearHeading(new Vector2d( -25, 25), Math.toRadians(-235))
                 .build();
 
 
@@ -75,7 +75,7 @@ public class LM2RedCloseGate12 extends LinearOpMode {
 
 
         Action scoreSet3 = drive.actionBuilder(new Pose2d(13, 40, Math.toRadians(-270))) // end of draw back set 3
-                .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-225))
+                .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-235))
                 .build();
 
         // Set 3

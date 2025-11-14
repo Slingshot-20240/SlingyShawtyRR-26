@@ -41,9 +41,17 @@ public class PythonLimelight {
     public double getAngle(){
         double[] llr = limelight.getLatestResult().getPythonOutput();
         if (llr == null || llr.length < 2)
-            return -1.0;
+            return 0;
 
         return llr[2];
+    }
+
+    public double getLastNav(){
+        double[] llr = limelight.getLatestResult().getPythonOutput();
+        if (llr == null || llr.length < 1)
+            return 0;
+        return llr[1];
+
     }
     /*
     public Pose3D getPose() {
@@ -63,7 +71,7 @@ public class PythonLimelight {
     */
     public enum ObeliskLocation //measured by the location of the green
     {
-        LEFT("GPP", 21), CENTER("PGP", 22), RIGHT("PPG", 23);
+        LEFT("GPP", 21), CENTER("PGP", 22), RIGHT("PPG", 23), NONE("none", -1);
 
         public final String order;
         public final int ATnumber;
@@ -73,6 +81,8 @@ public class PythonLimelight {
         }
 
         public static ObeliskLocation fromInt(int i){
+            if(i == 0)
+                return NONE;
             for(ObeliskLocation ol : ObeliskLocation.values()){
                 if (ol.ATnumber == i)
                     return ol;
