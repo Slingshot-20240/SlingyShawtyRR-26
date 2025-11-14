@@ -57,8 +57,8 @@ public class ASlingTele extends OpMode {
 
         if (gamepad1.dpad_up) {
             telemetry.clear();
-            telemetry.addLine("> Red Alliance");
-            telemetry.addLine("Blue Alliance");
+            telemetry.addLine("> Red (a) Alliance");
+            telemetry.addLine("Blue (b) Alliance");
 
             allianceColor = "red";
 
