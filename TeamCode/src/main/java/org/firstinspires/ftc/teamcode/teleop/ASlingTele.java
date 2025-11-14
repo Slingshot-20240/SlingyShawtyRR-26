@@ -47,8 +47,9 @@ public class ASlingTele extends OpMode {
 
 
     }
+
     //ISHAAN ADDED THIS INIT_LOOP FOR ALLIANCE COLOR SELECTION
-    //TRY ALSO KEEPING THIS IN THE MAIN INIT LOOP
+    //TRY ALSO KEEPING THIS IN THE MAIN INIT LOOP idk if its gonna work
     @Override
     public void init_loop() {
         telemetry.addLine("> Red Alliance");
@@ -81,6 +82,7 @@ public class ASlingTele extends OpMode {
         fsm.update();
 
 
+//----------------------------Drive Controls----------------------------\\
         drive.setDrivePowers(new PoseVelocity2d(
                 new Vector2d(
                         -gamepad1.left_stick_y,
@@ -88,15 +90,17 @@ public class ASlingTele extends OpMode {
                 ),
                 -gamepad1.right_stick_x
         ));
-
         drive.updatePoseEstimate();
 
+//----------------------------Telemetry and Dash Field Overlay----------------------------\\
+
+        //Direct from pinpoint position and heading
         Pose2D pinpointPose = robot.driver.getPosition();
         telemetry.addData("Pinpoint x: ", pinpointPose.getX(DistanceUnit.INCH));
         telemetry.addData("Pinpoint y: ", pinpointPose.getY(DistanceUnit.INCH));
         telemetry.addData("Pinpoint heading (deg): ", pinpointPose.getHeading(AngleUnit.DEGREES));
 
-
+        //Indirect from rr, but pinpoint position and heading
         Pose2d pose = drive.localizer.getPose();
         telemetry.addData("x", pose.position.x);
         telemetry.addData("y", pose.position.y);
@@ -104,12 +108,14 @@ public class ASlingTele extends OpMode {
 
         telemetry.addData("-----------------------","");
 
+        //Limelight telemetry
         telemetry.addData("limelight angle", Math.toDegrees(robot.limelight.getAngle()));
         telemetry.addData("limelight nav", (robot.limelight.getLastNav()));
         telemetry.addData("limelight obelisk", (robot.limelight.getObelisk().order));
 
         telemetry.update();
 
+        //Dash field overlay and draw bot with Canvas
         TelemetryPacket packet = new TelemetryPacket();
         packet.fieldOverlay().setStroke("#3F51B5");
         Drawing.drawRobot(packet.fieldOverlay(), pose);
@@ -125,9 +131,9 @@ public class ASlingTele extends OpMode {
                 .strafeToLinearHeading(new Vector2d(38, 32.2), Math.toRadians(180))
                 .build();
 
-        if (allianceColor == "red") {
+        if (allianceColor.equals("red")) {
             Actions.runBlocking(redPark);
-        } else if (allianceColor == "blue") {
+        } else if (allianceColor.equals("blue")) {
             Actions.runBlocking(bluePark);
         }
 
@@ -144,19 +150,19 @@ public class ASlingTele extends OpMode {
 
         if (gamepad1.start) {
             drive.localizer.setPose(new Pose2d(61.5, 0, Math.toRadians(180)));
-            //idk if this line is needed
+            //idk if this line is needed (shouldn't be needed)
             //drive = new MecanumDrive(hardwareMap, new Pose2d(61.5, 0, Math.toRadians(180)));
-            if (allianceColor == "red") {
+            if (allianceColor.equals("red")) {
                 Actions.runBlocking(goalAlignRed);
-            } else if (allianceColor == "blue") {
+            } else if (allianceColor.equals("blue")) {
                 Actions.runBlocking(goalAlignBlue);
             }
         }
 
-//                Action turnToAprilTag = drive.actionBuilder(pose)
-//                .turn(robot.limelight.getAngle())
-//                .build();
-//
+
+//        Action turnToAprilTag = drive.actionBuilder(pose)
+//        .turn(robot.limelight.getAngle())
+//        .build();
 //        if (controls.farLock.value()) {
 //            Actions.runBlocking(turnToAprilTag);
 //        }
@@ -164,12 +170,6 @@ public class ASlingTele extends OpMode {
 
 
 
-//        //SHOOTER STUFF ADDED BY ISHAAN PROLLY WONT WORK
-        //DO NOT UNCOMMENT THIS IS JANK!!!!!!!
-//        double x = pose.position.x;
-//        double y = pose.position.y;
-//
-//        shooterController.updateShooter(x, y);
 
 
     }
