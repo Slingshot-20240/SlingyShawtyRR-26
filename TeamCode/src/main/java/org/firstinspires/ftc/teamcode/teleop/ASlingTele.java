@@ -131,10 +131,12 @@ public class ASlingTele extends OpMode {
                 .strafeToLinearHeading(new Vector2d(38, 32.2), Math.toRadians(180))
                 .build();
 
-        if (allianceColor.equals("red")) {
-            Actions.runBlocking(redPark);
-        } else if (allianceColor.equals("blue")) {
-            Actions.runBlocking(bluePark);
+        if (gamepad1.start) {
+            if (allianceColor.equals("red")) {
+                Actions.runBlocking(redPark);
+            } else if (allianceColor.equals("blue")) {
+                Actions.runBlocking(bluePark);
+            }
         }
 
 //----------------------------Auto Align----------------------------\\
@@ -148,7 +150,7 @@ public class ASlingTele extends OpMode {
                         new TranslationalVelConstraint(20))
                 .build();
 
-        if (gamepad1.start) {
+        if (gamepad1.b) {
             drive.localizer.setPose(new Pose2d(61.5, 0, Math.toRadians(180)));
             //idk if this line is needed (shouldn't be needed)
             //drive = new MecanumDrive(hardwareMap, new Pose2d(61.5, 0, Math.toRadians(180)));
