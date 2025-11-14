@@ -6,6 +6,7 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
+import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -36,7 +37,7 @@ public class ASlingTele extends OpMode {
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, Math.toRadians(-270)));
-        shooter = new ShooterController(hardwareMap);
+        //shooterController = new ShooterController(hardwareMap);
 
 
     }
@@ -77,7 +78,7 @@ public class ASlingTele extends OpMode {
         packet.fieldOverlay().setStroke("#3F51B5");
         Drawing.drawRobot(packet.fieldOverlay(), pose);
         FtcDashboard.getInstance().sendTelemetryPacket(packet);
-
+//
 //
 //        Action turnToAprilTag = drive.actionBuilder(pose)
 //                .turn(robot.limelight.getAngle())
@@ -87,18 +88,27 @@ public class ASlingTele extends OpMode {
 //            Actions.runBlocking(turnToAprilTag);
 //        }
 
+
+
+        Action goalAlignRed = drive.actionBuilder(pose)
+                .strafeToLinearHeading(new Vector2d(59,4),Math.toRadians(-203))
+                .build();
+
         //TODO - make for other side too
-//        if (gamepad1.start) {
-//            drive.localizer.setPose(new Pose2d(61.5, -61.5, Math.toRadians(270)));
-//            drive = new MecanumDrive(hardwareMap, new Pose2d(61.5, -61.5, Math.toRadians(270)));
-//        }
+        if (gamepad1.start) {
+            drive.localizer.setPose(new Pose2d(61.5, 0, Math.toRadians(180)));
+            //idk if this line is needed
+            drive = new MecanumDrive(hardwareMap, new Pose2d(61.5, 0, Math.toRadians(180)));
+            Actions.runBlocking(goalAlignRed);
+        }
 
 
-        //SHOOTER STUFF ADDED BY ISHAAN PROLLY WONT WORK
-        double x = pose.position.x;
-        double y = pose.position.y;
-
-        shooter.updateShooter(x, y);
+//        //SHOOTER STUFF ADDED BY ISHAAN PROLLY WONT WORK
+        //DO NOT UNCOMMENT THIS IS JANK!!!!!!!
+//        double x = pose.position.x;
+//        double y = pose.position.y;
+//
+//        shooterController.updateShooter(x, y);
 
 
     }
