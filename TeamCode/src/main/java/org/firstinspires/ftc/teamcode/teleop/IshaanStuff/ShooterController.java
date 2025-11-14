@@ -6,6 +6,16 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class ShooterController {
 
+
+//ADD THIS AT IN TELEOP FILE!!!!! THIS IS THE IMPLEMENTATION
+
+//        double x = pose.position.x;
+//        double y = pose.position.y;
+//
+//        shooterController.updateShooter(x, y);
+
+
+
     private final DcMotorEx outtake1;
     private final DcMotorEx outtake2;
     private final Servo hoodServo;
