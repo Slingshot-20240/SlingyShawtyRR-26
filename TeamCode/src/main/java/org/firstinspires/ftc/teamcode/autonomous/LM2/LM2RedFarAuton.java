@@ -98,7 +98,7 @@ public class LM2RedFarAuton extends LinearOpMode {
                         new ParallelAction(
                                 scorePreload,
                                 //SHOOTER FIRST SET SPEED
-                                acl.intakeSet(1460)
+                                acl.intakeSet(1439)
                         ),
                         //TODO - Tune the time the flywheel takes to get to good speed for preload
                         acl.scoreSet(2,2.8),
@@ -110,7 +110,7 @@ public class LM2RedFarAuton extends LinearOpMode {
                         new ParallelAction(
                                 grabSet2,
                                 //SHOOTER SECOND SET SPEED
-                                acl.intakeSet(1460)
+                                acl.intakeSet(1439)
                         ),
 
                         //Shoot Set 2
@@ -126,7 +126,7 @@ public class LM2RedFarAuton extends LinearOpMode {
                         new ParallelAction(
                                 grabSet4hp,
                                 //SHOOTER 3RD SET SPEED
-                                acl.intakeSet(1460)
+                                acl.intakeSet(1439)
                         ),
                         //Shoot Set 2
                         new SequentialAction(

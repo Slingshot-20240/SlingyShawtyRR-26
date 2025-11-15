@@ -42,37 +42,37 @@ public class LM2BlueFarAuton extends LinearOpMode {
         // Score Preloads
         Action scorePreload = drive.actionBuilder(initialPose)
                 .strafeToLinearHeading(new Vector2d(54, -12), Math.toRadians(180))
-                .turnTo(Math.toRadians(203))
+                .turnTo(Math.toRadians(204))
                 .build();
 
         // Set 2
-        Action grabSet2 = drive.actionBuilder(new Pose2d(54, -12, Math.toRadians(203)))
-                .strafeToLinearHeading(new Vector2d(47, -22), Math.toRadians(270)) // prepareSet1Pose
-                .strafeToLinearHeading(new Vector2d(47, -60), Math.toRadians(270))
+        Action grabSet2 = drive.actionBuilder(new Pose2d(54, -12, Math.toRadians(204)))
+                .strafeToLinearHeading(new Vector2d(28, -22), Math.toRadians(270)) // prepareSet1Pose
+                .strafeToLinearHeading(new Vector2d(28, -66), Math.toRadians(270))
                 .build();
 
         //WALL !!!!!!!!!!!!!!!!
-        Action scoreSet2 = drive.actionBuilder(new Pose2d(47, -60, Math.toRadians(270))) // ends of grabSet2
+        Action scoreSet2 = drive.actionBuilder(new Pose2d(29, -66, Math.toRadians(270))) // ends of grabSet2
                 .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203),
                         new TranslationalVelConstraint(50), new ProfileAccelConstraint(-30,50))
                 .build();
 
 
         Action grabSet4hp = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(203)))
-                .strafeToLinearHeading(new Vector2d(40, -60), Math.toRadians(0),
+                .strafeToLinearHeading(new Vector2d(28, -73), Math.toRadians(0),
                         new TranslationalVelConstraint(70), new ProfileAccelConstraint(-30,50))
-                .strafeToLinearHeading(new Vector2d(59, -60), Math.toRadians(-15),
+                .strafeToLinearHeading(new Vector2d(59, -73), Math.toRadians(-22),
                         new TranslationalVelConstraint(12), new ProfileAccelConstraint(-20,40))
-                .strafeTo(new Vector2d(60,-30))
+                .strafeTo(new Vector2d(60,-55))
                 .build();
 
-        Action scoreSet4 = drive.actionBuilder(new Pose2d(60, -60, Math.toRadians(-15))) // ends of grabSet2
-                .strafeToLinearHeading(new Vector2d(55, -12), Math.toRadians(203),
+        Action scoreSet4 = drive.actionBuilder(new Pose2d(60, -55, Math.toRadians(-22))) // ends of grabSet2
+                .strafeToLinearHeading(new Vector2d(53.6, -12), Math.toRadians(200),
                         new TranslationalVelConstraint(50), new ProfileAccelConstraint(-20,40))
                 .build();
 
         // Park                                                         WALL !!!!!!!!
-        Action park = drive.actionBuilder(new Pose2d(55, -12, Math.toRadians(203)))
+        Action park = drive.actionBuilder(new Pose2d(53.6, -12, Math.toRadians(205)))
                 .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(180))
                 .build();
 

@@ -55,12 +55,12 @@ public class LM2RedCloseGate12 extends LinearOpMode {
 
 
         Action scoreSet2 = drive.actionBuilder(new Pose2d(-4.5, 55, Math.toRadians(180))) // ends gate
-                .strafeToLinearHeading(new Vector2d( -25, 25), Math.toRadians(-235))
+                .strafeToLinearHeading(new Vector2d( -25, 25), Math.toRadians(-232))
                 .build();
 
 
         // Set 2
-        Action grabSet3 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-225))) // ends of score set 2
+        Action grabSet3 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-232))) // ends of score set 2
                 .strafeToLinearHeading(new Vector2d(13, 19), Math.toRadians(-270), //prepare set 3
                         new TranslationalVelConstraint(80))
                 .strafeToLinearHeading(new Vector2d(13, 63), Math.toRadians(-270), //pickup set 3
@@ -75,11 +75,11 @@ public class LM2RedCloseGate12 extends LinearOpMode {
 
 
         Action scoreSet3 = drive.actionBuilder(new Pose2d(13, 40, Math.toRadians(-270))) // end of draw back set 3
-                .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-235))
+                .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-232))
                 .build();
 
         // Set 3
-        Action grabSet4 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-225))) // end of score set 3
+        Action grabSet4 = drive.actionBuilder(new Pose2d(-25, 25, Math.toRadians(-232))) // end of score set 3
                 .strafeToLinearHeading(new Vector2d(35.5, 19), Math.toRadians(-270))
                 .strafeToLinearHeading(new Vector2d(36, 63), Math.toRadians(-270))
                 .build();
@@ -90,7 +90,7 @@ public class LM2RedCloseGate12 extends LinearOpMode {
                 .build();
 
         Action scoreSet4 = drive.actionBuilder(new Pose2d(36, 40, Math.toRadians(-270))) // end of draw back set 4
-                .strafeToLinearHeading(new Vector2d(-61.5, 17), Math.toRadians(-270))
+                .strafeToLinearHeading(new Vector2d(-57, 17), Math.toRadians(-270))
                 .build();
 
 
@@ -149,7 +149,7 @@ public class LM2RedCloseGate12 extends LinearOpMode {
                                         drawBackSet3
                                 ),
                                 //SHOOTER 3RD SET SPEED
-                                acl.intakeSet(1080)
+                                acl.intakeSet(1060)
                         ),
 
                         //Shoot Set 3
