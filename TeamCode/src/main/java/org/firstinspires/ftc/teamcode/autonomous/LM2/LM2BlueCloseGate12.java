@@ -90,9 +90,9 @@ public class LM2BlueCloseGate12 extends LinearOpMode {
                 .build();
 
         Action scoreSet4 = drive.actionBuilder(new Pose2d(32.5, -40, Math.toRadians(270))) // end of draw back set 4
-                .strafeToLinearHeading(new Vector2d(-53, -20), Math.toRadians(246))
+                .strafeToLinearHeading(new Vector2d(-45, -17), Math.toRadians(256),
+                        new TranslationalVelConstraint(90))
                 .build();
-
 
 
 //-----------------Initialization-----------------\\
@@ -117,7 +117,7 @@ public class LM2BlueCloseGate12 extends LinearOpMode {
                         new ParallelAction(
                                 scorePreload,
                                 //SHOOTER FIRST SET SPEED
-                                acl.intakeSet(1080)
+                                acl.intakeSet(1060)
                         ),
                         //TODO - Tune the time the flywheel takes to get to good speed for preload
                         acl.scoreSet(0.5,2.4),
@@ -155,7 +155,7 @@ public class LM2BlueCloseGate12 extends LinearOpMode {
                         //Shoot Set 3
                         new SequentialAction(
                                 scoreSet3,
-                                acl.scoreSet(0,2.6)
+                                acl.scoreSet(0,2.8)
                         ),
 
                         //--------Set 4--------\\

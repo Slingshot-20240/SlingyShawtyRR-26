@@ -52,8 +52,7 @@ public class ASlingTele extends OpMode {
     //TRY ALSO KEEPING THIS IN THE MAIN INIT LOOP idk if its gonna work
     @Override
     public void init_loop() {
-        telemetry.addLine("> Red Alliance");
-        telemetry.addLine("Blue Alliance");
+
 
         if (gamepad1.dpad_up) {
             telemetry.clear();
@@ -141,13 +140,13 @@ public class ASlingTele extends OpMode {
 
 //----------------------------Auto Align----------------------------\\
         Action goalAlignRed = drive.actionBuilder(pose)
-                .strafeToLinearHeading(new Vector2d(59,4),Math.toRadians(-203),
-                        new TranslationalVelConstraint(20))
+                .strafeTo(new Vector2d(59,4))
+                .turnTo(Math.toRadians(-203))
                 .build();
 
         Action goalAlignBlue = drive.actionBuilder(pose)
-                .strafeToLinearHeading(new Vector2d(59,-4),Math.toRadians(203),
-                        new TranslationalVelConstraint(20))
+                .strafeTo(new Vector2d(59,-4))
+                .turnTo(Math.toRadians(3203))
                 .build();
 
         if (gamepad1.b) {
