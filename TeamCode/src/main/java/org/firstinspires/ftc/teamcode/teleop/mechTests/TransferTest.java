@@ -24,6 +24,11 @@ public class TransferTest extends OpMode {
     public void loop() {
         controls.update();
 
+        robot.intake.intakeOn();
+
+        robot.transfer.frontTransfer.setPower(power);
+        robot.transfer.backTransfer.setPower(1);
+
 //i may be wrong but idk if calling rr action like on and off willl work here
 //im prolly wrong (dis ishaan)
 //        if(controls.failSafeReset.value()) {

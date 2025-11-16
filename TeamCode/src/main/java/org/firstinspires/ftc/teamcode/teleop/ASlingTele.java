@@ -121,43 +121,43 @@ public class ASlingTele extends OpMode {
         FtcDashboard.getInstance().sendTelemetryPacket(packet);
 
 
-//----------------------------Auto Park----------------------------\\
-        Action redPark = drive.actionBuilder(pose)
-                .strafeToLinearHeading(new Vector2d(38, -32.3), Math.toRadians(180))
-                .build();
-
-        Action bluePark = drive.actionBuilder(pose)
-                .strafeToLinearHeading(new Vector2d(38, 32.2), Math.toRadians(180))
-                .build();
-
-        if (gamepad1.start) {
-            if (allianceColor.equals("red")) {
-                Actions.runBlocking(redPark);
-            } else if (allianceColor.equals("blue")) {
-                Actions.runBlocking(bluePark);
-            }
-        }
-
-//----------------------------Auto Align----------------------------\\
-        Action goalAlignRed = drive.actionBuilder(pose)
-                .strafeTo(new Vector2d(59,4))
-                .turnTo(Math.toRadians(-203))
-                .build();
-
-        Action goalAlignBlue = drive.actionBuilder(pose)
-                .strafeTo(new Vector2d(59,-4))
-                .turnTo(Math.toRadians(3203))
-                .build();
-
-        if (gamepad1.b) {
-            drive.localizer.setPose(new Pose2d(61.5, 0, Math.toRadians(180)));
-            //idk if this line is needed (shouldn't be needed)
-            //drive = new MecanumDrive(hardwareMap, new Pose2d(61.5, 0, Math.toRadians(180)));
-            if (allianceColor.equals("red")) {
-                Actions.runBlocking(goalAlignRed);
-            } else if (allianceColor.equals("blue")) {
-                Actions.runBlocking(goalAlignBlue);
-            }
+////----------------------------Auto Park----------------------------\\
+//        Action redPark = drive.actionBuilder(pose)
+//                .strafeToLinearHeading(new Vector2d(38, -32.3), Math.toRadians(180))
+//                .build();
+//
+//        Action bluePark = drive.actionBuilder(pose)
+//                .strafeToLinearHeading(new Vector2d(38, 32.2), Math.toRadians(180))
+//                .build();
+//
+//        if (gamepad1.start) {
+//            if (allianceColor.equals("red")) {
+//                Actions.runBlocking(redPark);
+//            } else if (allianceColor.equals("blue")) {
+//                Actions.runBlocking(bluePark);
+//            }
+//        }
+//
+////----------------------------Auto Align----------------------------\\
+//        Action goalAlignRed = drive.actionBuilder(pose)
+//                .strafeTo(new Vector2d(59,4))
+//                .turnTo(Math.toRadians(-203))
+//                .build();
+//
+//        Action goalAlignBlue = drive.actionBuilder(pose)
+//                .strafeTo(new Vector2d(59,-4))
+//                .turnTo(Math.toRadians(3203))
+//                .build();
+//
+//        if (gamepad1.b) {
+//            drive.localizer.setPose(new Pose2d(61.5, 0, Math.toRadians(180)));
+//            //idk if this line is needed (shouldn't be needed)
+//            //drive = new MecanumDrive(hardwareMap, new Pose2d(61.5, 0, Math.toRadians(180)));
+//            if (allianceColor.equals("red")) {
+//                Actions.runBlocking(goalAlignRed);
+//            } else if (allianceColor.equals("blue")) {
+//                Actions.runBlocking(goalAlignBlue);
+//            }
         }
 
 
@@ -173,5 +173,5 @@ public class ASlingTele extends OpMode {
 
 
 
-    }
 }
+

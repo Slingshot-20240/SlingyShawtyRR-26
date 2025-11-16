@@ -72,7 +72,7 @@ public class GamepadMapping {
         transfer.update(gamepad1.dpad_up);
 
         // OUTTAKE
-        outtake.update(gamepad1.right_bumper);
+        outtake.update(gamepad1.y);
 
         farLock.update(gamepad1.dpad_down);
     }

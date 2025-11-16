@@ -70,7 +70,7 @@ public class Transfer {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             backTransfer.setPower(-1);
-            frontTransfer.setPower(-0.06);
+            frontTransfer.setPower(-0.05);
             return false;
         }
     }
@@ -90,7 +90,7 @@ public class Transfer {
 
     public void hotDog() {
         backTransfer.setPower(1);
-        frontTransfer.setPower(-.25);
+        frontTransfer.setPower(-0.2);
     }
 
 }

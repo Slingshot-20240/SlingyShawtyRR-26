@@ -90,7 +90,7 @@ public class LM2RedCloseGate12 extends LinearOpMode {
                 .build();
 
         Action scoreSet4 = drive.actionBuilder(new Pose2d(36, 40, Math.toRadians(-270))) // end of draw back set 4
-                .strafeToLinearHeading(new Vector2d(-58, 17), Math.toRadians(-280))
+                .strafeToLinearHeading(new Vector2d(-58, 16), Math.toRadians(-280))
                 .build();
 
 
@@ -155,7 +155,7 @@ public class LM2RedCloseGate12 extends LinearOpMode {
                         //Shoot Set 3
                         new SequentialAction(
                                 scoreSet3,
-                                acl.scoreSet(0,2.6)
+                                acl.scoreSet(0,2.8)
                         ),
 
                         //--------Set 4--------\\
