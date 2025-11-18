@@ -76,20 +76,11 @@ public class ASlingTele extends OpMode {
         robot.hardwareSoftReset();
     }
 
+
     @Override
     public void loop() {
         fsm.update();
 
-
-//----------------------------Drive Controls----------------------------\\
-        drive.setDrivePowers(new PoseVelocity2d(
-                new Vector2d(
-                        -gamepad1.left_stick_y,
-                        -gamepad1.left_stick_x
-                ),
-                -gamepad1.right_stick_x
-        ));
-        drive.updatePoseEstimate();
 
 //----------------------------Telemetry and Dash Field Overlay----------------------------\\
 
@@ -120,6 +111,30 @@ public class ASlingTele extends OpMode {
         Drawing.drawRobot(packet.fieldOverlay(), pose);
         FtcDashboard.getInstance().sendTelemetryPacket(packet);
 
+//----------------------------Drive Controls----------------------------\\
+        //Field Centric Work in progress
+//        double radian = pinpointPose.getHeading(AngleUnit.RADIANS);
+//        double cosTheta = Math.cos(radian);
+//        double sinTheta = Math.sin(radian);
+//        double newX = (-inX * sinTheta) - (inY * cosTheta);
+//        double newY = (-inX * cosTheta) + (inY * sinTheta);
+//        drive.setDrivePowers(new PoseVelocity2d(
+//                new Vector2d(
+//                        -gamepad1.left_stick_y,
+//                        -gamepad1.left_stick_x
+//                ),
+//                -gamepad1.right_stick_x
+//        ));
+
+        //Robo Centric
+        drive.setDrivePowers(new PoseVelocity2d(
+                new Vector2d(
+                        -gamepad1.left_stick_y,
+                        -gamepad1.left_stick_x
+                ),
+                -gamepad1.right_stick_x
+        ));
+        drive.updatePoseEstimate();
 
 ////----------------------------Auto Park----------------------------\\
 //        Action redPark = drive.actionBuilder(pose)
