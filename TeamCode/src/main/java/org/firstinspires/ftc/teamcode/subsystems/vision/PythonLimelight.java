@@ -30,8 +30,9 @@ public class PythonLimelight {
 
     public PythonLimelight(HardwareMap hw) {
         limelight = hw.get(Limelight3A.class, "limelight");
-        limelight.pipelineSwitch(1);
+        limelight.setPollRateHz(100);
         limelight.start();
+        limelight.pipelineSwitch(1);
     }
     public ObeliskLocation getObelisk(){
         return ObeliskLocation.fromInt((int) limelight.getLatestResult().getPythonOutput()[0]);
