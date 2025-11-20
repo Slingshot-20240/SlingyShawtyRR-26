@@ -11,7 +11,8 @@ public class PythonLimelight {
     [
         most recent obelisk ID,
         most recent nav ID,
-        angle from change yes (if the marker is on the right, then +, if on left, -)
+        angle from change yes (if the marker is on the right, then +, if on left, -),
+        distance from tag (roughly +/- 1 in)
     ]
 
     IDEAL FORMAT:
@@ -30,8 +31,9 @@ public class PythonLimelight {
 
     public PythonLimelight(HardwareMap hw) {
         limelight = hw.get(Limelight3A.class, "limelight");
-        limelight.pipelineSwitch(1);
+        limelight.setPollRateHz(100);
         limelight.start();
+        limelight.pipelineSwitch(1);
     }
     public ObeliskLocation getObelisk(){
         return ObeliskLocation.fromInt((int) limelight.getLatestResult().getPythonOutput()[0]);
@@ -46,7 +48,14 @@ public class PythonLimelight {
         return llr[2];
     }
 
-    public double getLastNav(){
+    public double getDistance() {
+        double[] llr = limelight.getLatestResult().getPythonOutput();
+        if (llr == null || llr.length < 3)
+            return 0;
+
+        return llr[3];
+    }
+    public double getLastNav() {
         double[] llr = limelight.getLatestResult().getPythonOutput();
         if (llr == null || llr.length < 1)
             return 0;
