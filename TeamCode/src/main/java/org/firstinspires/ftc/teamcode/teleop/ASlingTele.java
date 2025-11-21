@@ -96,7 +96,7 @@ public class ASlingTele extends OpMode {
         telemetry.addData("y", pose.position.y);
         telemetry.addData("heading (deg)", Math.toDegrees(pose.heading.toDouble()));
 
-        telemetry.addData("-----------------------","");
+        telemetry.addData("-----------------------", "");
 
         //Limelight telemetry
         telemetry.addData("limelight angle", Math.toDegrees(robot.limelight.getAngle()));
@@ -112,19 +112,6 @@ public class ASlingTele extends OpMode {
         FtcDashboard.getInstance().sendTelemetryPacket(packet);
 
 //----------------------------Drive Controls----------------------------\\
-        //Field Centric Work in progress
-//        double radian = pinpointPose.getHeading(AngleUnit.RADIANS);
-//        double cosTheta = Math.cos(radian);
-//        double sinTheta = Math.sin(radian);
-//        double newX = (-inX * sinTheta) - (inY * cosTheta);
-//        double newY = (-inX * cosTheta) + (inY * sinTheta);
-//        drive.setDrivePowers(new PoseVelocity2d(
-//                new Vector2d(
-//                        -gamepad1.left_stick_y,
-//                        -gamepad1.left_stick_x
-//                ),
-//                -gamepad1.right_stick_x
-//        ));
 
         //Robo Centric
         drive.setDrivePowers(new PoseVelocity2d(
@@ -153,7 +140,7 @@ public class ASlingTele extends OpMode {
 //            }
 //        }
 //
-////----------------------------Auto Align----------------------------\\
+//----------------------------Auto Align----------------------------\\
 //        Action goalAlignRed = drive.actionBuilder(pose)
 //                .strafeTo(new Vector2d(59,4))
 //                .turnTo(Math.toRadians(-203))
@@ -173,20 +160,17 @@ public class ASlingTele extends OpMode {
 //            } else if (allianceColor.equals("blue")) {
 //                Actions.runBlocking(goalAlignBlue);
 //            }
-        }
+//      }
 
-
+//
 //        Action turnToAprilTag = drive.actionBuilder(pose)
-//        .turn(robot.limelight.getAngle())
-//        .build();
+//            .turn(robot.limelight.getAngle())
+//            .build();
 //        if (controls.farLock.value()) {
 //            Actions.runBlocking(turnToAprilTag);
 //        }
 
 
-
-
-
-
+    }
 }
 
