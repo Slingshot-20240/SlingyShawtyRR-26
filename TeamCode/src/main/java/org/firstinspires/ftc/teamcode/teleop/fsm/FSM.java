@@ -29,7 +29,7 @@ public class FSM {
     private final Shooter shooter;
     //private final Drivetrain drivetrain;
 
-    private final PythonLimelight limelight;
+    // private final PythonLimelight limelight;
 
     public FSM(HardwareMap hardwareMap, GamepadMapping gamepad) {
         robot = new Robot(hardwareMap, gamepad);
@@ -42,7 +42,7 @@ public class FSM {
         shooter = robot.shooter;
 
 //        drivetrain = robot.drivetrain;
-        limelight = robot.limelight;
+//        limelight = robot.limelight;
     }
 
     public void update() {

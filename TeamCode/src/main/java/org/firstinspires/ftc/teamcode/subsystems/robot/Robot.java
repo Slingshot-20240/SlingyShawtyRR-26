@@ -36,7 +36,7 @@ public class Robot {
 
     public GamepadMapping controls;
 
-    public PythonLimelight limelight;
+//    public PythonLimelight limelight;
 
     public Robot(HardwareMap hardwareMap, GamepadMapping controls) {
         this.controls = controls;
@@ -57,7 +57,7 @@ public class Robot {
         //ISHAAN TOOK THIS OUT SO THE REVERSING MOTORS DOES NOT CLASH WITH THE RR MOTORS
         //drivetrain = new Drivetrain(hardwareMap, imu, controls);
 
-        limelight = new PythonLimelight(hardwareMap);
+        // limelight = new PythonLimelight(hardwareMap);
     }
 
     public void hardwareSoftReset() {

@@ -21,6 +21,7 @@ import org.firstinspires.ftc.teamcode.Roadrunner.Drawing;
 import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
+import org.firstinspires.ftc.teamcode.subsystems.vision.PythonLimelight;
 import org.firstinspires.ftc.teamcode.teleop.IshaanStuff.ShooterController;
 import org.firstinspires.ftc.teamcode.teleop.fsm.FSM;
 
@@ -33,6 +34,7 @@ public class ASlingTele extends OpMode {
     private MecanumDrive drive;
     private ShooterController shooter;
     String allianceColor = "red";
+    private PythonLimelight limelight;
 
     @Override
     public void init() {
@@ -43,16 +45,14 @@ public class ASlingTele extends OpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, Math.toRadians(0)));
         //shooterController = new ShooterController(hardwareMap);
-
-
-
+        limelight = new PythonLimelight(hardwareMap);
     }
 
     //ISHAAN ADDED THIS INIT_LOOP FOR ALLIANCE COLOR SELECTION
     //TRY ALSO KEEPING THIS IN THE MAIN INIT LOOP idk if its gonna work
     @Override
     public void init_loop() {
-
+        limelight = new PythonLimelight(hardwareMap);
 
         if (gamepad1.dpad_up) {
             telemetry.clear();
@@ -81,6 +81,8 @@ public class ASlingTele extends OpMode {
     public void loop() {
         fsm.update();
 
+        limelight = new PythonLimelight(hardwareMap);
+
 
 //----------------------------Telemetry and Dash Field Overlay----------------------------\\
 
@@ -99,9 +101,10 @@ public class ASlingTele extends OpMode {
         telemetry.addData("-----------------------", "");
 
         //Limelight telemetry
-        telemetry.addData("limelight angle", Math.toDegrees(robot.limelight.getAngle()));
-        telemetry.addData("limelight nav", (robot.limelight.getLastNav()));
-        telemetry.addData("limelight obelisk", (robot.limelight.getObelisk().order));
+        telemetry.addData("limelight angle", Math.toDegrees(limelight.getAngle()));
+        telemetry.addData("limelight distance", limelight.getDistance());
+        telemetry.addData("limelight nav", (limelight.getLastNav()));
+        telemetry.addData("limelight obelisk", (limelight.getObelisk().order));
 
         telemetry.update();
 
@@ -124,13 +127,13 @@ public class ASlingTele extends OpMode {
         drive.updatePoseEstimate();
 
 
-        Action turnToAprilTag = drive.actionBuilder(pose)
-                //made negative to go opposite way
-                .turn(-robot.limelight.getAngle())
-                .build();
-        if (controls.farLock.value()) {
-            Actions.runBlocking(turnToAprilTag);
-        }
+//        Action turnToAprilTag = drive.actionBuilder(pose)
+//                //made negative to go opposite way
+//                .turn(-robot.limelight.getAngle())
+//                .build();
+//        if (controls.farLock.value()) {
+//            Actions.runBlocking(turnToAprilTag);
+//        }
 
 
         /*
