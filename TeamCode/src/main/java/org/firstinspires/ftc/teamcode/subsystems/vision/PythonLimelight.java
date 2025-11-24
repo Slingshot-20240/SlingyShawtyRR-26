@@ -35,22 +35,22 @@ public class PythonLimelight {
 //        limelight.reloadPipeline();
         limelight.start();
 
-        limelight.pipelineSwitch(1);
+        limelight.pipelineSwitch(0);
     }
     public PythonLimelight(HardwareMap hw, Telemetry t) {
         limelight = hw.get(Limelight3A.class, "limelight");
         t.addLine(String.format("connected: %s, running: %s, status: %s, index: %s",
                                 limelight.isConnected(),
                                 limelight.isRunning(),
-                                limelight.getStatus().getPipelineIndex(),
-                                limelight.getLatestResult().getPipelineIndex())
+                                limelight.getStatus(),
+                                limelight.getStatus().getPipelineIndex())
         );
 
         limelight.setPollRateHz(100);
 //        limelight.reloadPipeline();
         limelight.start();
-        if(limelight.getStatus().getPipelineIndex() != 1)
-            limelight.pipelineSwitch(1);
+        if(limelight.getStatus().getPipelineIndex() != 0)
+            limelight.pipelineSwitch(0);
     }
     public ObeliskLocation getObelisk(){
         return ObeliskLocation.fromInt((int) limelight.getLatestResult().getPythonOutput()[0]);
