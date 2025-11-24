@@ -23,4 +23,10 @@ public class LimelightTest extends OpMode {
         telemetry.addData("limelight obelisk", (limelight.getObelisk().order));
         telemetry.update();
     }
+
+    @Override
+    public void stop() {
+        super.stop();
+        limelight.close();
+    }
 }

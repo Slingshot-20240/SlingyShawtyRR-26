@@ -53,7 +53,7 @@ public class ShooterPID extends OpMode {
 
         flywheel2.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        fsm = new FSM(hardwareMap, controls);
+        fsm = new FSM(hardwareMap, controls, robot);
 
         drivetrain = new Drivetrain(hardwareMap, robot.imu, controls);
     }

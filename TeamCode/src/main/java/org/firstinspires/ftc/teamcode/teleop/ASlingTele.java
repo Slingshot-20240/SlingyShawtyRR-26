@@ -21,6 +21,7 @@ import org.firstinspires.ftc.teamcode.Roadrunner.Drawing;
 import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
+import org.firstinspires.ftc.teamcode.subsystems.vision.PythonLimelight;
 import org.firstinspires.ftc.teamcode.teleop.IshaanStuff.ShooterController;
 import org.firstinspires.ftc.teamcode.teleop.fsm.FSM;
 
@@ -34,11 +35,12 @@ public class ASlingTele extends OpMode {
     private ShooterController shooter;
     String allianceColor = "red";
 
+
     @Override
     public void init() {
         controls = new GamepadMapping(gamepad1, gamepad2);
         robot = new Robot(hardwareMap, controls);
-        fsm = new FSM(hardwareMap, controls);
+        fsm = new FSM(hardwareMap, controls, robot);
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, Math.toRadians(0)));

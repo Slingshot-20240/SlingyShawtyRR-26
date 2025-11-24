@@ -32,7 +32,9 @@ public class PythonLimelight {
     public PythonLimelight(HardwareMap hw) {
         limelight = hw.get(Limelight3A.class, "limelight");
         limelight.setPollRateHz(100);
+//        limelight.reloadPipeline();
         limelight.start();
+
         limelight.pipelineSwitch(1);
     }
     public ObeliskLocation getObelisk(){
@@ -78,6 +80,9 @@ public class PythonLimelight {
                                                  System.nanoTime()));
     }
     */
+    public void close(){
+        limelight.close();
+    }
     public enum ObeliskLocation //measured by the location of the green
     {
         LEFT("GPP", 21), CENTER("PGP", 22), RIGHT("PPG", 23), NONE("none", -1);

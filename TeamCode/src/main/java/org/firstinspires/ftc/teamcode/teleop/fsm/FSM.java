@@ -31,8 +31,8 @@ public class FSM {
 
     private final PythonLimelight limelight;
 
-    public FSM(HardwareMap hardwareMap, GamepadMapping gamepad) {
-        robot = new Robot(hardwareMap, gamepad);
+    public FSM(HardwareMap hardwareMap, GamepadMapping gamepad, Robot robot) {
+        this.robot = robot;
         this.gamepad = robot.controls;
 
         intake = robot.intake;

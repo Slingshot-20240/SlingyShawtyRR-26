@@ -17,8 +17,8 @@ public class FSMTest extends OpMode {
     @Override
     public void init() {
         gamepad = new GamepadMapping(gamepad1,gamepad2);
-        fsm = new FSM(hardwareMap, gamepad);
-        robot = fsm.robot;
+        robot = new Robot(hardwareMap, gamepad);
+        fsm = new FSM(hardwareMap, gamepad, robot);
         robot.shooter.variableHood.setPosition(0);
     }
 
