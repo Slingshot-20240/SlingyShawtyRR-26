@@ -37,6 +37,21 @@ public class PythonLimelight {
 
         limelight.pipelineSwitch(1);
     }
+    public PythonLimelight(HardwareMap hw, Telemetry t) {
+        limelight = hw.get(Limelight3A.class, "limelight");
+        t.addLine(String.format("connected: %s, running: %s, status: %s, index: %s",
+                                limelight.isConnected(),
+                                limelight.isRunning(),
+                                limelight.getStatus().getPipelineIndex(),
+                                limelight.getLatestResult().getPipelineIndex())
+        );
+
+        limelight.setPollRateHz(100);
+//        limelight.reloadPipeline();
+        limelight.start();
+        if(limelight.getStatus().getPipelineIndex() != 1)
+            limelight.pipelineSwitch(1);
+    }
     public ObeliskLocation getObelisk(){
         return ObeliskLocation.fromInt((int) limelight.getLatestResult().getPythonOutput()[0]);
     }
@@ -81,7 +96,9 @@ public class PythonLimelight {
     }
     */
     public void close(){
+        limelight.stop();
         limelight.close();
+        limelight.shutdown();
     }
     public enum ObeliskLocation //measured by the location of the green
     {

@@ -12,7 +12,7 @@ public class LimelightTest extends OpMode {
 
     @Override
     public void init() {
-        limelight = new PythonLimelight(hardwareMap);
+        limelight = new PythonLimelight(hardwareMap, telemetry);
     }
 
     @Override
