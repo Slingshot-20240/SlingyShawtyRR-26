@@ -125,14 +125,14 @@ public class ASlingTele extends OpMode {
         ));
         drive.updatePoseEstimate();
 
-
-        Action turnToAprilTag = drive.actionBuilder(pose)
-                //made negative to go opposite way
-                .turn(-robot.limelight.getAngle())
-                .build();
-        if (controls.farLock.value()) {
-            Actions.runBlocking(turnToAprilTag);
-        }
+//
+//        Action turnToAprilTag = drive.actionBuilder(pose)
+//                //made negative to go opposite way
+//                .turn(-robot.limelight.getAngle())
+//                .build();
+//        if (controls.farLock.value()) {
+//            Actions.runBlocking(turnToAprilTag);
+//        }
 
 
         /*
