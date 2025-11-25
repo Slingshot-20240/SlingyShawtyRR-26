@@ -16,8 +16,6 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 
-import java.util.ArrayList;
-
 public class logi {
     AprilTagProcessor apriltagPipeline;
 
@@ -56,7 +54,9 @@ public class logi {
         portal.setProcessorEnabled(ballPipeline, enabled);
     }
 
-    public double getDist() {
+    public double getATdist() {
+        if(!portal.getProcessorEnabled(apriltagPipeline))
+            return 0.0;
 
         for (AprilTagDetection detection : apriltagPipeline.getDetections()) {
             if (detection.id != 20 && detection.id != 24) continue;
@@ -76,7 +76,9 @@ public class logi {
         return 0.0;
     }
 
-    public double getAngle() {
+    public double getATangle() {
+        if(!portal.getProcessorEnabled(apriltagPipeline))
+            return 0.0;
 
         for (AprilTagDetection detection : apriltagPipeline.getDetections()) {
             if (detection.id != 20 && detection.id != 24) continue;
