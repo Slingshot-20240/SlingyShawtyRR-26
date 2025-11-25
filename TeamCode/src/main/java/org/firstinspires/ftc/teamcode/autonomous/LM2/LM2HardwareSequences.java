@@ -23,10 +23,8 @@ public class LM2HardwareSequences {
         shooter = new Shooter(hardwareMap);
     }
 
-    /**
-     * Lift up, Arm scores
-     */
-    public Action intakeInFor(long time) {
+
+    public Action intakeInFor(double time) {
         return new SequentialAction(
                 intake.in(),
                 new SleepAction(time),
@@ -42,7 +40,7 @@ public class LM2HardwareSequences {
         );
     }
 
-    public Action shootFor(long time) {
+    public Action shootFor(double time) {
         return new SequentialAction(
                 shooter.out(),
                 new SleepAction(time),
