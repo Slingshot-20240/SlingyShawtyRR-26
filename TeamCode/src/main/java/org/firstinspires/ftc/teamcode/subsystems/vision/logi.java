@@ -24,7 +24,7 @@ public class logi {
     VisionPortal portal;
 
     final double ATsize = 6.5;
-    final double theta = Math.toRadians(14080.0 / 337.0);
+    final double theta = Math.toRadians(44);
     final double[] resolution = new double[]{640, 480};
 
     public logi(HardwareMap hw) {
