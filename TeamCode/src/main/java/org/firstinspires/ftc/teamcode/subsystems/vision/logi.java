@@ -25,7 +25,7 @@ public class logi {
 
     final double ATsize = 6.5;
     final double theta = Math.toRadians(14080.0 / 337.0);
-    final double[] resolution = new double[]{1280, 960};
+    final double[] resolution = new double[]{640, 480};
 
     public logi(HardwareMap hw) {
         apriltagPipeline = new AprilTagProcessor.Builder().setTagFamily(AprilTagProcessor.TagFamily.TAG_36h11).setDrawTagID(true).setDrawTagOutline(true).setDrawAxes(true).setDrawCubeProjection(true).setOutputUnits(DistanceUnit.INCH, AngleUnit.DEGREES).build();
