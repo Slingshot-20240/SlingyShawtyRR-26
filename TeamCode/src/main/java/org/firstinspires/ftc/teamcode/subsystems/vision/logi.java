@@ -37,6 +37,8 @@ public class logi {
                 .setCameraResolution(new Size(1280, 720))
                 .setStreamFormat(VisionPortal.StreamFormat.YUY2)
                 .setAutoStopLiveView(true)
+                .enableLiveView(true)
+
                 .build();
 
         portal.setProcessorEnabled(apriltagPipeline, true);
@@ -74,7 +76,7 @@ public class logi {
 
             double normalDist = resolution[0] / 2 * conversion / (Math.tan(theta / 2));
 
-
+            //TODO: add the 3.5 inch offset
             double cX = detection.center.x;
             return Math.sqrt(Math.pow(normalDist, 2) + Math.pow((conversion * (cX - resolution[0] / 2)), 2));
 
