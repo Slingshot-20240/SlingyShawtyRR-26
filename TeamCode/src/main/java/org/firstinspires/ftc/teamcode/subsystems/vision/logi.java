@@ -31,7 +31,13 @@ public class logi {
         apriltagPipeline = new AprilTagProcessor.Builder().setTagFamily(AprilTagProcessor.TagFamily.TAG_36h11).setDrawTagID(true).setDrawTagOutline(true).setDrawAxes(true).setDrawCubeProjection(true).setOutputUnits(DistanceUnit.INCH, AngleUnit.DEGREES).build();
         ballPipeline = new ballProcessor();
 
-        portal = new VisionPortal.Builder().setCamera(hw.get(WebcamName.class, "Webcam 1")).addProcessors(apriltagPipeline).setCameraResolution(new Size(1280, 720)).setStreamFormat(VisionPortal.StreamFormat.YUY2).enableLiveView(false).setAutoStopLiveView(true).build();
+        portal = new VisionPortal.Builder()
+                .setCamera(hw.get(WebcamName.class, "Webcam 1"))
+                .addProcessors(apriltagPipeline, ballPipeline)
+                .setCameraResolution(new Size(1280, 720))
+                .setStreamFormat(VisionPortal.StreamFormat.YUY2)
+                .setAutoStopLiveView(true)
+                .build();
 
         portal.setProcessorEnabled(apriltagPipeline, true);
         portal.setProcessorEnabled(ballPipeline, false);
