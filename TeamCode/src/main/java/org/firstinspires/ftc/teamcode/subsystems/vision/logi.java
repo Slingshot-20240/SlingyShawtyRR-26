@@ -34,7 +34,7 @@ public class logi {
         portal = new VisionPortal.Builder()
                 .setCamera(hw.get(WebcamName.class, "Webcam 1"))
                 .addProcessors(apriltagPipeline, ballPipeline)
-                .setCameraResolution(new Size(1280, 720))
+                .setCameraResolution(new Size(640, 480))
                 .setStreamFormat(VisionPortal.StreamFormat.YUY2)
                 .setAutoStopLiveView(true)
                 .enableLiveView(true)
