@@ -22,7 +22,6 @@ import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
 import org.firstinspires.ftc.teamcode.subsystems.vision.PythonLimelight;
-import org.firstinspires.ftc.teamcode.teleop.IshaanStuff.ShooterController;
 import org.firstinspires.ftc.teamcode.teleop.fsm.FSM;
 
 @TeleOp
@@ -32,7 +31,6 @@ public class ASlingTele extends OpMode {
     private Robot robot;
 
     private MecanumDrive drive;
-    private ShooterController shooter;
     String allianceColor = "red";
 
 
