@@ -50,6 +50,7 @@ public class LM2CloseSequences {
 
     /**
      * Runs the Intake while hotdogging
+     * Sets shooter power
      */
     public Action intakeSet(int shooterPower) {
         return new ParallelAction(

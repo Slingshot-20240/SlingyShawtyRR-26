@@ -15,7 +15,7 @@ public class AprilTagLimelight {
     boolean isBlue;
 
     public AprilTagLimelight(HardwareMap hw, boolean isBlue) {
-        limelight = hw.get(Limelight3A.class, "limelight");
+        //limelight = hw.get(Limelight3A.class, "limelight");
         limelight.pipelineSwitch(0);
         limelight.start();
         this.isBlue = isBlue;

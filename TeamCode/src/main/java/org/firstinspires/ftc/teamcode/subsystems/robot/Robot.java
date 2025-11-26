@@ -23,8 +23,9 @@ public class Robot {
     // Front transfer 3 control hub
     // Back transfer 5 control hub
     // servo variable hood 0 on control hub
-    // shooter motor expansion hub port 3
-    // intake control hub port 3
+    // outtake1 control hub 3
+    // outtake2 control hub 2
+    // intake expansion hub port 3
 
     // MECHANISMS
     public final IMU imu;
@@ -57,7 +58,7 @@ public class Robot {
         //ISHAAN TOOK THIS OUT SO THE REVERSING MOTORS DOES NOT CLASH WITH THE RR MOTORS
         //drivetrain = new Drivetrain(hardwareMap, imu, controls);
 
-        limelight = new PythonLimelight(hardwareMap);
+        //limelight = new PythonLimelight(hardwareMap);
     }
 
     public void hardwareSoftReset() {

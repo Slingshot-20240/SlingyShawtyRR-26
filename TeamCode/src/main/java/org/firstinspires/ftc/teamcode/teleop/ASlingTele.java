@@ -22,7 +22,6 @@ import org.firstinspires.ftc.teamcode.Roadrunner.Localizer;
 import org.firstinspires.ftc.teamcode.misc.gamepad.GamepadMapping;
 import org.firstinspires.ftc.teamcode.subsystems.robot.Robot;
 import org.firstinspires.ftc.teamcode.subsystems.vision.PythonLimelight;
-import org.firstinspires.ftc.teamcode.teleop.IshaanStuff.ShooterController;
 import org.firstinspires.ftc.teamcode.teleop.fsm.FSM;
 
 @TeleOp
@@ -32,7 +31,6 @@ public class ASlingTele extends OpMode {
     private Robot robot;
 
     private MecanumDrive drive;
-    private ShooterController shooter;
     String allianceColor = "red";
 
 
@@ -44,7 +42,6 @@ public class ASlingTele extends OpMode {
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, Math.toRadians(0)));
-        //shooterController = new ShooterController(hardwareMap);
 
 
 
@@ -125,14 +122,14 @@ public class ASlingTele extends OpMode {
         ));
         drive.updatePoseEstimate();
 
-
-        Action turnToAprilTag = drive.actionBuilder(pose)
-                //made negative to go opposite way
-                .turn(-robot.limelight.getAngle())
-                .build();
-        if (controls.farLock.value()) {
-            Actions.runBlocking(turnToAprilTag);
-        }
+//
+//        Action turnToAprilTag = drive.actionBuilder(pose)
+//                //made negative to go opposite way
+//                .turn(-robot.limelight.getAngle())
+//                .build();
+//        if (controls.farLock.value()) {
+//            Actions.runBlocking(turnToAprilTag);
+//        }
 
 
         /*
