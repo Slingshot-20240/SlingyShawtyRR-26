@@ -70,7 +70,7 @@ public class logi {
             if (detection.id != 20 && detection.id != 24) continue;
 
 
-            return Math.sqrt(Math.pow(detection.ftcPose.y,2) + Math.pow(detection.ftcPose.x,2));
+            return detection.ftcPose.range;
 //            Point[] corners = detection.corners;
 //            double conversion = (Math.sqrt(Math.pow((corners[0].x - corners[1].x), 2) + Math.pow((corners[0].y - corners[1].y), 2)) + Math.sqrt(Math.pow((corners[2].x - corners[3].x), 2) + Math.pow((corners[2].y - corners[3].y), 2))) / 2.0;
 //
@@ -93,7 +93,7 @@ public class logi {
         for (AprilTagDetection detection : apriltagPipeline.getDetections()) {
             if (detection.id != 20 && detection.id != 24) continue;
 
-            return detection.ftcPose.yaw;
+            return detection.ftcPose.bearing;
 //            Point[] corners = detection.corners;
 //            double conversion = (Math.sqrt(Math.pow((corners[0].x - corners[1].x), 2) + Math.pow((corners[0].y - corners[1].y), 2)) + Math.sqrt(Math.pow((corners[2].x - corners[3].x), 2) + Math.pow((corners[2].y - corners[3].y), 2))) / 2.0;
 //
