@@ -42,7 +42,6 @@ public class ASlingTele extends OpMode {
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, Math.toRadians(0)));
-        //shooterController = new ShooterController(hardwareMap);
 
 
 
