@@ -1,26 +1,27 @@
-package org.firstinspires.ftc.teamcode.autonomous.misc;
+package com.example.meepmeeptesting;
 
-import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.ProfileAccelConstraint;
 import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
-import com.acmerobotics.roadrunner.ftc.Actions;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.noahbres.meepmeep.MeepMeep;
+import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
+import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
-import org.firstinspires.ftc.teamcode.MecanumDrive;
+public class Port15 {
+    public static void main(String[] args) {
+        MeepMeep meepMeep = new MeepMeep(700);
 
-@Autonomous(name = "Port 15 Pathing Test", group = "Autonomous")
-public class PathingTest extends LinearOpMode {
+        RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+                // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                .setConstraints(70, 70, Math.toRadians(180), Math.toRadians(180), 14.8)
+                .build();
 
-    @Override
-    public void runOpMode() {
-
-        Pose2d initialPose = new Pose2d(-46.7, 51, Math.toRadians(37+90));
-        MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
-
-        Action path = drive.actionBuilder(initialPose)
+        //90 - 53 = 37. 37 + 180 will get you the red starting pos.
+        //53 + 90 will get you the blue starting pos.
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-46.7, 51, Math.toRadians(37+90)))
+                //preload
+                .waitSeconds(2)
                 .strafeToLinearHeading(new Vector2d(-25, 25), Math.toRadians(-225))
                 .strafeToLinearHeading(new Vector2d(-11, 21), Math.toRadians(90),
                         new TranslationalVelConstraint(70)) // prepareSet1Pose
@@ -58,15 +59,16 @@ public class PathingTest extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(60, 60), Math.toRadians(0))
 
                 .strafeToLinearHeading(new Vector2d(-44, 25), Math.toRadians(-245))
-                .build();
+
+                .waitSeconds(3)
 
 
-        waitForStart();
+                .build());
+        meepMeep.setBackground(MeepMeep.Background.FIELD_DECODE_JUICE_DARK)
+                .setDarkMode(true)
+                .setBackgroundAlpha(0.95f)
+                .addEntity(myBot)
+                .start();
 
-        Actions.runBlocking(
-                new SequentialAction(
-                        path
-                )
-        );
     }
 }
